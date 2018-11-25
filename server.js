@@ -6,8 +6,7 @@ const bodyParser = require("body-parser");
 
 //require the models
 require("./models/users");
-
-//require proxy file from the client
+require("./models/pages");
 
 //require the passport
 require("./services/passport");

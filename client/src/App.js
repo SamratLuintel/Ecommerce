@@ -1,16 +1,31 @@
 import React, { Component } from "react";
 import Home from "./components/Home/Home";
-import { Route } from "react-router-dom";
+import { Route, withRouter } from "react-router-dom";
+import { fetchUser } from "./store/actions/profile/profile";
+import { connect } from "react-redux";
+import AddPage from "./components/admin/AddPage/AddPage";
+import Pages from "./components/Pages/Pages";
 
 class App extends Component {
+  componentDidMount = () => {
+    this.props.fetchUser();
+  };
+
   render() {
     return (
       <div className="App">
         <a href="/api/auth/google">Login With Google</a>
         <Route exact path="/home/:token?" component={Home} />
+        <Route exact path="/admin/add-page" component={AddPage} />
+        <Route exact path="/pages" component={Pages} />
       </div>
     );
   }
 }
 
-export default App;
+export default withRouter(
+  connect(
+    null,
+    { fetchUser }
+  )(App)
+);
