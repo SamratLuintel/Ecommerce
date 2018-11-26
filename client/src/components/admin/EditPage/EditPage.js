@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getEditPage, updatePage } from "../../../store/actions/pages/pages";
+import CKEditor from "react-ckeditor-component";
 
 class EditPage extends Component {
   state = {
@@ -36,6 +37,13 @@ class EditPage extends Component {
     }
   };
 
+  componentDidMount = () => {
+    if (this.props.profile.authenticated && !this.props.editPage.fetched) {
+      const id = this.props.match.params.id;
+      this.props.getEditPage(id);
+    }
+  };
+
   onSavePage = async () => {
     const page = {
       id: this.props.match.params.id,
@@ -56,9 +64,22 @@ class EditPage extends Component {
   };
 
   onTitleChange = e => this.setState({ title: e.target.value, titleError: "" });
-  onContentChange = e =>
-    this.setState({ content: e.target.value, contentError: "" });
 
+  onContentChange = evt => {
+    const newContent = evt.editor.getData();
+    this.setState({
+      content: newContent,
+      contentError: ""
+    });
+  };
+
+  onBlur = evt => {
+    console.log("onBlur event called with event info: ", evt);
+  };
+
+  afterPaste = evt => {
+    console.log("afterPaste event called with event info: ", evt);
+  };
   render() {
     return (
       <div className="AddPage">
@@ -72,13 +93,15 @@ class EditPage extends Component {
           onChange={this.onTitleChange}
         />
         {this.state.titleError}
-        <h3>Content</h3>
-        <textarea
-          value={this.state.content}
-          onChange={this.onContentChange}
-          disabled={this.state.disabled}
-          cols="30"
-          rows="1"
+
+        <CKEditor
+          activeClass="p10"
+          content={this.state.content}
+          events={{
+            blur: this.onBlur,
+            afterPaste: this.afterPaste,
+            change: this.onContentChange
+          }}
         />
         {this.state.contentError}
         <button onClick={this.onSavePage}>Save the page</button>

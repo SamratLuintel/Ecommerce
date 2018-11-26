@@ -14,6 +14,10 @@ const UserSchema = new Schema({
     type: String,
     sparse: true
   },
+  google: {
+    type: String,
+    sparse: true
+  },
   email: {
     type: String
   },

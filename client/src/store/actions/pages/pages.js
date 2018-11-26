@@ -27,7 +27,6 @@ export const addPage = (title, slug, content) => async dispatch => {
 //Gets the page selected for edit view
 export const getEditPage = id => async dispatch => {
   try {
-    console.log("Get Edit Page is called");
     const res = await axios.get(`/api/page/${id}`);
     dispatch({
       type: UPDATE_EDIT_PAGE,
@@ -41,7 +40,6 @@ export const getEditPage = id => async dispatch => {
 //Updates the page
 export const updatePage = page => async dispatch => {
   try {
-    console.log("From update page", page);
     const res = await axios.post(`/api/page/${page.id}`, page);
     dispatch({
       type: UPDATE_EDIT_PAGE,
@@ -51,5 +49,15 @@ export const updatePage = page => async dispatch => {
     const errMessage = err.response ? err.response.data : err.response;
     console.log("Edit page errors", errMessage);
     throw errMessage;
+  }
+};
+
+//Deletes a page
+export const deletePage = id => async dispatch => {
+  try {
+    await axios.delete(`/api/page/${id}`);
+    return;
+  } catch (error) {
+    console.log(error);
   }
 };

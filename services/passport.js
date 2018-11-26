@@ -60,6 +60,7 @@ passport.use(
         newUser.fullname = profile.displayName;
         newUser.username = profile.displayName;
         newUser.email = profile.emails[0].value;
+        newUser.google = profile.id;
         newUser.userImage = profile._json.image.url;
         const savedUser = await newUser.save();
         done(null, savedUser);

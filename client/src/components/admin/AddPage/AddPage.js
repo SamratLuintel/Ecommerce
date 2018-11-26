@@ -3,6 +3,7 @@ import AddPageContent from "./AddPageContent/AddPageContent";
 import AddPageContext from "./add-page-context";
 import { addPage } from "../../../store/actions/pages/pages";
 import { connect } from "react-redux";
+import CKEditor from "react-ckeditor-component";
 
 class AddPage extends Component {
   state = {
@@ -14,17 +15,17 @@ class AddPage extends Component {
     contentError: ""
   };
 
-  onTitleChange = e => {
-    this.setState({ title: e.target.value, titleError: "" });
-  };
-  onSlugChange = e => {
-    this.setState({ slug: e.target.value });
-  };
+  onTitleChange = e => this.setState({ title: e.target.value, titleError: "" });
 
-  onContentChange = e => {
-    this.setState({ content: e.target.value, contentError: "" });
-  };
+  onSlugChange = e => this.setState({ slug: e.target.value });
 
+  onContentChange = evt => {
+    const newContent = evt.editor.getData();
+    this.setState({
+      content: newContent,
+      contentError: ""
+    });
+  };
   onCreatePage = async () => {
     const { title, slug, content } = this.state;
     try {
@@ -38,6 +39,14 @@ class AddPage extends Component {
     if (error.title) this.setState({ titleError: error.title });
     if (error.content) this.setState({ contentError: error.content });
     if (error.slug) this.setState({ slugError: error.slug });
+  };
+
+  onBlur = evt => {
+    console.log("onBlur event called with event info: ", evt);
+  };
+
+  afterPaste = evt => {
+    console.log("afterPaste event called with event info: ", evt);
   };
   render() {
     const handlers = {
@@ -65,8 +74,16 @@ class AddPage extends Component {
             rows="1"
           />
           {this.state.slugError}
-          <h3>Content</h3>
-          <AddPageContent />
+
+          <CKEditor
+            activeClass="p10"
+            content={this.state.content}
+            events={{
+              blur: this.onBlur,
+              afterPaste: this.afterPaste,
+              change: this.onContentChange
+            }}
+          />
           <button onClick={this.onCreatePage}>Create a Page</button>
         </div>
       </AddPageContext.Provider>

@@ -1,11 +1,19 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
+import { deletePage, fetchPages } from "../../../store/actions/pages/pages";
+import { connect } from "react-redux";
+
 class Page extends Component {
   redirectToEditPage = () => {
     const id = this.props.id;
     this.props.history.push(`/admin/edit-page/${id}`);
   };
 
+  onDeletePage = async () => {
+    const id = this.props.id;
+    await this.props.deletePage(id);
+    this.props.fetchPages();
+  };
   render() {
     const { props } = this;
     return (
@@ -14,11 +22,16 @@ class Page extends Component {
           <tr>
             <td>{props.title}</td>
             <td onClick={this.redirectToEditPage}>Edit</td>
-            <td>Delete</td>
+            <td onClick={this.onDeletePage}>Delete</td>
           </tr>
         </tbody>
       </div>
     );
   }
 }
-export default withRouter(Page);
+export default withRouter(
+  connect(
+    null,
+    { deletePage, fetchPages }
+  )(Page)
+);
