@@ -1,6 +1,6 @@
 const isEmpty = require("../is-empty");
 
-module.exports = ValidateAddPage = data => {
+module.exports = ValidatePage = data => {
   let errors = {};
   if (isEmpty(data.title)) {
     errors.title = "You will need a title";

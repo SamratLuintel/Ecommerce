@@ -17,8 +17,7 @@ class Pages extends Component {
   renderPages = () => {
     if (this.props.pages.fetched && this.props.profile.authenticated) {
       return this.props.pages.lists.map(page => {
-        console.log(page);
-        return <Page title={page.title} />;
+        return <Page title={page.title} id={page._id} />;
       });
     }
   };

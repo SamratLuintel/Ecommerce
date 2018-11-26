@@ -1,5 +1,5 @@
 import axios from "axios";
-import { UPDATE_PAGES } from "../../types";
+import { UPDATE_PAGES, UPDATE_EDIT_PAGE } from "../../types";
 
 export const fetchPages = () => async dispatch => {
   try {
@@ -20,6 +20,36 @@ export const addPage = (title, slug, content) => async dispatch => {
   } catch (err) {
     const errMessage = err.response ? err.response.data : err.response;
     console.log("Add page errors", errMessage);
+    throw errMessage;
+  }
+};
+
+//Gets the page selected for edit view
+export const getEditPage = id => async dispatch => {
+  try {
+    console.log("Get Edit Page is called");
+    const res = await axios.get(`/api/page/${id}`);
+    dispatch({
+      type: UPDATE_EDIT_PAGE,
+      payload: res.data
+    });
+  } catch (error) {
+    console.log(error.response);
+  }
+};
+
+//Updates the page
+export const updatePage = page => async dispatch => {
+  try {
+    console.log("From update page", page);
+    const res = await axios.post(`/api/page/${page.id}`, page);
+    dispatch({
+      type: UPDATE_EDIT_PAGE,
+      payload: res.data
+    });
+  } catch (err) {
+    const errMessage = err.response ? err.response.data : err.response;
+    console.log("Edit page errors", errMessage);
     throw errMessage;
   }
 };
