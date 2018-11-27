@@ -82,7 +82,7 @@ class EditPage extends Component {
   };
   render() {
     return (
-      <div className="AddPage">
+      <div className="Edit Page">
         <h2>This is An Edit Page</h2>
         <h3>Title</h3>
         <textarea

@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 class Category extends Component {
   redirectToEditCategory = () => {
     const id = this.props.id;
-    this.props.history.push(`/admin/edit-page/${id}`);
+    this.props.history.push(`/admin/edit-category/${id}`);
   };
 
   onDeleteCategory = async () => {

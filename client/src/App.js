@@ -9,6 +9,7 @@ import Pages from "./components/Pages/Pages";
 import EditPage from "./components/admin/EditPage/EditPage";
 import AddCategory from "./components/admin/AddCategory/AddCategory";
 import Categories from "./components/Categories/Categories";
+import EditCategory from "./components/admin/EditCategory/EditCategory";
 
 class App extends Component {
   componentDidMount = () => {
@@ -23,6 +24,7 @@ class App extends Component {
         <Route exact path="/admin/add-page" component={AddPage} />
         <Route exact path="/admin/add-category" component={AddCategory} />
         <Route exact path="/admin/edit-page/:id" component={EditPage} />
+        <Route exact path="/admin/edit-category/:id" component={EditCategory} />
         <Route exact path="/pages" component={Pages} />
         <Route exact path="/categories" component={Categories} />
       </div>
