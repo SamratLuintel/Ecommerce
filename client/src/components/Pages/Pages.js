@@ -4,16 +4,18 @@ import { fetchPages } from "../../store/actions/pages/pages";
 import Page from "./Page/Page";
 
 class Pages extends Component {
-  static getDerivedStateFromProps(nextProps, prevState) {
-    if (!nextProps.pages.fetched && nextProps.profile.authenticated) {
-      console.log("Inside pages is called");
-      console.log(nextProps.fetchPages());
-      nextProps.fetchPages();
+  componentDidUpdate = (prevProps, prevState) => {
+    //Fetched the edit page
+    if (this.props.profile.authenticated && !this.props.pages.fetched) {
+      this.props.fetchPages();
     }
-    // Return null to indicate no change to state.
-    return null;
-  }
+  };
 
+  componentDidMount = () => {
+    if (this.props.profile.authenticated && !this.props.pages.fetched) {
+      this.props.fetchPages();
+    }
+  };
   renderPages = () => {
     if (this.props.pages.fetched && this.props.profile.authenticated) {
       return this.props.pages.lists.map(page => {
