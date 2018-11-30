@@ -26,6 +26,7 @@ class AddPage extends Component {
       contentError: ""
     });
   };
+
   onCreatePage = async () => {
     const { title, slug, content } = this.state;
     try {

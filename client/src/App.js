@@ -10,6 +10,8 @@ import EditPage from "./components/admin/EditPage/EditPage";
 import AddCategory from "./components/admin/AddCategory/AddCategory";
 import Categories from "./components/Categories/Categories";
 import EditCategory from "./components/admin/EditCategory/EditCategory";
+import Products from "./components/Products/Products";
+import AddProduct from "./components/admin/AddProduct/AddProduct";
 
 class App extends Component {
   componentDidMount = () => {
@@ -23,10 +25,12 @@ class App extends Component {
         <Route exact path="/home/:token?" component={Home} />
         <Route exact path="/admin/add-page" component={AddPage} />
         <Route exact path="/admin/add-category" component={AddCategory} />
+        <Route exact path="/admin/add-product" component={AddProduct} />
         <Route exact path="/admin/edit-page/:id" component={EditPage} />
         <Route exact path="/admin/edit-category/:id" component={EditCategory} />
         <Route exact path="/pages" component={Pages} />
         <Route exact path="/categories" component={Categories} />
+        <Route exact path="/products" component={Products} />
       </div>
     );
   }

@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-import { deletePage, fetchPages } from "../../../store/actions/pages/pages";
 import { connect } from "react-redux";
+import {
+  deleteCategory,
+  fetchCategories
+} from "../../../store/actions/categories/categories";
 
 class Category extends Component {
   redirectToEditCategory = () => {
@@ -11,8 +14,8 @@ class Category extends Component {
 
   onDeleteCategory = async () => {
     const id = this.props.id;
-    await this.props.deletePage(id);
-    this.props.fetchPages();
+    await this.props.deleteCategory(id);
+    this.props.fetchCategories();
   };
   render() {
     const { props } = this;
@@ -32,6 +35,6 @@ class Category extends Component {
 export default withRouter(
   connect(
     null,
-    { deletePage, fetchPages }
+    { deleteCategory, fetchCategories }
   )(Category)
 );

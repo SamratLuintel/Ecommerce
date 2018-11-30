@@ -8,7 +8,7 @@ const bodyParser = require("body-parser");
 require("./models/users");
 require("./models/pages");
 require("./models/categories");
-
+require("./models/products");
 //require the passport
 require("./services/passport");
 
@@ -25,9 +25,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 //require the routes
-require("./routes/admin/admin_pages")(app);
 require("./routes/authRoutes")(app);
+require("./routes/admin/admin_pages")(app);
 require("./routes/admin/admin_categories")(app);
+require("./routes/admin/admin_products")(app);
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => {

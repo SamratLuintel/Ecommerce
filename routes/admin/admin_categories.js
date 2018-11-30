@@ -75,7 +75,7 @@ module.exports = app => {
 
       const category = await Category.findById(req.params.id);
       if (category) {
-        //If page exist and it is the one created by the user
+        //If category exist and it is the one created by the user
         if (category.createdBy.equals(req.user.id)) {
           const newCategory = await Category.findOneAndUpdate(
             { _id: req.params.id },
@@ -100,6 +100,32 @@ module.exports = app => {
       }
     } catch (err) {
       console.log("From /api/page/:id", err);
+      res.status(400).send({ message: "Internal server error occured" });
+    }
+  });
+
+  //Deletes a category
+  app.delete("/api/category/:id", requireToken, async (req, res) => {
+    console.log("Delete category is called");
+    try {
+      const category = await Category.findById(req.params.id);
+      if (category) {
+        //If category exist and it is the one created by the user
+        if (category.createdBy.equals(req.user.id)) {
+          await Category.findByIdAndRemove(req.params.id);
+          res.status(200).send();
+        } else {
+          res
+            .status(401)
+            .send({ message: "That is not the category created by you" });
+        }
+      } else {
+        res
+          .status(400)
+          .send({ message: "The category with provided id does not exist" });
+      }
+    } catch (err) {
+      console.log("From delete /api/page/:id", err);
       res.status(400).send({ message: "Internal server error occured" });
     }
   });

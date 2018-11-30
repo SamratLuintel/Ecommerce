@@ -3,6 +3,7 @@ import { UPDATE_CATEGORIES, UPDATE_EDIT_CATEGORY } from "../../types";
 
 export const fetchCategories = () => async dispatch => {
   try {
+    console.log("Fetch categories is called");
     const res = await axios.get("/api/categories");
     dispatch({
       type: UPDATE_CATEGORIES,
@@ -38,10 +39,12 @@ export const getEditCategory = id => async dispatch => {
     console.log(error.response);
   }
 };
+
 //Updates the category
 export const updateCategory = category => async dispatch => {
   try {
     const res = await axios.post(`/api/category/${category.id}`, category);
+    console.log("Update category successfully finished");
     dispatch({
       type: UPDATE_EDIT_CATEGORY,
       payload: res.data
@@ -50,5 +53,15 @@ export const updateCategory = category => async dispatch => {
     const errMessage = err.response ? err.response.data : err.response;
     console.log("Edit category errors", errMessage);
     throw errMessage;
+  }
+};
+
+//Deletes the category
+export const deleteCategory = id => async dispatch => {
+  try {
+    await axios.delete(`/api/category/${id}`);
+    return;
+  } catch (error) {
+    console.log(error);
   }
 };
