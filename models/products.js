@@ -5,9 +5,6 @@ const ProductSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  slug: {
-    type: String
-  },
   desc: {
     type: String,
     required: true
@@ -20,9 +17,12 @@ const ProductSchema = mongoose.Schema({
     type: Number,
     required: true
   },
-  image: {
-    type: String
-  },
+  images: [
+    {
+      type: String,
+      required: true
+    }
+  ],
   createdBy: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "users"

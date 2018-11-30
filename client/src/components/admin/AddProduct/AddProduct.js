@@ -5,6 +5,12 @@ import { fetchCategories } from "../../../store/actions/categories/categories";
 import Dropzone from "react-dropzone";
 import keys from "../../../config/keys";
 import axios from "axios";
+import AddProductImage from "./AddProductImage/AddProductImage";
+import { addProduct } from "../../../store/actions/products/products";
+
+//Remove Item in an array from specific index
+const removeItem = (items, i) =>
+  items.slice(0, i - 1).concat(items.slice(i, items.length));
 
 class AddProduct extends Component {
   state = {
@@ -12,29 +18,15 @@ class AddProduct extends Component {
     title: "",
     desc: "",
     category: "",
+    price: "",
     //Images which will be live previewed without being saved on any kind of database
     localImages: [],
     imagesFormData: [],
     titleError: "",
-    descError: ""
-  };
-
-  onTitleChange = e => this.setState({ title: e.target.value, titleError: "" });
-  onDescChange = e => this.setState({ desc: e.target.value });
-  onCategoryChange = e => this.setState({ category: e.target.value });
-
-  onCreateProduct = async () => {
-    const { title, slug, content } = this.state;
-    try {
-      await this.props.addPage(title, slug, content);
-    } catch (err) {
-      this.setFormError(err);
-    }
-  };
-
-  setFormError = error => {
-    if (error.title) this.setState({ titleError: error.title });
-    if (error.desc) this.setState({ descError: error.desc });
+    categoryError: "",
+    priceError: "",
+    descError: "",
+    imagesError: ""
   };
 
   componentDidMount = async () => {
@@ -59,6 +51,20 @@ class AddProduct extends Component {
     }
   };
 
+  onTitleChange = e => this.setState({ title: e.target.value, titleError: "" });
+  onDescChange = e => this.setState({ desc: e.target.value, descError: "" });
+  onCategoryChange = e =>
+    this.setState({ category: e.target.value, categoryError: "" });
+  onPriceChange = e => this.setState({ price: e.target.value, priceError: "" });
+
+  setFormError = error => {
+    if (error.title) this.setState({ titleError: error.title });
+    if (error.desc) this.setState({ descError: error.desc });
+    if (error.category) this.setState({ categoryError: error.category });
+    if (error.price) this.setState({ priceError: error.price });
+    if (error.images) this.setState({ imagesError: error.images });
+  };
+
   renderCategoriesOptions = () => {
     if (!this.props.categories.fetched) return;
     return this.props.categories.lists.map(({ title, _id }) => (
@@ -69,13 +75,13 @@ class AddProduct extends Component {
   //It creates a formData of all the uploaded images and saves it in the state
 
   handleUploadImages = images => {
+    this.setState({ imagesError: "" });
     this.updateLocalImages(images);
     let imagesFormData = this.state.imagesFormData;
     console.log(imagesFormData);
     images.map(image => {
       // our formdata
       const formData = new FormData();
-      console.log(formData);
       formData.append("file", image);
       formData.append("upload_preset", keys.cloudinary.uploadPreset);
       formData.append("api_key", keys.cloudinary.APIkey);
@@ -89,6 +95,12 @@ class AddProduct extends Component {
     const formDatas = this.state.imagesFormData;
     //keeps the track of id of all uploded images
     let imagesId = [];
+
+    //Default header creates cor issue when image are being
+    //submitted to cloudinary, so we temporarilty disable it
+    const token = axios.defaults.headers.common["authorization"];
+    //Deleting authorization header
+    delete axios.defaults.headers.common["authorization"];
     const uploads = formDatas.map(formData => {
       return axios
         .post("https://api.cloudinary.com/v1_1/samrat/image/upload", formData, {
@@ -100,11 +112,21 @@ class AddProduct extends Component {
     try {
       await axios.all(uploads);
       console.log("Images have been successfully updated");
+      //Puttinb back authorization header
+      axios.defaults.headers.common["authorization"] = token;
       return imagesId;
     } catch (error) {
       console.log("Some error have occured", error);
       throw error;
     }
+  };
+
+  removeUploadImages = index => {
+    console.log("Remove Upload Images is called", index);
+    this.setState({
+      imagesFormData: this.state.imagesFormData.filter((_, i) => i !== index),
+      localImages: this.state.localImages.filter((_, i) => i !== index)
+    });
   };
 
   updateLocalImages = images => {
@@ -117,10 +139,33 @@ class AddProduct extends Component {
   };
 
   renderLocalImages = () => {
-    return this.state.localImages.map(image => (
-      <img src={image} alt="Product" />
+    return this.state.localImages.map((image, index) => (
+      <AddProductImage
+        image={image}
+        index={index}
+        onImageDelete={this.removeUploadImages}
+      />
     ));
   };
+
+  onCreateProduct = async () => {
+    try {
+      const images = await this.saveUploadImages();
+      const data = {
+        title: this.state.title,
+        desc: this.state.desc,
+        category: this.state.category,
+        price: this.state.price,
+        images
+      };
+      console.log(data.category);
+      await this.props.addProduct(data);
+      console.log("Product is successfuly created");
+    } catch (error) {
+      this.setFormError(error);
+    }
+  };
+
   render() {
     const optionDefault = <option value="">Choose a Category</option>;
     return (
@@ -142,6 +187,14 @@ class AddProduct extends Component {
           rows="1"
         />
         {this.state.descError}
+        <h3>Price</h3>
+        <textarea
+          value={this.state.price}
+          onChange={this.onPriceChange}
+          cols="30"
+          rows="1"
+        />
+        {this.state.priceError}
         <h3>Categories</h3>
         <select
           name="categories"
@@ -152,6 +205,7 @@ class AddProduct extends Component {
           {optionDefault}
           {this.renderCategoriesOptions()}
         </select>
+        {this.state.categoryError}
         {this.renderLocalImages()}
 
         {/* Image Upload startes here */}
@@ -159,7 +213,8 @@ class AddProduct extends Component {
         <Dropzone onDrop={this.handleUploadImages} multiple accept="image/*">
           Try dropping some files here, or click to select files to upload.
         </Dropzone>
-        <button onClick={this.saveUploadImages}>Create a Page</button>
+        {this.state.imagesError}
+        <button onClick={this.onCreateProduct}>Create a Product</button>
       </div>
     );
   }
@@ -172,5 +227,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { fetchCategories }
+  { fetchCategories, addProduct }
 )(AddProduct);
