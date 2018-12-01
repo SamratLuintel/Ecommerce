@@ -12,6 +12,7 @@ import Categories from "./components/Categories/Categories";
 import EditCategory from "./components/admin/EditCategory/EditCategory";
 import Products from "./components/Products/Products";
 import AddProduct from "./components/admin/AddProduct/AddProduct";
+import EditProduct from "./components/admin/EditProduct/EditProduct";
 
 class App extends Component {
   componentDidMount = () => {
@@ -28,6 +29,7 @@ class App extends Component {
         <Route exact path="/admin/add-product" component={AddProduct} />
         <Route exact path="/admin/edit-page/:id" component={EditPage} />
         <Route exact path="/admin/edit-category/:id" component={EditCategory} />
+        <Route exact path="/admin/edit-product/:id" component={EditProduct} />
         <Route exact path="/pages" component={Pages} />
         <Route exact path="/categories" component={Categories} />
         <Route exact path="/products" component={Products} />

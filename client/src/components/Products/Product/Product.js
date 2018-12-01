@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 class Product extends Component {
   redirectToEditPage = () => {
     const id = this.props.id;
-    this.props.history.push(`/admin/edit-page/${id}`);
+    this.props.history.push(`/admin/edit-product/${id}`);
   };
 
   onDeletePage = async () => {

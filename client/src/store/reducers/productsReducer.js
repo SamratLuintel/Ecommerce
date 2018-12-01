@@ -17,7 +17,7 @@ export default (state = initialState, { type, payload }) => {
     case UPDATE_EDIT_PRODUCT:
       return {
         ...state,
-        editPage: {
+        editProduct: {
           fetched: true,
           ...payload
         }

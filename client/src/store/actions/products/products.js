@@ -1,5 +1,5 @@
 import axios from "axios";
-import { UPDATE_PRODUCTS } from "../../types";
+import { UPDATE_PRODUCTS, UPDATE_EDIT_PRODUCT } from "../../types";
 
 export const uploadProductImages = images => {};
 
@@ -21,5 +21,32 @@ export const addProduct = data => async dispatch => {
   } catch (error) {
     console.log("Error from add product", error.response);
     throw error.response ? error.response.data : {};
+  }
+};
+
+export const getEditProduct = id => async dispatch => {
+  try {
+    const res = await axios.get(`/api/product/${id}`);
+    dispatch({
+      type: UPDATE_EDIT_PRODUCT,
+      payload: res.data
+    });
+  } catch (error) {
+    throw error;
+    console.log(error.response);
+  }
+};
+
+//Updates the product
+export const updateProduct = product => async dispatch => {
+  try {
+    const res = await axios.post(`/api/product/${product.id}`, product);
+    dispatch({
+      type: UPDATE_EDIT_PRODUCT,
+      payload: res.data
+    });
+    console.log("Product is successfully updated");
+  } catch (error) {
+    console.log(error);
   }
 };

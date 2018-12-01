@@ -5,22 +5,29 @@ import { fetchCategories } from "../../../store/actions/categories/categories";
 import Dropzone from "react-dropzone";
 import keys from "../../../config/keys";
 import axios from "axios";
-import AddProductImage from "./AddProductImage/AddProductImage";
-import { addProduct } from "../../../store/actions/products/products";
+import EditProductImage from "./EditProductImage/EditProductImage";
+import {
+  getEditProduct,
+  updateProduct
+} from "../../../store/actions/products/products";
 
-//Remove Item in an array from specific index
-const removeItem = (items, i) =>
-  items.slice(0, i - 1).concat(items.slice(i, items.length));
-
-class AddProduct extends Component {
+class EditProduct extends Component {
   state = {
-    loaded: false,
+    //disabled keeps the track of whetherform data are fetched
+    disabled: true,
+
+    fetched: false,
+    categoriesFetched: false,
     title: "",
     desc: "",
     category: "",
     price: "",
+    id: "",
+    //contains the list of images fetched from server
+    images: [],
     //Images which will be live previewed without being saved on any kind of database
     localImages: [],
+    //contains the info of uploaded images
     imagesFormData: [],
     titleError: "",
     categoryError: "",
@@ -29,14 +36,31 @@ class AddProduct extends Component {
     imagesError: ""
   };
 
+  static getDerivedStateFromProps = (nextProps, nextState) => {
+    if (nextProps.editProduct.fetched && nextState.disabled) {
+      console.log(
+        "Get derived state from props is called",
+        nextProps.editProduct
+      );
+      return {
+        title: nextProps.editProduct.title,
+        desc: nextProps.editProduct.desc,
+        category: nextProps.editProduct.category,
+        price: nextProps.editProduct.price,
+        images: nextProps.editProduct.images,
+        id: nextProps.editProduct._id,
+        fetched: true
+      };
+    }
+  };
+
   componentDidMount = async () => {
     if (
       this.props.profile.authenticated &&
       !this.props.categories.fetched &&
       !this.state.loaded
     ) {
-      await this.props.fetchCategories();
-      this.setState({ loaded: true });
+      this.fetchCategoryAndEditProduct();
     }
   };
 
@@ -46,11 +70,18 @@ class AddProduct extends Component {
       !this.props.categories.fetched &&
       !this.state.loaded
     ) {
-      await this.props.fetchCategories();
-      this.setState({ loaded: true });
+      this.fetchCategoryAndEditProduct();
     }
   };
 
+  fetchCategoryAndEditProduct = async () => {
+    const id = this.props.match.params.id;
+    const fetchCategoryPromise = this.props.fetchCategories();
+    const fetchEditProductPromise = this.props.getEditProduct(id);
+    await fetchCategoryPromise;
+    await fetchEditProductPromise;
+    this.setState({ fetched: true, disabled: false });
+  };
   onTitleChange = e => this.setState({ title: e.target.value, titleError: "" });
   onDescChange = e => this.setState({ desc: e.target.value, descError: "" });
   onCategoryChange = e =>
@@ -121,7 +152,7 @@ class AddProduct extends Component {
     }
   };
 
-  removeUploadImage = index => {
+  removeUploadLocalImage = index => {
     console.log("Remove Upload Images is called", index);
     this.setState({
       imagesFormData: this.state.imagesFormData.filter((_, i) => i !== index),
@@ -129,6 +160,11 @@ class AddProduct extends Component {
     });
   };
 
+  removeServerImage = index => {
+    this.setState({
+      images: this.state.images.filter((_, i) => i !== index)
+    });
+  };
   updateLocalImages = images => {
     let localImagesURL = this.state.localImages;
     images.map(image => {
@@ -140,26 +176,39 @@ class AddProduct extends Component {
 
   renderLocalImages = () => {
     return this.state.localImages.map((image, index) => (
-      <AddProductImage
+      <EditProductImage
         image={image}
-        onImageDelete={() => this.removeUploadImage(index)}
+        onImageDelete={() => this.removeUploadLocalImage(index)}
       />
     ));
   };
 
-  onCreateProduct = async () => {
+  renderServerImages = () => {
+    const rawURL = "https://res.cloudinary.com/samrat/image/upload/";
+    return this.state.images.map((image, index) => {
+      const imageURL = rawURL + image;
+      return (
+        <EditProductImage
+          image={imageURL}
+          onImageDelete={() => this.removeServerImage(index)}
+        />
+      );
+    });
+  };
+  onEditProduct = async () => {
     try {
-      const images = await this.saveUploadImages();
+      const uploadedImages = await this.saveUploadImages();
       const data = {
         title: this.state.title,
         desc: this.state.desc,
         category: this.state.category,
         price: this.state.price,
-        images
+        id: this.state.id,
+        images: [...this.state.images, ...uploadedImages]
       };
       console.log(data.category);
-      await this.props.addProduct(data);
-      console.log("Product is successfuly created");
+      await this.props.updateProduct(data);
+      console.log("Product is successfuly saved");
     } catch (error) {
       this.setFormError(error);
     }
@@ -206,6 +255,7 @@ class AddProduct extends Component {
         </select>
         {this.state.categoryError}
         {this.renderLocalImages()}
+        {this.renderServerImages()}
 
         {/* Image Upload startes here */}
 
@@ -213,7 +263,7 @@ class AddProduct extends Component {
           Try dropping some files here, or click to select files to upload.
         </Dropzone>
         {this.state.imagesError}
-        <button onClick={this.onCreateProduct}>Create a Product</button>
+        <button onClick={this.onEditProduct}>Save the Product</button>
       </div>
     );
   }
@@ -221,10 +271,11 @@ class AddProduct extends Component {
 
 const mapStateToProps = state => ({
   profile: state.profile,
-  categories: state.categories
+  categories: state.categories,
+  editProduct: state.products.editProduct
 });
 
 export default connect(
   mapStateToProps,
-  { fetchCategories, addProduct }
-)(AddProduct);
+  { fetchCategories, getEditProduct, updateProduct }
+)(EditProduct);
