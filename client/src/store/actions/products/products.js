@@ -50,3 +50,13 @@ export const updateProduct = product => async dispatch => {
     console.log(error);
   }
 };
+
+//Delete the product
+export const deleteProduct = id => async dispatch => {
+  try {
+    await axios.delete(`/api/product/${id}`);
+    return;
+  } catch (error) {
+    console.log(error);
+  }
+};

@@ -81,4 +81,26 @@ module.exports = app => {
       console.log(err);
     }
   });
+
+  //Deletes a product
+  app.delete("/api/product/:id", requireToken, async (req, res) => {
+    console.log("Delete product page is called");
+    try {
+      const product = await Product.findById(req.params.id);
+      if (!product)
+        res
+          .status(400)
+          .send({ message: "The product with provided id does not exist" });
+
+      if (!product.createdBy.equals(req.user.id))
+        res
+          .status(401)
+          .send({ message: "That is not the product created by you" });
+
+      await Product.findByIdAndRemove(req.params.id);
+      res.status(200).send();
+    } catch (error) {
+      console.log(error);
+    }
+  });
 };

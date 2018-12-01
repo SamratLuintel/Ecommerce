@@ -1,7 +1,11 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-import { deletePage, fetchPages } from "../../../store/actions/pages/pages";
+
 import { connect } from "react-redux";
+import {
+  deleteProduct,
+  fetchProducts
+} from "../../../store/actions/products/products";
 
 class Product extends Component {
   redirectToEditPage = () => {
@@ -11,8 +15,8 @@ class Product extends Component {
 
   onDeletePage = async () => {
     const id = this.props.id;
-    await this.props.deletePage(id);
-    this.props.fetchPages();
+    await this.props.deleteProduct(id);
+    this.props.fetchProducts();
   };
   render() {
     const { props } = this;
@@ -35,6 +39,6 @@ class Product extends Component {
 export default withRouter(
   connect(
     null,
-    { deletePage, fetchPages }
+    { deleteProduct, fetchProducts }
   )(Product)
 );
