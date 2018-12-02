@@ -16,6 +16,7 @@ import EditProduct from "./components/admin/EditProduct/EditProduct";
 import Products from "./components/Products/Products";
 import Product from "./components/Product/Product";
 import { fetchCart } from "./store/actions/carts/carts";
+import Checkout from "./components/Checkout/Checkout";
 
 class App extends Component {
   componentDidMount = async () => {
@@ -46,6 +47,7 @@ class App extends Component {
         {/* General User Routes */}
         <Route exact path="/products" component={Products} />
         <Route exact path="/product/:id" component={Product} />
+        <Route exact path="/checkout" component={Checkout} />
       </div>
     );
   }
