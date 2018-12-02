@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { fetchPublicProducts } from "../../store/actions/public/publicProducts/publicProducts";
 import CategoriesFilter from "./CategoriesFilter/CategoriesFilter";
 import ProductCard from "./ProductCard/ProductCard";
+import ApplicationHeader from "../common/ApplicationHeader/ApplicationHeader";
 
 class Products extends Component {
   componentDidMount = () => {
@@ -35,6 +36,7 @@ class Products extends Component {
   render() {
     return (
       <div className="Products">
+        <ApplicationHeader />
         <CategoriesFilter />
         {this.renderProducts()}
       </div>

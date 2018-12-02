@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { connect } from "react-redux";
+import { addProductToCart, fetchCart } from "../../store/actions/carts/carts";
 
 class Product extends Component {
   state = {
@@ -7,7 +9,10 @@ class Product extends Component {
     title: "",
     desc: "",
     price: "",
-    images: []
+    images: [],
+
+    //product info
+    amount: 10
   };
 
   componentDidMount = () => {
@@ -45,6 +50,14 @@ class Product extends Component {
     }
   };
 
+  onAddProductToCart = async () => {
+    const product = this.props.match.params.id;
+    const amount = this.state.amount;
+    const data = { product, amount };
+    await this.props.addProductToCart(data);
+    console.log("Add Product to card finished");
+    this.props.fetchCart();
+  };
   render() {
     if (this.state.error && this.state.fetched)
       return <p>{this.state.errorMessage}</p>;
@@ -53,8 +66,12 @@ class Product extends Component {
         <p>{this.state.title}</p>
         <p>{this.state.desc}</p>
         <p>{this.state.price}</p>
+        <p onClick={this.onAddProductToCart}>Add Product To Cart</p>
       </div>
     );
   }
 }
-export default Product;
+export default connect(
+  null,
+  { addProductToCart, fetchCart }
+)(Product);

@@ -15,10 +15,16 @@ import AddProduct from "./components/admin/AddProduct/AddProduct";
 import EditProduct from "./components/admin/EditProduct/EditProduct";
 import Products from "./components/Products/Products";
 import Product from "./components/Product/Product";
+import { fetchCart } from "./store/actions/carts/carts";
 
 class App extends Component {
-  componentDidMount = () => {
-    this.props.fetchUser();
+  componentDidMount = async () => {
+    try {
+      await this.props.fetchUser();
+      this.props.fetchCart();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   render() {
@@ -48,6 +54,6 @@ class App extends Component {
 export default withRouter(
   connect(
     null,
-    { fetchUser }
+    { fetchUser, fetchCart }
   )(App)
 );

@@ -26,12 +26,9 @@ module.exports = app => {
       }
     } catch (error) {
       console.log(error);
-      res
-        .status(400)
-        .send({
-          message:
-            "Some internal server error has occured.Please try again later"
-        });
+      res.status(400).send({
+        message: "Some internal server error has occured.Please try again later"
+      });
     }
   });
 };

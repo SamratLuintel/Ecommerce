@@ -6,6 +6,7 @@ import productsReducer from "./productsReducer";
 import publicCategoriesReducer from "./public/publicCategoriesReducer";
 import publicPagesReducer from "./public/publicPagesReducer";
 import publicProductsReducer from "./public/publicProductsReducer";
+import cartsReducer from "./cartsReducer";
 
 export default combineReducers({
   profile: profileReducer,
@@ -18,5 +19,7 @@ export default combineReducers({
   */
   publicCategories: publicCategoriesReducer,
   publicPages: publicPagesReducer,
-  publicProducts: publicProductsReducer
+  publicProducts: publicProductsReducer,
+
+  carts: cartsReducer
 });

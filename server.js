@@ -9,6 +9,7 @@ require("./models/users");
 require("./models/pages");
 require("./models/categories");
 require("./models/products");
+require("./models/carts");
 //require the passport
 require("./services/passport");
 
@@ -33,7 +34,7 @@ require("./routes/admin/admin_products")(app);
 require("./routes/products")(app);
 require("./routes/pages")(app);
 require("./routes/categories")(app);
-
+require("./routes/carts")(app);
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
   console.log("The server is listening to the port", port);

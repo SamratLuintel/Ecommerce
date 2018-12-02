@@ -13,6 +13,7 @@ export const fetchUser = token => async dispatch => {
       });
       localStorage.setItem("ecommerceToken", token);
       //set the authorization header in every request
+
       setAuthToken(token);
       return dispatch({ type: UPDATE_USER_LOGGEDIN, payload: res.data });
     } catch (err) {
