@@ -27,7 +27,7 @@ export const addPage = (title, slug, content) => async dispatch => {
 //Gets the page selected for edit view
 export const getEditPage = id => async dispatch => {
   try {
-    const res = await axios.get(`/api/page/${id}`);
+    const res = await axios.get(`/api/admin-page/${id}`);
     dispatch({
       type: UPDATE_EDIT_PAGE,
       payload: res.data
@@ -40,7 +40,7 @@ export const getEditPage = id => async dispatch => {
 //Updates the page
 export const updatePage = page => async dispatch => {
   try {
-    const res = await axios.post(`/api/page/${page.id}`, page);
+    const res = await axios.post(`/api/admin-page/${page.id}`, page);
     dispatch({
       type: UPDATE_EDIT_PAGE,
       payload: res.data
@@ -55,7 +55,7 @@ export const updatePage = page => async dispatch => {
 //Deletes a page
 export const deletePage = id => async dispatch => {
   try {
-    await axios.delete(`/api/page/${id}`);
+    await axios.delete(`/api/admin-page/${id}`);
     return;
   } catch (error) {
     console.log(error);

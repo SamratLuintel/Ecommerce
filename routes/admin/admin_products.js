@@ -30,7 +30,7 @@ module.exports = app => {
     res.status(200).send(product);
   });
 
-  app.get("/api/product/:id", requireToken, async (req, res) => {
+  app.get("/api/admin-product/:id", requireToken, async (req, res) => {
     try {
       const product = await Product.findById(req.params.id);
       if (!product)
@@ -49,7 +49,7 @@ module.exports = app => {
   });
 
   //Edits a Product
-  app.post("/api/product/:id", requireToken, async (req, res) => {
+  app.post("/api/admin-product/:id", requireToken, async (req, res) => {
     const { errors, isValid } = ValidateProduct(req.body);
     if (!isValid) return res.status(400).send(errors);
     try {
@@ -83,7 +83,7 @@ module.exports = app => {
   });
 
   //Deletes a product
-  app.delete("/api/product/:id", requireToken, async (req, res) => {
+  app.delete("/api/admin-product/:id", requireToken, async (req, res) => {
     console.log("Delete product page is called");
     try {
       const product = await Product.findById(req.params.id);

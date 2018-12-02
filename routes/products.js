@@ -12,4 +12,26 @@ module.exports = app => {
       console.log(error);
     }
   });
+
+  //Fetch a particular product
+  app.get("/api/product/:id", async (req, res) => {
+    try {
+      const product = await Product.findById(req.params.id);
+      if (product) {
+        res.status(200).send(product);
+      } else {
+        res
+          .status(400)
+          .send({ message: "The product with provided id does not exist" });
+      }
+    } catch (error) {
+      console.log(error);
+      res
+        .status(400)
+        .send({
+          message:
+            "Some internal server error has occured.Please try again later"
+        });
+    }
+  });
 };

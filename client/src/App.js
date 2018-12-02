@@ -14,6 +14,7 @@ import AdminProducts from "./components/admin/AdminProducts/AdminProducts";
 import AddProduct from "./components/admin/AddProduct/AddProduct";
 import EditProduct from "./components/admin/EditProduct/EditProduct";
 import Products from "./components/Products/Products";
+import Product from "./components/Product/Product";
 
 class App extends Component {
   componentDidMount = () => {
@@ -38,6 +39,7 @@ class App extends Component {
 
         {/* General User Routes */}
         <Route exact path="/products" component={Products} />
+        <Route exact path="/product/:id" component={Product} />
       </div>
     );
   }

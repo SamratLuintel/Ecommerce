@@ -43,7 +43,7 @@ module.exports = app => {
   });
 
   //Gets a particular category
-  app.get("/api/category/:id", requireToken, async (req, res) => {
+  app.get("/api/admin-category/:id", requireToken, async (req, res) => {
     try {
       const category = await Category.findById(req.params.id);
       if (category) {
@@ -67,7 +67,7 @@ module.exports = app => {
   });
 
   //Updates a category
-  app.post(`/api/category/:id`, requireToken, async (req, res) => {
+  app.post(`/api/admin-category/:id`, requireToken, async (req, res) => {
     try {
       const { errors, isValid } = ValidateCategory(req.body);
       console.log(errors);
@@ -105,7 +105,7 @@ module.exports = app => {
   });
 
   //Deletes a category
-  app.delete("/api/category/:id", requireToken, async (req, res) => {
+  app.delete("/api/admin-category/:id", requireToken, async (req, res) => {
     console.log("Delete category is called");
     try {
       const category = await Category.findById(req.params.id);

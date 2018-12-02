@@ -26,7 +26,7 @@ export const addProduct = data => async dispatch => {
 
 export const getEditProduct = id => async dispatch => {
   try {
-    const res = await axios.get(`/api/product/${id}`);
+    const res = await axios.get(`/api/admin-product/${id}`);
     dispatch({
       type: UPDATE_EDIT_PRODUCT,
       payload: res.data
@@ -40,7 +40,7 @@ export const getEditProduct = id => async dispatch => {
 //Updates the product
 export const updateProduct = product => async dispatch => {
   try {
-    const res = await axios.post(`/api/product/${product.id}`, product);
+    const res = await axios.post(`/api/admin-product/${product.id}`, product);
     dispatch({
       type: UPDATE_EDIT_PRODUCT,
       payload: res.data
@@ -54,7 +54,7 @@ export const updateProduct = product => async dispatch => {
 //Delete the product
 export const deleteProduct = id => async dispatch => {
   try {
-    await axios.delete(`/api/product/${id}`);
+    await axios.delete(`/api/admin-product/${id}`);
     return;
   } catch (error) {
     console.log(error);

@@ -49,7 +49,7 @@ module.exports = app => {
   });
 
   //Gets the information of a specific page
-  app.get("/api/page/:id", requireToken, async (req, res) => {
+  app.get("/api/admin-page/:id", requireToken, async (req, res) => {
     try {
       const page = await Page.findById(req.params.id);
       if (page) {
@@ -74,7 +74,7 @@ module.exports = app => {
   });
 
   //Updates a page
-  app.post("/api/page/:id", requireToken, async (req, res) => {
+  app.post("/api/admin-page/:id", requireToken, async (req, res) => {
     try {
       const { errors, isValid } = ValidatePage(req.body);
       console.log(errors);
@@ -113,7 +113,7 @@ module.exports = app => {
   });
 
   //Deletes a page
-  app.delete("/api/page/:id", requireToken, async (req, res) => {
+  app.delete("/api/admin-page/:id", requireToken, async (req, res) => {
     console.log("Delete page is called");
     try {
       const page = await Page.findById(req.params.id);

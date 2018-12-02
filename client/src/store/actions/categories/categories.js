@@ -30,7 +30,7 @@ export const addCategory = title => async dispatch => {
 //Gets the category selected for edit view
 export const getEditCategory = id => async dispatch => {
   try {
-    const res = await axios.get(`/api/category/${id}`);
+    const res = await axios.get(`/api/admin-category/${id}`);
     dispatch({
       type: UPDATE_EDIT_CATEGORY,
       payload: res.data
