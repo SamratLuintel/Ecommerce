@@ -1,48 +1,41 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchProducts } from "../../store/actions/products/products";
-import Product from "./Product/Product";
+import { fetchPublicProducts } from "../../store/actions/public/publicProducts/publicProducts";
+import CategoriesFilter from "./CategoriesFilter/CategoriesFilter";
+import ProductCard from "./ProductCard/ProductCard";
 
 class Products extends Component {
-  componentDidUpdate = (prevProps, prevState) => {
-    if (this.props.profile.authenticated && !this.props.products.fetched) {
-      this.props.fetchProducts();
+  componentDidMount = () => {
+    if (!this.props.publicProducts.fetched) {
+      this.props.fetchPublicProducts();
     }
   };
 
-  componentDidMount = () => {
-    if (this.props.profile.authenticated && !this.props.products.fetched) {
-      this.props.fetchProducts();
-    }
+  filterProducts = products => {
+    if (!this.props.publicProducts.categoryFilter) return products;
+
+    const filterId = this.props.publicProducts.categoryFilter;
+    //Filter the product by category
+    return this.props.publicProducts.lists.filter(
+      product => product.category === filterId
+    );
   };
   renderProducts = () => {
-    if (this.props.products.fetched && this.props.profile.authenticated) {
-      return this.props.products.lists.map(product => {
-        return (
-          <Product
-            title={product.title}
-            price={product.price}
-            desc={product.desc}
-            category={product.category}
-            id={product._id}
-          />
-        );
-      });
-    }
+    const products = this.filterProducts(this.props.publicProducts.lists);
+    return products.map(product => (
+      <ProductCard
+        id={product._id}
+        title={product.title}
+        desc={product.desc}
+        price={product.price}
+        category={product.category}
+      />
+    ));
   };
   render() {
     return (
       <div className="Products">
-        <thead>
-          <tr>
-            <th>Product</th>
-            <th>Price</th>
-            <th>Category</th>
-            <th>Product Image</th>
-            <th>Edit</th>
-            <th>Delete</th>
-          </tr>
-        </thead>
+        <CategoriesFilter />
         {this.renderProducts()}
       </div>
     );
@@ -50,11 +43,9 @@ class Products extends Component {
 }
 
 const mapStateToProps = state => ({
-  profile: state.profile,
-  products: state.products
+  publicProducts: state.publicProducts
 });
-
 export default connect(
   mapStateToProps,
-  { fetchProducts }
+  { fetchPublicProducts }
 )(Products);

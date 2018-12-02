@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-import { deletePage, fetchPages } from "../../../store/actions/pages/pages";
+import { deletePage, fetchPages } from "../../../../store/actions/pages/pages";
 import { connect } from "react-redux";
 
-class Page extends Component {
+class AdminPage extends Component {
   redirectToEditPage = () => {
     const id = this.props.id;
     this.props.history.push(`/admin/edit-page/${id}`);
@@ -33,5 +33,5 @@ export default withRouter(
   connect(
     null,
     { deletePage, fetchPages }
-  )(Page)
+  )(AdminPage)
 );

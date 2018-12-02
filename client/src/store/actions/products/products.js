@@ -5,7 +5,7 @@ export const uploadProductImages = images => {};
 
 export const fetchProducts = () => async dispatch => {
   try {
-    const res = await axios.get("/api/products");
+    const res = await axios.get("/api/admin-products");
     dispatch({
       type: UPDATE_PRODUCTS,
       payload: res.data

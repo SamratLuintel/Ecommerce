@@ -4,9 +4,9 @@ import { connect } from "react-redux";
 import {
   deleteCategory,
   fetchCategories
-} from "../../../store/actions/categories/categories";
+} from "../../../../store/actions/categories/categories";
 
-class Category extends Component {
+class AdminCategory extends Component {
   redirectToEditCategory = () => {
     const id = this.props.id;
     this.props.history.push(`/admin/edit-category/${id}`);
@@ -36,5 +36,5 @@ export default withRouter(
   connect(
     null,
     { deleteCategory, fetchCategories }
-  )(Category)
+  )(AdminCategory)
 );

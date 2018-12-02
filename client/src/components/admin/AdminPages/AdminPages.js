@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchPages } from "../../store/actions/pages/pages";
-import Page from "./Page/Page";
+import { fetchPages } from "../../../store/actions/pages/pages";
+import AdminPage from "./AdminPage/AdminPage";
 
-class Pages extends Component {
+class AdminPages extends Component {
   componentDidUpdate = (prevProps, prevState) => {
     //Fetched the edit page
     if (this.props.profile.authenticated && !this.props.pages.fetched) {
@@ -19,7 +19,7 @@ class Pages extends Component {
   renderPages = () => {
     if (this.props.pages.fetched && this.props.profile.authenticated) {
       return this.props.pages.lists.map(page => {
-        return <Page title={page.title} id={page._id} />;
+        return <AdminPage title={page.title} id={page._id} />;
       });
     }
   };
@@ -47,4 +47,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { fetchPages }
-)(Pages);
+)(AdminPages);

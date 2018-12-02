@@ -37,7 +37,7 @@ module.exports = app => {
   });
 
   //Lists all the categories
-  app.get("/api/categories", requireToken, async (req, res) => {
+  app.get("/api/admin-categories", requireToken, async (req, res) => {
     const categories = await Category.find({ createdBy: req.user.id });
     res.status(200).send(categories);
   });

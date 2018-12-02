@@ -4,7 +4,7 @@ import { UPDATE_CATEGORIES, UPDATE_EDIT_CATEGORY } from "../../types";
 export const fetchCategories = () => async dispatch => {
   try {
     console.log("Fetch categories is called");
-    const res = await axios.get("/api/categories");
+    const res = await axios.get("/api/admin-categories");
     dispatch({
       type: UPDATE_CATEGORIES,
       payload: res.data

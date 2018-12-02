@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchCategories } from "../../store/actions/categories/categories";
-import Category from "./Category/Category";
+import { fetchCategories } from "../../../store/actions/categories/categories";
+import AdminCategory from "./AdminCategory/AdminCategory";
 import { withRouter } from "react-router-dom";
 
-class Pages extends Component {
+class AdminCategories extends Component {
   componentDidUpdate = (prevProps, prevState) => {
     //Fetched the edit page
     if (this.props.profile.authenticated && !this.props.categories.fetched) {
@@ -21,7 +21,7 @@ class Pages extends Component {
   renderCategories = () => {
     if (this.props.categories.fetched && this.props.profile.authenticated) {
       return this.props.categories.lists.map(category => {
-        return <Category title={category.title} id={category._id} />;
+        return <AdminCategory title={category.title} id={category._id} />;
       });
     }
   };
@@ -58,5 +58,5 @@ export default withRouter(
   connect(
     mapStateToProps,
     { fetchCategories }
-  )(Pages)
+  )(AdminCategories)
 );

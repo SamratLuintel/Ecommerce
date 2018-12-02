@@ -30,6 +30,10 @@ require("./routes/admin/admin_pages")(app);
 require("./routes/admin/admin_categories")(app);
 require("./routes/admin/admin_products")(app);
 
+require("./routes/products")(app);
+require("./routes/pages")(app);
+require("./routes/categories")(app);
+
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
   console.log("The server is listening to the port", port);
