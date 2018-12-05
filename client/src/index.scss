@@ -1,6 +1,5 @@
 @import "styles/styles";
 @import "components/components";
-
 * {
   margin: 0;
   padding: 0;
@@ -10,5 +9,5 @@
   outline: none;
 }
 html {
-  box-sizing: border-box;
+  box-sizing: border-box !important;
 }

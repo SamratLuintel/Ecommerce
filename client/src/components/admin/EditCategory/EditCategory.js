@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import {
   getEditCategory,
   updateCategory
-} from "../../../store/actions/categories/categories";
+} from "../../../store/actions/categories/adminCategories";
 
 class EditCategory extends Component {
   state = {
@@ -80,7 +80,7 @@ class EditCategory extends Component {
 
 const mapStateToProps = state => ({
   profile: state.profile,
-  editCategory: state.categories.editCategory
+  editCategory: state.adminCategories.editCategory
 });
 export default connect(
   mapStateToProps,

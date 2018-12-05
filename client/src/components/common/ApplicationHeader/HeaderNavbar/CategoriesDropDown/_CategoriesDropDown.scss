@@ -1,0 +1,63 @@
+.CategoriesDropDown {
+  height: 60px;
+  color: #fff;
+  font-family: "Open Sans";
+  width: 25%;
+  background: #529501;
+}
+
+.CategoriesDropDown__button {
+  height: 60px;
+  line-height: 60px;
+  font-size: 0.9375rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 1.5px;
+  padding-left: 20px;
+
+  i {
+    padding-right: 17px;
+  }
+  i:last-child {
+    float: right;
+    line-height: 60px;
+  }
+}
+
+.CategoriesDropDown__menu-item {
+  border: 0;
+  border-bottom: 1px solid #ebebeb;
+  margin: 0;
+  float: none;
+  display: block;
+  position: static;
+  cursor: pointer;
+  height: 48px;
+  padding: 0 20px 0 40px;
+  line-height: 48px;
+  position: relative;
+  color: #161616;
+  transition: 0.5s all;
+  &:hover {
+    color: $primary-green;
+  }
+  i {
+    min-width: 37px;
+    text-align: center;
+    margin: 0;
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    padding-top: 15px !important;
+  }
+
+  span {
+    font-size: 0.9375rem;
+    text-transform: capitalize;
+    margin-bottom: 0;
+    padding: 0;
+    line-height: 46px;
+  }
+}

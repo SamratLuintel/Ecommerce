@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import { addPage } from "../../../store/actions/pages/pages";
 import { connect } from "react-redux";
-import { fetchCategories } from "../../../store/actions/categories/categories";
+import { fetchAdminCategories } from "../../../store/actions/categories/adminCategories";
 import Dropzone from "react-dropzone";
 import keys from "../../../config/keys";
 import axios from "axios";
@@ -9,7 +8,7 @@ import EditProductImage from "./EditProductImage/EditProductImage";
 import {
   getEditProduct,
   updateProduct
-} from "../../../store/actions/products/products";
+} from "../../../store/actions/products/adminProducts";
 
 class EditProduct extends Component {
   state = {
@@ -76,7 +75,7 @@ class EditProduct extends Component {
 
   fetchCategoryAndEditProduct = async () => {
     const id = this.props.match.params.id;
-    const fetchCategoryPromise = this.props.fetchCategories();
+    const fetchCategoryPromise = this.props.fetchAdminCategories();
     const fetchEditProductPromise = this.props.getEditProduct(id);
     await fetchCategoryPromise;
     await fetchEditProductPromise;
@@ -271,11 +270,11 @@ class EditProduct extends Component {
 
 const mapStateToProps = state => ({
   profile: state.profile,
-  categories: state.categories,
+  categories: state.adminCategories,
   editProduct: state.products.editProduct
 });
 
 export default connect(
   mapStateToProps,
-  { fetchCategories, getEditProduct, updateProduct }
+  { fetchAdminCategories, getEditProduct, updateProduct }
 )(EditProduct);

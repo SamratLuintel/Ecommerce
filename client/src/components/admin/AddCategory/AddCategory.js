@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { addCategory } from "../../../store/actions/categories/categories";
+import { addCategory } from "../../../store/actions/categories/adminCategories";
 
 import { connect } from "react-redux";
 

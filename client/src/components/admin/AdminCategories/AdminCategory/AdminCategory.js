@@ -3,8 +3,8 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import {
   deleteCategory,
-  fetchCategories
-} from "../../../../store/actions/categories/categories";
+  fetchAdminCategories
+} from "../../../../store/actions/categories/adminCategories";
 
 class AdminCategory extends Component {
   redirectToEditCategory = () => {
@@ -15,7 +15,7 @@ class AdminCategory extends Component {
   onDeleteCategory = async () => {
     const id = this.props.id;
     await this.props.deleteCategory(id);
-    this.props.fetchCategories();
+    this.props.fetchAdminCategories();
   };
   render() {
     const { props } = this;
@@ -35,6 +35,6 @@ class AdminCategory extends Component {
 export default withRouter(
   connect(
     null,
-    { deleteCategory, fetchCategories }
+    { deleteCategory, fetchAdminCategories }
   )(AdminCategory)
 );

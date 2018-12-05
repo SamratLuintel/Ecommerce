@@ -1,12 +1,12 @@
 import axios from "axios";
-import { UPDATE_CATEGORIES, UPDATE_EDIT_CATEGORY } from "../../types";
+import { UPDATE_ADMIN_CATEGORIES, UPDATE_EDIT_CATEGORY } from "../../types";
 
-export const fetchCategories = () => async dispatch => {
+export const fetchAdminCategories = () => async dispatch => {
   try {
     console.log("Fetch categories is called");
     const res = await axios.get("/api/admin-categories");
     dispatch({
-      type: UPDATE_CATEGORIES,
+      type: UPDATE_ADMIN_CATEGORIES,
       payload: res.data
     });
   } catch (err) {

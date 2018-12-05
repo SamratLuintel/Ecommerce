@@ -1,12 +1,11 @@
 import React, { Component } from "react";
-import { addPage } from "../../../store/actions/pages/pages";
 import { connect } from "react-redux";
-import { fetchCategories } from "../../../store/actions/categories/categories";
+import { fetchAdminCategories } from "../../../store/actions/categories/adminCategories";
 import Dropzone from "react-dropzone";
 import keys from "../../../config/keys";
 import axios from "axios";
 import AddProductImage from "./AddProductImage/AddProductImage";
-import { addProduct } from "../../../store/actions/products/products";
+import { addProduct } from "../../../store/actions/products/adminProducts";
 
 //Remove Item in an array from specific index
 const removeItem = (items, i) =>
@@ -35,7 +34,7 @@ class AddProduct extends Component {
       !this.props.categories.fetched &&
       !this.state.loaded
     ) {
-      await this.props.fetchCategories();
+      await this.props.fetchAdminCategories();
       this.setState({ loaded: true });
     }
   };
@@ -46,7 +45,7 @@ class AddProduct extends Component {
       !this.props.categories.fetched &&
       !this.state.loaded
     ) {
-      await this.props.fetchCategories();
+      await this.props.fetchAdminCategories();
       this.setState({ loaded: true });
     }
   };
@@ -221,10 +220,10 @@ class AddProduct extends Component {
 
 const mapStateToProps = state => ({
   profile: state.profile,
-  categories: state.categories
+  categories: state.adminCategories
 });
 
 export default connect(
   mapStateToProps,
-  { fetchCategories, addProduct }
+  { fetchAdminCategories, addProduct }
 )(AddProduct);

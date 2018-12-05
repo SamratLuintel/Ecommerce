@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import {
   deleteProduct,
   fetchProducts
-} from "../../../../store/actions/products/products";
+} from "../../../../store/actions/products/adminProducts";
 
 class Product extends Component {
   redirectToEditPage = () => {

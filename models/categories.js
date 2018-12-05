@@ -6,8 +6,9 @@ const CategoriesSchema = new Schema({
     type: String,
     required: true
   },
-  slug: {
-    type: String
+  icon: {
+    type: String,
+    default: "f15b"
   },
   createdBy: {
     type: mongoose.Schema.Types.ObjectId,

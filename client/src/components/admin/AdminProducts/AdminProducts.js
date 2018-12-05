@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchProducts } from "../../../store/actions/products/products";
+import { fetchProducts } from "../../../store/actions/products/adminProducts";
 import AdminProduct from "./AdminProduct/AdminProduct";
 
 class AdminProducts extends Component {
@@ -51,7 +51,7 @@ class AdminProducts extends Component {
 
 const mapStateToProps = state => ({
   profile: state.profile,
-  products: state.products
+  products: state.adminProducts
 });
 
 export default connect(

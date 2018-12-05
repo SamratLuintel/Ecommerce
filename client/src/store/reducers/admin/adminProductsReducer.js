@@ -1,21 +1,27 @@
-import {
-  UPDATE_PUBLIC_PRODUCTS,
-  SET_PUBLIC_PRODUCT_CATEGORY_FILTER
-} from "../../types";
+import { UPDATE_PRODUCTS, UPDATE_EDIT_PRODUCT } from "../../types";
 
 const initialState = {
   //Below fetched variable is for the list of all pages on /pages route
   fetched: false,
   lists: [],
-  categoryFilter: null
+
+  editProduct: {
+    fetched: false
+  }
 };
 
 export default (state = initialState, { type, payload }) => {
   switch (type) {
-    case UPDATE_PUBLIC_PRODUCTS:
+    case UPDATE_PRODUCTS:
       return { ...state, lists: payload, fetched: true };
-    case SET_PUBLIC_PRODUCT_CATEGORY_FILTER:
-      return { ...state, categoryFilter: payload };
+    case UPDATE_EDIT_PRODUCT:
+      return {
+        ...state,
+        editProduct: {
+          fetched: true,
+          ...payload
+        }
+      };
     default:
       return state;
   }
