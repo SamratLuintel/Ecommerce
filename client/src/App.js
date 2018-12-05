@@ -31,7 +31,6 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <a href="/api/auth/google">Login With Google</a>
         <Route exact path="/home/:token?" component={Home} />
         {/* All the admin routes */}
         <Route exact path="/admin/add-page" component={AddPage} />

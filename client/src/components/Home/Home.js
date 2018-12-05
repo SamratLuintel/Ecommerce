@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { fetchUser } from "../../store/actions/profile/profile";
 import { connect } from "react-redux";
+import ApplicationHeader from "../common/ApplicationHeader/ApplicationHeader";
 
 class Home extends Component {
   componentDidMount = () => {
-    //FetchUser is called initially at App.js
+    //FetchUser function is called initially at App.js
     //This page is usually called when the user logs in
     if (
       (this.props.profile.fetched && !this.props.profile.authenticated) ||
@@ -21,7 +22,11 @@ class Home extends Component {
   };
 
   render() {
-    return <div>Home Route is called</div>;
+    return (
+      <div>
+        <ApplicationHeader />
+      </div>
+    );
   }
 }
 

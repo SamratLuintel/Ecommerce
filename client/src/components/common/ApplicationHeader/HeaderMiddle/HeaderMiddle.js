@@ -1,0 +1,37 @@
+import React, { Component } from "react";
+import HeaderControlBlock from "./HeaderControlBlock/HeaderControlBlock";
+
+class HeaderMiddle extends Component {
+  render() {
+    return (
+      <div className="HeaderMiddle">
+        <div className="container HeaderMiddle__content">
+          <div className="HeaderMiddle__left">
+            <h1 className="HeaderMiddle__title">
+              <span className="green">SAMRAT</span>MART
+            </h1>
+          </div>
+          <div className="HeaderMiddle__right">
+            <div className="HeaderMiddle__search-wrapper">
+              <input
+                type="text"
+                className="HeaderMiddle__search"
+                placeholder="Search Entire Store Here..."
+              />
+              <span className="HeaderMiddle__search-icon">
+                <i class="fas fa-search" />
+              </span>
+            </div>
+            {/*Control Block Area */}
+            <HeaderControlBlock />
+            <div className="HeaderMiddle__user-cart">
+              Your Cart
+              <p className="HeaderMiddle__user-cart__price">$0.00</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
+export default HeaderMiddle;

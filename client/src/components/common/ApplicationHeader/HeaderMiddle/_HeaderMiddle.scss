@@ -1,0 +1,57 @@
+@import "HeaderControlBlock/HeaderControlBlock";
+
+.HeaderMiddle__content {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  background: #fff;
+  display: flex;
+  justify-content: space-between;
+}
+.HeaderMiddle__title {
+  font-weight: 800;
+  font-style: italic;
+
+  .green {
+    color: #62a70f;
+  }
+  color: #252525;
+}
+
+.HeaderMiddle__search {
+  height: 50px;
+  line-height: 50px;
+  width: 500px;
+  padding-left: 15px;
+  border: 1px solid #ebebeb;
+}
+
+.HeaderMiddle__search-wrapper {
+  display: flex;
+}
+
+.HeaderMiddle__search-icon {
+  background-color: #529501;
+  color: #fff;
+  padding: 14px 15px;
+
+  i {
+    font-size: 1rem;
+  }
+}
+
+.HeaderMiddle__right {
+  display: flex;
+}
+
+.HeaderMiddle__user-cart {
+  margin-top: 8px;
+  line-height: 1.3;
+  font-size: 0.875rem;
+  margin-left: 20px;
+}
+
+.HeaderMiddle__user-cart__price {
+  color: #f2453d;
+  font-weight: 600;
+  font-size: 1.125rem;
+}

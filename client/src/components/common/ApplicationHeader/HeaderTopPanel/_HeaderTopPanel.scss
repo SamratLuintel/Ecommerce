@@ -1,0 +1,28 @@
+.HeaderTopPanel {
+  background-color: #f5f5f5;
+  color: #636363;
+  height: 40px;
+  line-height: 40px;
+}
+
+.HeaderTopPanel__wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.HeaderTopPanel__info {
+  font-size: 0.8125rem;
+  letter-spacing: 0.25px;
+
+  i {
+    padding-right: 13px;
+    font-size: 0.7rem !important;
+  }
+  span {
+    padding-right: 23px;
+  }
+
+  span:last-child {
+    padding-right: 0px;
+  }
+}

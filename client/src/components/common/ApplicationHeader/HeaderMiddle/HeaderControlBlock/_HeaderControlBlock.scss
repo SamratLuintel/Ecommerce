@@ -1,0 +1,40 @@
+.HeaderControlBlock {
+  display: flex;
+  align-items: center;
+  margin-left: 15px;
+}
+
+.HeaderControlBlock__action-btn {
+  position: relative;
+  margin-right: 40px;
+
+  i {
+    font-size: 25px;
+    color: #252525;
+    transition: 0.5s all;
+    cursor: pointer;
+
+    &:hover {
+      color: #529501;
+    }
+  }
+
+  &:last-child {
+    margin-right: 0px;
+  }
+}
+
+.HeaderControlBlock__action-btn__counter {
+  position: absolute;
+  top: -7px;
+  left: 20px;
+  background: #e1e1e1 !important;
+  color: #111 !important;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  line-height: 18px;
+  font-weight: 700;
+  border-radius: 50%;
+  font-size: 0.75rem;
+}

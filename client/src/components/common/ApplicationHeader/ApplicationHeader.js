@@ -1,13 +1,17 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import HeaderTopPanel from "./HeaderTopPanel/HeaderTopPanel";
+import HeaderMiddle from "./HeaderMiddle/HeaderMiddle";
+import HeaderNavbar from "./HeaderNavbar/HeaderNavbar";
 
 class ApplicationHeader extends Component {
   render() {
     const { props } = this;
     return (
       <div className="ApplicationHeader">
-        <i class="fas fa-shopping-cart" />
-        {props.carts.totalItems}
+        <HeaderTopPanel />
+        <HeaderMiddle />
+        <HeaderNavbar />
       </div>
     );
   }
