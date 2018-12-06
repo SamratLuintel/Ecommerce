@@ -4,7 +4,7 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import {
   deleteProduct,
-  fetchProducts
+  fetchAdminProducts
 } from "../../../../store/actions/products/adminProducts";
 
 class Product extends Component {
@@ -16,7 +16,7 @@ class Product extends Component {
   onDeletePage = async () => {
     const id = this.props.id;
     await this.props.deleteProduct(id);
-    this.props.fetchProducts();
+    this.props.fetchAdminProducts();
   };
   render() {
     const { props } = this;
@@ -39,6 +39,6 @@ class Product extends Component {
 export default withRouter(
   connect(
     null,
-    { deleteProduct, fetchProducts }
+    { deleteProduct, fetchAdminProducts }
   )(Product)
 );

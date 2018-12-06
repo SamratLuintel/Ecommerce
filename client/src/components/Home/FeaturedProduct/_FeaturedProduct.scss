@@ -1,0 +1,9 @@
+@import "FeaturedProductSlider/FeaturedProductSlider";
+
+.FeaturedProduct {
+  background: #f5f5f5;
+}
+
+.FeaturedProduct__slider-container {
+  justify-content: flex-end !important;
+}

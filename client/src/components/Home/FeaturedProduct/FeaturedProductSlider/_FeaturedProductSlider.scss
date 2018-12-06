@@ -1,0 +1,58 @@
+.FeaturedProductSlider {
+  min-height: 480px;
+  background: #f5f5f5;
+  position: relative;
+  font-family: "Open Sans";
+}
+
+.FeaturedProductSlider__content {
+  position: absolute;
+  width: 100%;
+  top: 60%;
+  transform: translateY(-40%);
+  transition: all 0.6s cubic-bezier(0.44, 0.13, 0.48, 0.87);
+  transition-delay: 0.3s;
+  z-index: 999;
+  text-align: left;
+  left: 20px;
+}
+
+.FeaturedProductSlider__content {
+  &__title {
+    color: #252525;
+    font-size: 3.75rem;
+    font-weight: 600;
+    letter-spacing: -2px;
+    margin: 15px 0;
+  }
+
+  &__subtitle {
+    color: #252525;
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+    font-weight: 400;
+  }
+
+  &__button {
+    color: rgb(82, 149, 1);
+    background: rgb(245, 245, 245);
+    height: 40px;
+    line-height: 40px;
+    display: inline-block;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin: 0;
+    padding: 0 20px;
+    letter-spacing: 0.75px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: 1s;
+    margin-top: 10px;
+    &:hover {
+      color: #fff;
+      background-color: rgb(242, 100, 34);
+    }
+  }
+}

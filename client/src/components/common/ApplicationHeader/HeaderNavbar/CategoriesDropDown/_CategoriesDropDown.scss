@@ -25,6 +25,10 @@
   }
 }
 
+.CategoriesDropDown__menu-lists {
+  position: relative;
+  z-index: 99;
+}
 .CategoriesDropDown__menu-item {
   border: 0;
   border-bottom: 1px solid #ebebeb;
@@ -34,9 +38,11 @@
   position: static;
   cursor: pointer;
   height: 48px;
+  background-color: #fff;
   padding: 0 20px 0 40px;
   line-height: 48px;
   position: relative;
+  z-index: 999;
   color: #161616;
   transition: 0.5s all;
   &:hover {

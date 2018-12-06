@@ -1,18 +1,18 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchProducts } from "../../../store/actions/products/adminProducts";
+import { fetchAdminProducts } from "../../../store/actions/products/adminProducts";
 import AdminProduct from "./AdminProduct/AdminProduct";
 
 class AdminProducts extends Component {
   componentDidUpdate = (prevProps, prevState) => {
     if (this.props.profile.authenticated && !this.props.products.fetched) {
-      this.props.fetchProducts();
+      this.props.fetchAdminProducts();
     }
   };
 
   componentDidMount = () => {
     if (this.props.profile.authenticated && !this.props.products.fetched) {
-      this.props.fetchProducts();
+      this.props.fetchAdminProducts();
     }
   };
   renderProducts = () => {
@@ -56,5 +56,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { fetchProducts }
+  { fetchAdminProducts }
 )(AdminProducts);

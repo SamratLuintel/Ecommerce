@@ -3,7 +3,7 @@ import { UPDATE_PRODUCTS, UPDATE_EDIT_PRODUCT } from "../../types";
 
 export const uploadProductImages = images => {};
 
-export const fetchProducts = () => async dispatch => {
+export const fetchAdminProducts = () => async dispatch => {
   try {
     const res = await axios.get("/api/admin-products");
     dispatch({

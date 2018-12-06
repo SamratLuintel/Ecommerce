@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { fetchUser } from "../../store/actions/profile/profile";
 import { connect } from "react-redux";
 import ApplicationHeader from "../common/ApplicationHeader/ApplicationHeader";
+import FeaturedProduct from "./FeaturedProduct/FeaturedProduct";
 
 class Home extends Component {
   componentDidMount = () => {
@@ -25,6 +26,7 @@ class Home extends Component {
     return (
       <div>
         <ApplicationHeader />
+        <FeaturedProduct />
       </div>
     );
   }
