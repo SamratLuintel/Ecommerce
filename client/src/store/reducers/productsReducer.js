@@ -1,7 +1,8 @@
 import {
   UPDATE_PUBLIC_PRODUCTS,
   SET_PUBLIC_PRODUCT_CATEGORY_FILTER,
-  UPDATE_FEATURED_PRODUCTS
+  UPDATE_FEATURED_PRODUCTS,
+  UPDATE_PRODUCTS_PER_CATEGORY
 } from "../types";
 
 const initialState = {
@@ -26,6 +27,16 @@ export default (state = initialState, { type, payload }) => {
 
     case UPDATE_FEATURED_PRODUCTS:
       return { ...state, featured: { fetched: true, lists: payload } };
+
+    case UPDATE_PRODUCTS_PER_CATEGORY:
+      return {
+        ...state,
+        //payload.category is the id
+        [payload.category]: {
+          lists: payload.products
+        }
+      };
+
     default:
       return state;
   }

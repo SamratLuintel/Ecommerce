@@ -3,11 +3,17 @@ import { fetchUser } from "../../store/actions/profile/profile";
 import { connect } from "react-redux";
 import ApplicationHeader from "../common/ApplicationHeader/ApplicationHeader";
 import FeaturedProduct from "./FeaturedProduct/FeaturedProduct";
+import HomeBanner from "./HomeBanner/HomeBanner";
+import RandomProducts from "./RandomProducts/RandomProducts";
 
 class Home extends Component {
   componentDidMount = () => {
     //FetchUser function is called initially at App.js
     //This page is usually called when the user logs in
+    this.handleUserToken();
+  };
+
+  handleUserToken = () => {
     if (
       (this.props.profile.fetched && !this.props.profile.authenticated) ||
       !this.props.profile.fetched
@@ -26,7 +32,9 @@ class Home extends Component {
     return (
       <div>
         <ApplicationHeader />
-        <FeaturedProduct />
+        {/*<FeaturedProduct />*/}
+        <HomeBanner />
+        <RandomProducts />
       </div>
     );
   }

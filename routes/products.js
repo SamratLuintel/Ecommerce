@@ -47,4 +47,17 @@ module.exports = app => {
       });
     }
   });
+
+  //Fetch product per particular category
+  app.get("/api/product/per-category/:category", async (req, res) => {
+    try {
+      const products = await Product.find({ category: req.params.category });
+      res.status(200).send({ category: req.params.category, products });
+    } catch (error) {
+      console.log(error);
+      res.status(400).send({
+        message: "Some internal server error has occured.Please try again later"
+      });
+    }
+  });
 };

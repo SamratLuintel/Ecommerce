@@ -1,0 +1,28 @@
+.SingleTab {
+  margin: 0 20px 0 0;
+  padding: 13px 0;
+  color: #111;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 1rem;
+  min-width: 120px;
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.SingleTab--selected {
+  &:before {
+    background: #76bd22;
+    width: 120px;
+    height: 2px;
+    content: "";
+    bottom: 0;
+    left: 0;
+    position: absolute;
+
+    transition: all 0.25s;
+    z-index: 3;
+    margin: 0 auto;
+  }
+}
