@@ -1,0 +1,41 @@
+@import "MobileBanner/MobileBanner";
+
+.RecentProducts {
+  background: #f0f0f0;
+  padding-bottom: 60px;
+}
+
+.RecentProducts__header {
+  width: 100%;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.6px;
+  color: #252525;
+  border-bottom: 1px solid #e1e1e1;
+  background: 0 0;
+  padding: 0 0 15px;
+  padding: 60px 0 20px;
+  position: relative;
+
+  &:before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    width: 70px;
+    height: 2px;
+    background-color: #529501;
+    transition: all 0.3s ease-in-out;
+  }
+}
+
+.RecentProducts__header:hover {
+  &:before {
+    width: 110px;
+    background-color: #ff1900;
+  }
+}
+
+.RecentProducts__product-lists {
+  margin-top: 40px;
+}

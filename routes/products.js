@@ -16,7 +16,7 @@ module.exports = app => {
   //product with featured value set to true
   //For now we have to set it manually in mongo server
   //later we can implement some algorithm to do this automatically
-  app.get("/api/product/featured", async (req, res) => {
+  app.get("/api/products/featured", async (req, res) => {
     console.log("Find featured product have been called");
     try {
       const product = await Product.find({ featured: true });
@@ -53,6 +53,36 @@ module.exports = app => {
     try {
       const products = await Product.find({ category: req.params.category });
       res.status(200).send({ category: req.params.category, products });
+    } catch (error) {
+      console.log(error);
+      res.status(400).send({
+        message: "Some internal server error has occured.Please try again later"
+      });
+    }
+  });
+
+  //Fetch popular product
+  app.get("/api/products/popular", async (req, res) => {
+    try {
+      const products = await Product.find({ popular: true })
+        .sort({ createdOn: -1 })
+        .limit(5);
+      res.status(200).send(products);
+    } catch (error) {
+      console.log(error);
+      res.status(400).send({
+        message: "Some internal server error has occured.Please try again later"
+      });
+    }
+  });
+
+  //Fetch recent products
+  app.get("/api/products/recent", async (req, res) => {
+    try {
+      const products = await Product.find({})
+        .sort({ createdOn: -1 })
+        .limit(5);
+      res.status(200).send(products);
     } catch (error) {
       console.log(error);
       res.status(400).send({

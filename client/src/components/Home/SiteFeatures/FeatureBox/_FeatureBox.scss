@@ -1,0 +1,46 @@
+.FeatureBox {
+  transition: all 0.3s ease-out;
+  text-align: center;
+  padding: 50px 0;
+}
+
+.FeatureBox__icon {
+  display: inline-block;
+  padding-right: 15px;
+  vertical-align: middle;
+  font-size: 2.75rem;
+  line-height: 60px;
+  width: 60px;
+  height: 60px;
+  transition: all 0.3s ease-out;
+  color: #529501;
+}
+
+.FeatureBox__info {
+  text-align: left;
+  padding-left: 0;
+  display: inline-block;
+  vertical-align: middle;
+  width: auto;
+  margin: 0 auto;
+}
+
+.FeatureBox__info {
+  h4 {
+    font-size: 0.875rem;
+    font-weight: 700;
+    line-height: 24px;
+    text-transform: uppercase;
+    letter-spacing: -0.25px;
+    color: #333333;
+  }
+
+  p {
+    transition: all 0.3s ease-in-out;
+    font-size: 0.8125rem;
+    line-height: 16px;
+    margin-bottom: 0;
+    letter-spacing: 0;
+    color: #636363;
+  }
+}

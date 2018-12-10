@@ -4,7 +4,8 @@ import { connect } from "react-redux";
 
 class CategoriesDropDown extends Component {
   state = {
-    showMenu: false
+    showMenu: true,
+    fetched: false
   };
 
   showMenu = event => {
@@ -21,8 +22,16 @@ class CategoriesDropDown extends Component {
     });
   };
 
+  componentDidUpdate = (prevProps, prevState) => {
+    //For fixing the fading in animation bug
+    if (this.props.categories.fetched && !prevState.fetched) {
+      this.setState({ fetched: true });
+    }
+  };
+
   renderCategoriesList = () => {
     if (!this.props.categories.fetched) return;
+
     return this.props.categories.lists.map(category => (
       <div className="CategoriesDropDown__menu-item">
         <i className={category.icon} />
@@ -39,7 +48,7 @@ class CategoriesDropDown extends Component {
           <i class="fas fa-chevron-down" />
         </div>
 
-        {this.state.showMenu ? (
+        {this.state.showMenu && this.state.fetched ? (
           <div className="CategoriesDropDown__menu-lists">
             <FadeIn>{this.renderCategoriesList()}</FadeIn>
           </div>

@@ -2,7 +2,9 @@ import {
   UPDATE_PUBLIC_PRODUCTS,
   SET_PUBLIC_PRODUCT_CATEGORY_FILTER,
   UPDATE_FEATURED_PRODUCTS,
-  UPDATE_PRODUCTS_PER_CATEGORY
+  UPDATE_POPULAR_PRODUCTS,
+  UPDATE_PRODUCTS_PER_CATEGORY,
+  UPDATE_RECENT_PRODUCTS
 } from "../types";
 
 const initialState = {
@@ -12,6 +14,16 @@ const initialState = {
   categoryFilter: null,
   //Holds the list of featured product
   featured: {
+    fetched: false,
+    lists: []
+  },
+  //Hold the list of popular product
+  popular: {
+    fetched: false,
+    lists: []
+  },
+  //Hold the list of recent products
+  recent: {
     fetched: false,
     lists: []
   }
@@ -28,6 +40,11 @@ export default (state = initialState, { type, payload }) => {
     case UPDATE_FEATURED_PRODUCTS:
       return { ...state, featured: { fetched: true, lists: payload } };
 
+    case UPDATE_POPULAR_PRODUCTS:
+      return { ...state, popular: { fetched: true, lists: payload } };
+
+    case UPDATE_RECENT_PRODUCTS:
+      return { ...state, recent: { fetched: true, lists: payload } };
     case UPDATE_PRODUCTS_PER_CATEGORY:
       return {
         ...state,

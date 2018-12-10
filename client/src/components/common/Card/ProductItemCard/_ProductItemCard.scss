@@ -1,6 +1,7 @@
 .ProductItemCard {
-  padding: 0 15px;
+  background-color: #fff;
   position: relative;
+  height: 100%;
 }
 
 .ProductItemCard__main-content {
@@ -10,21 +11,20 @@
   position: relative;
   overflow: visible;
   border-radius: 2px;
+  height: 100%;
   padding: 10px;
-
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   &:hover {
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
   }
 }
 
-.ProductItemCard__image-container {
-  transition: all 0.2s ease-in-out 0s;
-  height: 225px;
-  width: 100%;
-}
-
 .ProductItemCard__image {
-  width: 100%;
+  transition: all 0.2s ease-in-out 0s;
+  max-width: 100%;
+  height: auto;
   text-align: center;
 }
 

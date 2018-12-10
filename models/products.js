@@ -30,6 +30,14 @@ const ProductSchema = mongoose.Schema({
   featured: {
     type: Boolean,
     default: false
+  },
+  createdOn: {
+    type: Date,
+    default: Date.now
+  },
+  popular: {
+    type: Boolean,
+    default: false
   }
 });
 

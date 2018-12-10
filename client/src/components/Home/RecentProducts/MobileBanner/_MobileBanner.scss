@@ -1,0 +1,12 @@
+.MobileBanner {
+  overflow: hidden;
+}
+
+.MobileBanner__image {
+  width: 100%;
+  height: auto;
+  transition: 0.4s all ease-out;
+  &:hover {
+    transform: scale(1.1);
+  }
+}
