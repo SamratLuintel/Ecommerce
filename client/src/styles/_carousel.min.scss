@@ -88,23 +88,22 @@
   white-space: nowrap;
 }
 .carousel .thumb {
-  -webkit-transition: border 0.15s ease-in;
-  -moz-transition: border 0.15s ease-in;
-  -ms-transition: border 0.15s ease-in;
-  -o-transition: border 0.15s ease-in;
-  transition: border 0.15s ease-in;
+  -webkit-transition: all 0.15s ease-in;
+  -moz-transition: all 0.15s ease-in;
+  -ms-transition: all 0.15s ease-in;
+  -o-transition: all 0.15s ease-in;
+  transition: all 0.15s ease-in;
   display: inline-block;
   width: 80px;
   margin-right: 6px;
   white-space: nowrap;
+  cursor: pointer;
   overflow: hidden;
-  border: 3px solid #fff;
-  padding: 2px;
+  opacity: 0.2;
 }
 .carousel .thumb.selected,
 .carousel .thumb:hover {
-  border: 3px solid #333;
-  padding: 2px;
+  opacity: 1;
 }
 .carousel .thumb img {
   vertical-align: top;

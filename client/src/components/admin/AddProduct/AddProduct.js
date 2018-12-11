@@ -6,16 +6,16 @@ import keys from "../../../config/keys";
 import axios from "axios";
 import AddProductImage from "./AddProductImage/AddProductImage";
 import { addProduct } from "../../../store/actions/products/adminProducts";
-
-//Remove Item in an array from specific index
-const removeItem = (items, i) =>
-  items.slice(0, i - 1).concat(items.slice(i, items.length));
+import CKEditor from "react-ckeditor-component";
 
 class AddProduct extends Component {
   state = {
     loaded: false,
     title: "",
+    //Short description of the product
     desc: "",
+    //In depth info of the product
+    details: "",
     category: "",
     price: "",
     //Images which will be live previewed without being saved on any kind of database
@@ -25,7 +25,8 @@ class AddProduct extends Component {
     categoryError: "",
     priceError: "",
     descError: "",
-    imagesError: ""
+    imagesError: "",
+    detailsError: ""
   };
 
   componentDidMount = async () => {
@@ -55,6 +56,12 @@ class AddProduct extends Component {
   onCategoryChange = e =>
     this.setState({ category: e.target.value, categoryError: "" });
   onPriceChange = e => this.setState({ price: e.target.value, priceError: "" });
+  onDetailsChange = e => {
+    const newDetails = e.editor.getData();
+    this.setState({
+      details: newDetails
+    });
+  };
 
   setFormError = error => {
     if (error.title) this.setState({ titleError: error.title });
@@ -62,6 +69,7 @@ class AddProduct extends Component {
     if (error.category) this.setState({ categoryError: error.category });
     if (error.price) this.setState({ priceError: error.price });
     if (error.images) this.setState({ imagesError: error.images });
+    if (error.details) this.setState({ detailsError: error.details });
   };
 
   renderCategoriesOptions = () => {
@@ -154,6 +162,7 @@ class AddProduct extends Component {
         desc: this.state.desc,
         category: this.state.category,
         price: this.state.price,
+        details: this.state.details,
         images
       };
       console.log(data.category);
@@ -177,7 +186,7 @@ class AddProduct extends Component {
           onChange={this.onTitleChange}
         />
         {this.state.titleError}
-        <h3>Description</h3>
+        <h3>Short Description</h3>
         <textarea
           value={this.state.desc}
           onChange={this.onDescChange}
@@ -185,6 +194,14 @@ class AddProduct extends Component {
           rows="1"
         />
         {this.state.descError}
+        <h3>Product Details</h3>
+        <CKEditor
+          content={this.state.details}
+          events={{
+            change: this.onDetailsChange
+          }}
+        />
+        {this.state.detailsError}
         <h3>Price</h3>
         <textarea
           value={this.state.price}

@@ -15,6 +15,9 @@ module.exports = data => {
   if (isEmpty(data.category)) {
     errors.category = "You will need to select a category";
   }
+  if (isEmpty(data.details)) {
+    errors.details = "You will need to provide a details";
+  }
 
   if (isEmpty(data.desc)) {
     errors.desc = "You will need to provide a description";

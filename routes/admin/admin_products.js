@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const passport = require("passport");
 const Product = mongoose.model("products");
 const ValidateProduct = require("../../utils/validation/product-validation");
-
+const ValidateProductReview = require("../../utils/validation/product-review-validation");
 const requireToken = passport.authenticate("jwt", { session: false });
 
 module.exports = app => {
@@ -23,6 +23,7 @@ module.exports = app => {
       desc: req.body.desc,
       category: req.body.category,
       price: req.body.price,
+      details: req.body.details,
       images: req.body.images,
       createdBy: req.user
     }).save();
@@ -30,6 +31,7 @@ module.exports = app => {
     res.status(200).send(product);
   });
 
+  //Fetches a product
   app.get("/api/admin-product/:id", requireToken, async (req, res) => {
     try {
       const product = await Product.findById(req.params.id);
@@ -99,6 +101,44 @@ module.exports = app => {
 
       await Product.findByIdAndRemove(req.params.id);
       res.status(200).send();
+    } catch (error) {
+      console.log(error);
+    }
+  });
+
+  //Add a particular review for a product
+  app.post("/api/products/add-review", requireToken, async (req, res) => {
+    try {
+      console.log("Add review is called", req.body.productId);
+      const { errors, isValid } = ValidateProductReview(req.body);
+      if (!isValid) res.status(400).send(errors);
+      //Checking if the user has already rated the product
+      const product = await Product.findOne({
+        _id: req.body.productId,
+        reviews: { $elemMatch: { createdBy: req.user._id } }
+      });
+
+      console.log("Product is matched", product);
+      //If product does not
+      if (product)
+        return res.status(400).send({
+          message: "The user has already rated the product"
+        });
+
+      const updatedProduct = await Product.findOneAndUpdate(
+        { _id: req.body.productId },
+        {
+          $push: {
+            reviews: {
+              rating: req.body.rating,
+              comment: req.body.comment,
+              createdBy: req.user
+            }
+          }
+        },
+        { new: true }
+      );
+      // console.log("Reviews have been successfully added", updatedProduct);
     } catch (error) {
       console.log(error);
     }

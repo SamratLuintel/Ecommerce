@@ -1,0 +1,25 @@
+.SingleInfoTab {
+  position: relative;
+  margin-right: 2px;
+  padding: 0 30px;
+  background-color: #ebebeb;
+  color: #333;
+  display: inline-block;
+  font-size: 0.875rem;
+  height: 55px;
+  line-height: 55px;
+  font-weight: 400;
+  transition: all 0.4s ease-out;
+  cursor: pointer;
+  user-select: none;
+  text-transform: uppercase;
+  &:hover {
+    background-color: $primary-green;
+    color: #fff;
+  }
+}
+
+.SingleInfoTab--selected {
+  background-color: $primary-green;
+  color: #fff;
+}

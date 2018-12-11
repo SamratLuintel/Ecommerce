@@ -2,15 +2,21 @@ import React, { Component } from "react";
 import axios from "axios";
 import { connect } from "react-redux";
 import { addProductToCart, fetchCart } from "../../store/actions/carts/carts";
+import ApplicationHeader from "../common/ApplicationHeader/ApplicationHeader";
+import AddProductContext from "./addProductContext";
+import ProductGallery from "./ProductGallery/ProductGallery";
+import ProductShortDescription from "./ProductShortDescription/ProductShortDescription";
+import ProductAdditionalInfo from "./ProductAdditionalInfo/ProductAdditionalInfo";
 
 class Product extends Component {
   state = {
     fetched: false,
+    id: "",
     title: "",
     desc: "",
     price: "",
     images: [],
-
+    details: "",
     //product info
     amount: 10
   };
@@ -24,11 +30,14 @@ class Product extends Component {
       const id = this.props.match.params.id;
       const res = await axios.get(`/api/product/${id}`);
 
+      console.log("From fetch product", res.data);
       this.setState({
         title: res.data.title,
         desc: res.data.desc,
         price: res.data.price,
         images: res.data.images,
+        details: res.data.details,
+        id: res.data._id,
         fetched: true
       });
     } catch (error) {
@@ -61,13 +70,32 @@ class Product extends Component {
   render() {
     if (this.state.error && this.state.fetched)
       return <p>{this.state.errorMessage}</p>;
+
+    const contextValue = {
+      title: this.state.title,
+      desc: this.state.desc,
+      price: this.state.price,
+      images: this.state.images,
+      amount: this.state.amount,
+      details: this.state.details,
+      id: this.state.id,
+      onAddProductToCart: this.onAddProductToCart
+    };
     return (
-      <div className="Product">
-        <p>{this.state.title}</p>
-        <p>{this.state.desc}</p>
-        <p>{this.state.price}</p>
-        <p onClick={this.onAddProductToCart}>Add Product To Cart</p>
-      </div>
+      <AddProductContext.Provider value={contextValue}>
+        <div className="Product">
+          <ApplicationHeader />
+          <div className="container">
+            <div className="row">
+              <div className="col-md-6 col-sm-12">{/*<ProductGallery />*/}</div>
+              <div className="col-md-6 col-sm-12">
+                <ProductShortDescription />
+              </div>
+            </div>
+            <ProductAdditionalInfo />
+          </div>
+        </div>
+      </AddProductContext.Provider>
     );
   }
 }

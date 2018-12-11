@@ -5,6 +5,8 @@ import Dropzone from "react-dropzone";
 import keys from "../../../config/keys";
 import axios from "axios";
 import EditProductImage from "./EditProductImage/EditProductImage";
+import CKEditor from "react-ckeditor-component";
+
 import {
   getEditProduct,
   updateProduct
@@ -20,6 +22,7 @@ class EditProduct extends Component {
     title: "",
     desc: "",
     category: "",
+    details: "",
     price: "",
     id: "",
     //contains the list of images fetched from server
@@ -32,7 +35,8 @@ class EditProduct extends Component {
     categoryError: "",
     priceError: "",
     descError: "",
-    imagesError: ""
+    imagesError: "",
+    detailsError: ""
   };
 
   static getDerivedStateFromProps = (nextProps, nextState) => {
@@ -47,6 +51,7 @@ class EditProduct extends Component {
         category: nextProps.editProduct.category,
         price: nextProps.editProduct.price,
         images: nextProps.editProduct.images,
+        details: nextProps.editProduct.details,
         id: nextProps.editProduct._id,
         fetched: true
       };
@@ -86,6 +91,12 @@ class EditProduct extends Component {
   onCategoryChange = e =>
     this.setState({ category: e.target.value, categoryError: "" });
   onPriceChange = e => this.setState({ price: e.target.value, priceError: "" });
+  onDetailsChange = e => {
+    const newDetails = e.editor.getData();
+    this.setState({
+      details: newDetails
+    });
+  };
 
   setFormError = error => {
     if (error.title) this.setState({ titleError: error.title });
@@ -93,6 +104,7 @@ class EditProduct extends Component {
     if (error.category) this.setState({ categoryError: error.category });
     if (error.price) this.setState({ priceError: error.price });
     if (error.images) this.setState({ imagesError: error.images });
+    if (error.details) this.setState({ detailsError: error.details });
   };
 
   renderCategoriesOptions = () => {
@@ -202,6 +214,7 @@ class EditProduct extends Component {
         desc: this.state.desc,
         category: this.state.category,
         price: this.state.price,
+        details: this.state.details,
         id: this.state.id,
         images: [...this.state.images, ...uploadedImages]
       };
@@ -234,6 +247,14 @@ class EditProduct extends Component {
           rows="1"
         />
         {this.state.descError}
+        <h3>Product Details</h3>
+        <CKEditor
+          content={this.state.details}
+          events={{
+            change: this.onDetailsChange
+          }}
+        />
+        {this.state.detailsError}
         <h3>Price</h3>
         <textarea
           value={this.state.price}
@@ -271,7 +292,7 @@ class EditProduct extends Component {
 const mapStateToProps = state => ({
   profile: state.profile,
   categories: state.adminCategories,
-  editProduct: state.products.editProduct
+  editProduct: state.adminProducts.editProduct
 });
 
 export default connect(
