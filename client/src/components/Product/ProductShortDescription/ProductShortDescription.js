@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import AddProductContext from "../addProductContext";
+import ProductContext from "../productContext";
+
 class ProductShortDescription extends Component {
-  static contextType = AddProductContext;
+  static contextType = ProductContext;
 
   render() {
     return (

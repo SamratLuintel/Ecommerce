@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import AddProductContext from "../../addProductContext";
+import ProductContext from "../../productContext";
 import StarRatingComponent from "react-star-rating-component";
 import axios from "axios";
-
+import classnames from "classnames";
 class AddProductReview extends Component {
-  static contextType = AddProductContext;
+  static contextType = ProductContext;
   state = {
     comment: "",
     commentError: "",
@@ -12,7 +12,7 @@ class AddProductReview extends Component {
   };
 
   onCommentChange = e => {
-    this.setState({ comment: e.target.value });
+    this.setState({ comment: e.target.value,commentError:"" });
   };
 
   onRatingChange = rating => {
@@ -27,6 +27,8 @@ class AddProductReview extends Component {
         rating: this.state.rating
       };
       const res = await axios.post("/api/products/add-review", data);
+      this.context.onSelectedTabChange("reviews");
+      this.context.fetchProduct();
     } catch (error) {
       console.log(error.response);
       if (error.response && error.response.data) {
@@ -39,6 +41,20 @@ class AddProductReview extends Component {
     if (error.comment) this.setState({ commentError: error.comment });
   };
   render() {
+    if (this.context.hasReviewed) {
+      return (
+        <div className="AddProductReview">
+          <p className="AddProductReview__review-legend">
+            You have already reviewed the product
+          </p>
+        </div>
+      );
+    }
+
+    const commentBoxClasses = classnames({
+      AddProductReview__comment: true,
+      "AddProductReview__comment--red": this.state.commentError !== ""
+    });
     return (
       <div className="AddProductReview">
         <p className="AddProductReview__review-legend">
@@ -65,9 +81,11 @@ class AddProductReview extends Component {
             onChange={this.onCommentChange}
             name=""
             id=""
-            className="AddProductReview__comment"
+            className={commentBoxClasses}
           />
-          {this.state.commentError}
+          {this.state.commentError && (
+            <p className="AddProductReview__error">{this.state.commentError}</p>
+          )}
         </div>
         <div
           className="AddProductReview__submit-btn"

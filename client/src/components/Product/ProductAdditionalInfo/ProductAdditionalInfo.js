@@ -2,28 +2,26 @@ import React, { Component } from "react";
 import AdditionalInfoTabs from "./AdditionalInfoTabs/AdditionalInfoTabs";
 import ProductDetails from "./ProductDetails/ProductDetails";
 import AddProductReview from "./AddProductReview/AddProductReview";
+import ProductContext from "../productContext";
+import ShowProductReviews from "./ShowProductReviews/ShowProductReviews";
 
 class ProductAdditionalInfo extends Component {
-  state = {
-    //Three options
-    //details , reviews and add-review
-    selectedTab: "details"
-  };
-  onSelectedTabChange = name => {
-    this.setState({ selectedTab: name });
-  };
+  static contextType = ProductContext;
   render() {
     let renderElement;
-    if (this.state.selectedTab === "details")
+    if (this.context.selectedTab === "details")
       renderElement = <ProductDetails />;
 
-    if (this.state.selectedTab === "add-review")
+    if (this.context.selectedTab === "add-review")
       renderElement = <AddProductReview />;
+
+    if (this.context.selectedTab === "reviews")
+      renderElement = <ShowProductReviews />;
     return (
       <div className="ProductAdditionalInfo">
         <AdditionalInfoTabs
-          selectedTab={this.state.selectedTab}
-          onSelectedTabChange={this.onSelectedTabChange}
+          selectedTab={this.context.selectedTab}
+          onSelectedTabChange={this.context.onSelectedTabChange}
         />
         {renderElement}
       </div>

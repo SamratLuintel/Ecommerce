@@ -88,7 +88,9 @@ module.exports = app => {
   app.delete("/api/admin-product/:id", requireToken, async (req, res) => {
     console.log("Delete product page is called");
     try {
-      const product = await Product.findById(req.params.id);
+      const product = await Product.findById(req.params.id).populate(
+        "reviews.createdBy"
+      );
       if (!product)
         res
           .status(400)
@@ -111,7 +113,7 @@ module.exports = app => {
     try {
       console.log("Add review is called", req.body.productId);
       const { errors, isValid } = ValidateProductReview(req.body);
-      if (!isValid) res.status(400).send(errors);
+      if (!isValid) return res.status(400).send(errors);
       //Checking if the user has already rated the product
       const product = await Product.findOne({
         _id: req.body.productId,
@@ -138,6 +140,7 @@ module.exports = app => {
         },
         { new: true }
       );
+      res.status(200).send({ message: "Comment have been successfully added" });
       // console.log("Reviews have been successfully added", updatedProduct);
     } catch (error) {
       console.log(error);

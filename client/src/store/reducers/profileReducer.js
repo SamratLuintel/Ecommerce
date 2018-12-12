@@ -1,7 +1,8 @@
 import { UPDATE_USER_LOGGEDIN, UPDATE_USER_LOGGEDOUT } from "../types";
 
 const initialState = {
-  fetched: false
+  fetched: false,
+  authenticated: false
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -11,7 +12,8 @@ export default (state = initialState, { type, payload }) => {
         fetched: true,
         authenticated: true,
         username: payload.username,
-        fullname: payload.fullname
+        fullname: payload.fullname,
+        id: payload._id
       };
     case UPDATE_USER_LOGGEDOUT:
       return {

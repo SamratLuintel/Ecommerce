@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { Carousel } from "react-responsive-carousel";
-import AddProductContext from "../addProductContext";
+import ProductContext from "../productContext";
 
 class ProductGallery extends Component {
-  static contextType = AddProductContext;
+  static contextType = ProductContext;
 
   renderGalleryImages = () => {
     const imageRawUrl = "https://res.cloudinary.com/samrat/image/upload/";

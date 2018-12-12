@@ -1,0 +1,21 @@
+.SingleProductReview__info-wrapper {
+  display: flex;
+}
+
+.SingleProductReview__name {
+  font-weight: 700;
+  font-size: 0.875rem;
+  line-height: 30px;
+  color: #666666;
+  margin-right: 10px;
+}
+
+.SingleProductReview__comment {
+  font-weight: 400;
+  font-size: 0.875rem;
+  line-height: 30px;
+  color: #666666;
+}
+.SingleProductReview__rating-star-icon {
+  font-size: 0.9rem;
+}
