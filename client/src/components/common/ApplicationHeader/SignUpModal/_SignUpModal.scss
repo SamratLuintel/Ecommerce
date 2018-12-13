@@ -1,0 +1,42 @@
+@import "SignUpOAuth/SignUpOAuth";
+@import "SignUpManual/SignUpManual";
+
+.SignUpModal {
+  padding: 50px 0;
+  width: 600px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.SignUpModal__cross {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 45px;
+  width: 45px;
+  color: #000;
+  transition: all 0.3s ease 0s;
+  line-height: 40px;
+  cursor: pointer;
+  font-size: 1.3rem;
+
+  &:hover {
+    transform: rotate(90deg);
+    background-color: #000;
+    color: #fff;
+  }
+}
+
+.SignUpModal__title {
+  font-size: 1.875rem;
+  font-weight: 400;
+  color: #333333;
+}
+
+.SignUpModal__sub-title {
+  margin: 10px 0;
+  font-size: 0.8125rem;
+  line-height: 16px;
+  color: #3b3b3b;
+}

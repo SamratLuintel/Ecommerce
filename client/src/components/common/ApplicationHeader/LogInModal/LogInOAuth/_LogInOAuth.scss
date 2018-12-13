@@ -1,0 +1,53 @@
+.LogInOAuth {
+  margin-top: 20px;
+  overflow: hidden;
+}
+
+.LogInOAuth__element {
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  color: #fff;
+  transition: 0.3s all ease-in;
+  display: inline-block;
+
+  text-align: center;
+  margin-right: 10px;
+
+  &:last-child {
+    margin-right: 0px;
+  }
+}
+
+.LogInOAuth__element--blue {
+  background-color: #1e4389;
+  &:hover {
+    background-color: #355695;
+  }
+}
+
+.LogInOAuth__element--red {
+  background-color: #df4b38;
+
+  &:hover {
+    background-color: #e25d4c;
+  }
+}
+
+.LogInOAuth__hr {
+  border-top: 1px solid #aaa;
+  text-align: center;
+  margin: 30px auto 0;
+  max-width: 350px;
+
+  span {
+    position: relative;
+    top: -12px;
+    display: inline-block;
+    background-color: #fff;
+    text-align: center;
+    font-size: 16px;
+    padding: 0 20px;
+    color: #282828;
+  }
+}

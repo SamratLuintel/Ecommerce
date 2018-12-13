@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import ApplicationHeaderContext from "../../applicationHeaderContext";
 
 class HeaderControlBlock extends Component {
+  static contextType = ApplicationHeaderContext;
   render() {
     const { props } = this;
     return (
@@ -12,7 +14,10 @@ class HeaderControlBlock extends Component {
             {props.carts.totalItems}
           </span>
         </div>
-        <div className="HeaderControlBlock__action-btn">
+        <div
+          className="HeaderControlBlock__action-btn"
+          onClick={this.context.openLoginModal}
+        >
           <i class="fas fa-user" />
         </div>
       </div>
