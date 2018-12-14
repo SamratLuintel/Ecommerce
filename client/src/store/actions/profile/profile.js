@@ -50,3 +50,36 @@ export const fetchUser = token => async dispatch => {
     type: UPDATE_USER_LOGGEDOUT
   });
 };
+
+export const registerUser = data => async dispatch => {
+  try {
+    const res = await axios.post("/api/register", data);
+    console.log("Register user response", res.data);
+    dispatch(fetchUser(res.data.token));
+  } catch (error) {
+    console.log("Error from register user", error.response);
+    throw error.response ? error.response.data : {};
+  }
+};
+
+export const logInUser = data => async dispatch => {
+  try {
+    console.log("Login user have been called", data);
+    const res = await axios.post("/api/login", data);
+    console.log("Log In user have been called", res.data);
+    dispatch(fetchUser(res.data.token));
+  } catch (error) {
+    console.log(error.response);
+    throw error.response ? error.response.data : {};
+  }
+};
+
+export const logOutUser = history => async dispatch => {
+  try {
+    await localStorage.removeItem("ecommerceToken");
+    dispatch({
+      type: UPDATE_USER_LOGGEDOUT
+    });
+    history.push("/home");
+  } catch (error) {}
+};

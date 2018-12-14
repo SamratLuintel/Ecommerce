@@ -27,7 +27,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Route exact path="/home/:token?" component={Home} />
+        <Route path="/home/:token?" component={Home} />
         {/* All the admin routes */}
         <Route exact path="/admin/add-category" component={AddCategory} />
         <Route exact path="/admin/add-product" component={AddProduct} />

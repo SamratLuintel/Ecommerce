@@ -11,7 +11,7 @@ import SignUpModal from "./SignUpModal/SignUpModal";
 class ApplicationHeader extends Component {
   state = {
     loginModalOpen: false,
-    signupModalOpen: true
+    signupModalOpen: false
   };
   componentDidMount = () => {
     this.props.fetchCategories();
