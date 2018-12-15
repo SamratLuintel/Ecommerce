@@ -15,6 +15,7 @@ export const SET_PUBLIC_PRODUCT_CATEGORY_FILTER =
   "set_public_product_category_filter";
 
 export const UPDATE_CART_ITEMS = "update_cart_items";
+export const RESET_CART_ITEMS = "reset_cart_items";
 
 export const UPDATE_FEATURED_PRODUCTS = "update_featured_products";
 export const UPDATE_POPULAR_PRODUCTS = "update_popular_products";

@@ -24,6 +24,15 @@ class App extends Component {
     }
   };
 
+  componentDidUpdate = (prevProps, prevState) => {
+    if (
+      prevProps.profile.authenticated !== this.props.profile.authenticated &&
+      this.props.profile.authenticated
+    ) {
+      this.props.fetchCart();
+    }
+  };
+
   render() {
     return (
       <div className="App">
@@ -45,9 +54,13 @@ class App extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  profile: state.profile
+});
+
 export default withRouter(
   connect(
-    null,
+    mapStateToProps,
     { fetchUser, fetchCart }
   )(App)
 );

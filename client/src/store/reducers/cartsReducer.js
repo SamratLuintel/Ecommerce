@@ -1,4 +1,4 @@
-import { UPDATE_CART_ITEMS } from "../types";
+import { UPDATE_CART_ITEMS, RESET_CART_ITEMS } from "../types";
 
 const initialState = {
   totalItems: 0,
@@ -10,6 +10,12 @@ export default (state = initialState, { type, payload }) => {
     case UPDATE_CART_ITEMS:
       return { ...state, totalItems: payload.length, items: payload };
 
+    case RESET_CART_ITEMS:
+      return {
+        ...state,
+        totalItems: 0,
+        items: []
+      };
     default:
       return state;
   }

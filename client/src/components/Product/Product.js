@@ -138,7 +138,9 @@ class Product extends Component {
           <ApplicationHeader />
           <div className="container">
             <div className="row">
-              <div className="col-md-6 col-sm-12">{/*<ProductGallery />*/}</div>
+              <div className="col-md-6 col-sm-12">
+                <ProductGallery />
+              </div>
               <div className="col-md-6 col-sm-12">
                 <ProductShortDescription />
               </div>

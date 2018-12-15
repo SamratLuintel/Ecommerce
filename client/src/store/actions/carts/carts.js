@@ -1,5 +1,5 @@
 import axios from "axios";
-import { UPDATE_CART_ITEMS } from "../../types";
+import { UPDATE_CART_ITEMS, RESET_CART_ITEMS } from "../../types";
 
 export const addProductToCart = data => async dispatch => {
   console.log("Add product to card has been called");
@@ -23,4 +23,10 @@ export const fetchCart = () => async dispatch => {
   } catch (error) {
     console.log(error);
   }
+};
+
+export const resetCart = () => dispatch => {
+  dispatch({
+    type: RESET_CART_ITEMS
+  });
 };

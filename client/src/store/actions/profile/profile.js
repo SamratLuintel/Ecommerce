@@ -1,6 +1,11 @@
 import axios from "axios";
-import { UPDATE_USER_LOGGEDIN, UPDATE_USER_LOGGEDOUT } from "../../types";
+import {
+  UPDATE_USER_LOGGEDIN,
+  UPDATE_USER_LOGGEDOUT,
+  RESET_CART_ITEMS
+} from "../../types";
 import setAuthToken from "../../../utils/setAuthToken";
+import { fetchCart } from "../carts/carts";
 
 export const fetchUser = token => async dispatch => {
   //At first we will check if the user is just logging in
@@ -66,7 +71,6 @@ export const logInUser = data => async dispatch => {
   try {
     console.log("Login user have been called", data);
     const res = await axios.post("/api/login", data);
-    console.log("Log In user have been called", res.data);
     dispatch(fetchUser(res.data.token));
   } catch (error) {
     console.log(error.response);
@@ -79,6 +83,9 @@ export const logOutUser = history => async dispatch => {
     await localStorage.removeItem("ecommerceToken");
     dispatch({
       type: UPDATE_USER_LOGGEDOUT
+    });
+    dispatch({
+      type: RESET_CART_ITEMS
     });
     history.push("/home");
   } catch (error) {}

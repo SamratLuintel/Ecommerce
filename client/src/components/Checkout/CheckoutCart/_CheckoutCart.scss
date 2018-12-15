@@ -1,0 +1,24 @@
+@import "CheckoutItem/CheckoutItem";
+
+.CheckoutCart {
+  width: 100%;
+}
+
+.CheckoutCart__header__tr {
+  display: flex;
+  color: #3b3b3b;
+  font-size: 0.875rem;
+}
+
+.CheckoutCart__header__item {
+  border-bottom: 2px solid #ebebeb;
+  padding: 8px;
+  padding-top: 10px;
+  flex-basis: 22.07%;
+  text-align: right;
+
+  &:first-child {
+    flex-basis: 33.37%;
+    text-align: left;
+  }
+}

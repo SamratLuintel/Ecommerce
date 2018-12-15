@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 
 class CategoriesDropDown extends Component {
   state = {
-    showMenu: true,
+    showMenu: false,
     fetched: false
   };
 
