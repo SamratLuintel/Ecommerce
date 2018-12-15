@@ -12,6 +12,9 @@
     text-align: left;
     flex-basis: 33.37%;
   }
+  &:last-child {
+    flex-basis: 12.07%;
+  }
 }
 
 .CheckoutItem__product {
@@ -78,4 +81,13 @@
   padding-right: 6px;
   display: inline-block;
   cursor: pointer;
+}
+
+.CheckoutItem__item__delete-btn {
+  cursor: pointer;
+  transition: 0.4s all ease-out;
+
+  &:hover {
+    color: $primary-green;
+  }
 }

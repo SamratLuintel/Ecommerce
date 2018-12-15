@@ -21,6 +21,9 @@
     flex-basis: 33.37%;
     text-align: left;
   }
+  &:last-child {
+    flex-basis: 12.07%;
+  }
 }
 
 .CheckoutCart__save-btn {

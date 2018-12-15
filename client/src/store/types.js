@@ -24,3 +24,4 @@ export const UPDATE_RECENT_PRODUCTS = "update_recent_products";
 export const UPDATE_PRODUCTS_PER_CATEGORY = "update_products_per_category";
 
 export const UPDATE_CART_PRODUCT_AMOUNT = "update_cart_product_amount";
+export const DELETE_CART_ITEM = "delete_cart_item";

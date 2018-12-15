@@ -38,6 +38,7 @@ class CheckoutCart extends Component {
               <th className="CheckoutCart__header__item">Price</th>
               <th className="CheckoutCart__header__item">Quantity</th>
               <th className="CheckoutCart__header__item">Total</th>
+              <th className="CheckoutCart__header__item" />
             </tr>
           </thead>
           <tbody>{this.renderCartItems()}</tbody>

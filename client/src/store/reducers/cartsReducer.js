@@ -2,7 +2,8 @@ import update from "immutability-helper";
 import {
   UPDATE_CART_ITEMS,
   RESET_CART_ITEMS,
-  UPDATE_CART_PRODUCT_AMOUNT
+  UPDATE_CART_PRODUCT_AMOUNT,
+  DELETE_CART_ITEM
 } from "../types";
 
 const initialState = {
@@ -33,6 +34,12 @@ export default (state = initialState, { type, payload }) => {
           [payload.index]: {
             amount: { $set: payload.amount }
           }
+        }
+      });
+    case DELETE_CART_ITEM:
+      return update(state, {
+        items: {
+          $splice: [[payload.index, 1]]
         }
       });
     default:

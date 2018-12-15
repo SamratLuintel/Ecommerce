@@ -2,7 +2,8 @@ import axios from "axios";
 import {
   UPDATE_CART_ITEMS,
   RESET_CART_ITEMS,
-  UPDATE_CART_PRODUCT_AMOUNT
+  UPDATE_CART_PRODUCT_AMOUNT,
+  DELETE_CART_ITEM
 } from "../../types";
 
 export const addProductToCart = data => async dispatch => {
@@ -42,6 +43,12 @@ export const updateCartProductAmount = (index, amount) => dispatch => {
   });
 };
 
+export const deleteCartProduct = index => dispatch => {
+  dispatch({
+    type: DELETE_CART_ITEM,
+    payload: index
+  });
+};
 export const saveCart = (items, cartId) => async dispatch => {
   try {
     const res = await axios.post(`/api/save-cart/${cartId}`, { items });

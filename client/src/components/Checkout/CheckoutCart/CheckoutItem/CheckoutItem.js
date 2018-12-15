@@ -1,5 +1,8 @@
 import React, { Component } from "react";
-import { updateCartProductAmount } from "../../../../store/actions/carts/carts";
+import {
+  updateCartProductAmount,
+  deleteCartProduct
+} from "../../../../store/actions/carts/carts";
 import { connect } from "react-redux";
 
 class CheckoutItem extends Component {
@@ -17,6 +20,10 @@ class CheckoutItem extends Component {
   productTotalPrice = () => {
     return this.props.price * this.props.amount;
   };
+
+  onDeleteProduct = () => {
+    this.props.deleteCartProduct(this.props.index);
+  };
   render() {
     const { props } = this;
     return (
@@ -31,7 +38,7 @@ class CheckoutItem extends Component {
           </div>
         </td>
         <td className="CheckoutItem__item CheckoutItem__medium-text">
-          {props.price}
+          ${props.price}
         </td>
         <td className="CheckoutItem__item">
           <div className="CheckoutItem__quantity-ctrl">
@@ -55,7 +62,13 @@ class CheckoutItem extends Component {
           </div>
         </td>
         <td className="CheckoutItem__item CheckoutItem__medium-text">
-          {this.productTotalPrice()}
+          ${this.productTotalPrice()}
+        </td>
+        <td className="CheckoutItem__item  CheckoutItem__medium-text">
+          <i
+            onClick={this.onDeleteProduct}
+            className="fas fa-times CheckoutItem__item__delete-btn"
+          />
         </td>
       </tr>
     );
@@ -63,5 +76,5 @@ class CheckoutItem extends Component {
 }
 export default connect(
   null,
-  { updateCartProductAmount }
+  { updateCartProductAmount, deleteCartProduct }
 )(CheckoutItem);
