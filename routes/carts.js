@@ -79,4 +79,19 @@ module.exports = app => {
       res.status(400).send(error);
     }
   });
+
+  app.post("/api/save-cart/:id", requireToken, async (req, res) => {
+    try {
+      const items = req.body.items;
+      const newCart = await Cart.findOneAndUpdate(
+        { _id: req.params.id },
+        { items },
+        { new: true }
+      ).populate("items.product");
+      res.status(200).send(newCart);
+    } catch (error) {
+      console.log(error);
+      res.status(400).send(error);
+    }
+  });
 };

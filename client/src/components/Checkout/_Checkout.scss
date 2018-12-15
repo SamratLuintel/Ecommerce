@@ -1,1 +1,12 @@
 @import "CheckoutCart/CheckoutCart";
+@import "CartSummary/CartSummary";
+
+.Checkout__heading {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 500;
+  line-height: 35px;
+  color: #333333;
+  margin-top: 20px;
+  margin-bottom: 40px;
+}

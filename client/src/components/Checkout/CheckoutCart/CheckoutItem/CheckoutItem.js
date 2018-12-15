@@ -1,37 +1,67 @@
 import React, { Component } from "react";
+import { updateCartProductAmount } from "../../../../store/actions/carts/carts";
+import { connect } from "react-redux";
 
 class CheckoutItem extends Component {
+  increaseProductAmount = () => {
+    const newAmount = this.props.amount + 1;
+    this.props.updateCartProductAmount(this.props.index, newAmount);
+  };
+
+  decreaseProductAmount = () => {
+    const newAmount = this.props.amount - 1;
+    if (newAmount <= 0) return;
+    this.props.updateCartProductAmount(this.props.index, newAmount);
+  };
+
+  productTotalPrice = () => {
+    return this.props.price * this.props.amount;
+  };
   render() {
+    const { props } = this;
     return (
       <tr className="CheckoutItem">
         <td className="CheckoutItem__product CheckoutItem__item">
           <div className="CheckoutItem__image-wrapper">
-            <img
-              src="http://mediamart.zooextension.com/media/catalog/product/cache/2f58bf1051a2f0ceba166b720ec0a490/1/-/1-5_2.jpg"
-              alt=""
-              className="CheckoutItem__image"
-            />
+            <img src={props.image} alt="" className="CheckoutItem__image" />
           </div>
 
           <div className="CheckoutItem__product-name">
-            <strong>Gopro Camera</strong>
+            <strong>{props.title}</strong>
           </div>
         </td>
-        <td className="CheckoutItem__item CheckoutItem__medium-text">100$</td>
+        <td className="CheckoutItem__item CheckoutItem__medium-text">
+          {props.price}
+        </td>
         <td className="CheckoutItem__item">
           <div className="CheckoutItem__quantity-ctrl">
-            <div className="CheckoutItem__quantity-ctrl__reduce-btn">-</div>
+            <div
+              onClick={this.decreaseProductAmount}
+              className="CheckoutItem__quantity-ctrl__reduce-btn"
+            >
+              -
+            </div>
             <input
-              value={2}
+              value={props.amount}
               type="text"
               className="CheckoutItem__quantity-ctrl__input"
             />
-            <div className="CheckoutItem__quantity-ctrl__increase-btn">+</div>
+            <div
+              onClick={this.increaseProductAmount}
+              className="CheckoutItem__quantity-ctrl__increase-btn"
+            >
+              +
+            </div>
           </div>
         </td>
-        <td className="CheckoutItem__item CheckoutItem__medium-text">$1500</td>
+        <td className="CheckoutItem__item CheckoutItem__medium-text">
+          {this.productTotalPrice()}
+        </td>
       </tr>
     );
   }
 }
-export default CheckoutItem;
+export default connect(
+  null,
+  { updateCartProductAmount }
+)(CheckoutItem);

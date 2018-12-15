@@ -1,6 +1,6 @@
 @import "CheckoutItem/CheckoutItem";
 
-.CheckoutCart {
+.CheckoutCart__table {
   width: 100%;
 }
 
@@ -20,5 +20,26 @@
   &:first-child {
     flex-basis: 33.37%;
     text-align: left;
+  }
+}
+
+.CheckoutCart__save-btn {
+  padding: 8px 20px;
+  background: #a1a1a1;
+  border-radius: 0;
+  border: none;
+  display: table;
+  color: #252525;
+  font-weight: 600;
+  letter-spacing: 1px;
+  line-height: 20px;
+  font-size: 0.875rem;
+  cursor: pointer;
+  user-select: none;
+  margin: 0 auto;
+  transition: 0.4s all ease-out;
+  &:hover {
+    background-color: $primary-green;
+    color: #fff;
   }
 }
