@@ -1,15 +1,11 @@
 import React, { Component } from "react";
-import RevenueCard from "./RevenueCard/RevenueCard";
+import DashboardTopRow from "./DashboardTopRow/DashboardTopRow";
 
 class DashboardContent extends Component {
   render() {
     return (
       <div className="DashboardContent">
-        <div className="row">
-          <div className="col-md-6">
-            <RevenueCard />
-          </div>
-        </div>
+        <DashboardTopRow />
       </div>
     );
   }
