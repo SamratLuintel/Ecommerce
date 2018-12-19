@@ -1,0 +1,12 @@
+@import "DashboardHeader/DashboardHeader";
+@import "DashboardContent/DashboardContent";
+
+.AdminDashboard {
+  display: flex;
+}
+
+.AdminDashboard__main-dashboard-area {
+  margin-left: 260px;
+  position: relative;
+  flex-grow: 1;
+}

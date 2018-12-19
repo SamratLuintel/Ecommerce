@@ -13,6 +13,7 @@ import Products from "./components/Products/Products";
 import Product from "./components/Product/Product";
 import { fetchCart } from "./store/actions/carts/carts";
 import Checkout from "./components/Checkout/Checkout";
+import AdminDashboard from "./components/admin/AdminDashboard/AdminDashboard";
 
 class App extends Component {
   componentDidMount = async () => {
@@ -44,6 +45,7 @@ class App extends Component {
         <Route exact path="/admin/edit-product/:id" component={EditProduct} />
         <Route exact path="/admin/categories" component={AdminCategories} />
         <Route exact path="/admin/products" component={AdminProducts} />
+        <Route exact path="/admin/dashboard" component={AdminDashboard} />
 
         {/* General User Routes */}
         <Route exact path="/products" component={Products} />

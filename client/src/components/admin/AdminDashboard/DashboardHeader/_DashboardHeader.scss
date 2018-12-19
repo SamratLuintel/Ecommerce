@@ -1,0 +1,26 @@
+.DashboardHeader {
+  position: fixed;
+  padding: 0rem 18px;
+  height: 66px;
+  line-height: 66px;
+  width: calc(100% - 260px);
+  background-color: #fff;
+  box-shadow: 0 0.25rem 0.125rem 0 rgba(0, 0, 0, 0.05);
+  display: flex;
+  justify-content: space-between;
+}
+
+.DashboardHeader__scroll-top-btn {
+  color: #6b6f82;
+  font-weight: 400;
+  font-size: 1.3125rem;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.DashboardHeader__user {
+  align-self: flex-end;
+  float: right;
+  color: #6b6f82;
+  font-size: 1rem;
+}
