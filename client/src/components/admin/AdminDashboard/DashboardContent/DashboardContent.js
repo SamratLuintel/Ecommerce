@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import DashboardTopRow from "./DashboardTopRow/DashboardTopRow";
 import DashboardMiddleRow from "./DashboardMiddleRow/DashboardMiddleRow";
+import WorldVisitorsCard from "./WorldVisitorsCard/WorldVisitorsCard";
 
 class DashboardContent extends Component {
   render() {
@@ -8,6 +9,7 @@ class DashboardContent extends Component {
       <div className="DashboardContent">
         <DashboardTopRow />
         <DashboardMiddleRow />
+        <WorldVisitorsCard />
       </div>
     );
   }

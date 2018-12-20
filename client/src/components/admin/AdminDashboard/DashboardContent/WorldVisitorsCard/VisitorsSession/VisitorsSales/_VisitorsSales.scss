@@ -1,0 +1,30 @@
+.VisitorsSales {
+  padding-top: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.VisitorsSales__sales {
+  margin-bottom: 1rem;
+}
+.VisitorsSales__sales__title {
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 20px;
+  color: #6b6f82;
+}
+
+.VisitorsSales__sales__float-right {
+  float: right;
+}
+
+.VisitorSales__sales__float-right--green {
+  color: #28d094;
+}
+
+.VisitorSales__sales__float-right--red {
+  color: #ff4961;
+}
+
+.VisitorsSales__progress-bar {
+  margin-top: 1rem;
+}
