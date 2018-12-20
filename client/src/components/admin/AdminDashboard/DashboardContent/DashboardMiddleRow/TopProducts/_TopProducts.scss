@@ -1,0 +1,29 @@
+.TopProducts {
+  background-color: #fff;
+}
+
+.TopProducts__header {
+  padding: 1.5rem;
+  padding-bottom: 1rem;
+  font-size: 1rem;
+  color: #464855;
+  font-weight: 500;
+}
+
+.TopProducts__table__th {
+  padding: 0.75rem 2rem;
+  border-bottom: 1px solid #e3ebf3;
+  color: #6b6f82;
+  line-height: 20px;
+  font-weight: 700;
+  font-size: 0.875rem;
+}
+
+.TopProducts__table__td {
+  color: #6b6f82;
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 20px;
+  padding: 0.75rem 2rem;
+  border-bottom: 1px solid #e3ebf3;
+}
