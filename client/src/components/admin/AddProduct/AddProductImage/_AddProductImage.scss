@@ -1,0 +1,31 @@
+.AddProductImage {
+  width: 100%;
+  position: relative;
+}
+
+.AddProductImage__image {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.AddProductImage__cross {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20px;
+  height: 20px;
+  margin-right: -10px;
+  margin-top: -10px;
+  line-height: 20px;
+  cursor: pointer;
+  background-color: red;
+  color: #fff;
+  text-align: center;
+  font-size: 0.7rem;
+  border-radius: 50%;
+  transition: 0.4s all ease-in-out;
+
+  &:hover {
+    background-color: darken(red, 10%);
+  }
+}

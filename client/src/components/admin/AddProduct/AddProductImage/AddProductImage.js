@@ -5,12 +5,16 @@ class AddProductImage extends Component {
     const { props } = this;
     return (
       <div className="AddProductImage">
-        <img src={props.image} alt="Product" />
+        <img
+          src={props.image}
+          alt="Product"
+          className="AddProductImage__image"
+        />
         <div
           className="AddProductImage__cross"
           onClick={() => props.onImageDelete(props.index)}
         >
-          Cross
+          <i class="fas fa-times" />
         </div>
       </div>
     );

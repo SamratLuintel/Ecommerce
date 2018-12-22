@@ -1,12 +1,16 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchAdminCategories } from "../../../store/actions/categories/adminCategories";
 import Dropzone from "react-dropzone";
 import keys from "../../../config/keys";
 import axios from "axios";
 import AddProductImage from "./AddProductImage/AddProductImage";
 import { addProduct } from "../../../store/actions/products/adminProducts";
 import CKEditor from "react-ckeditor-component";
+import AdminHeader from "../../common/admin/AdminHeader/AdminHeader";
+import AdminSideNav from "../../common/admin/AdminSideNav/AdminSideNav";
+import Select from "react-select";
+import { fetchCategories } from "../../../store/actions/categories/userCategories";
+import classnames from "classnames";
 
 class AddProduct extends Component {
   state = {
@@ -35,7 +39,7 @@ class AddProduct extends Component {
       !this.props.categories.fetched &&
       !this.state.loaded
     ) {
-      await this.props.fetchAdminCategories();
+      await this.props.fetchCategories();
       this.setState({ loaded: true });
     }
   };
@@ -46,20 +50,21 @@ class AddProduct extends Component {
       !this.props.categories.fetched &&
       !this.state.loaded
     ) {
-      await this.props.fetchAdminCategories();
+      await this.props.fetchCategories();
       this.setState({ loaded: true });
     }
   };
 
   onTitleChange = e => this.setState({ title: e.target.value, titleError: "" });
   onDescChange = e => this.setState({ desc: e.target.value, descError: "" });
-  onCategoryChange = e =>
-    this.setState({ category: e.target.value, categoryError: "" });
+  onCategoryChange = categoryValue =>
+    this.setState({ category: categoryValue, categoryError: "" });
   onPriceChange = e => this.setState({ price: e.target.value, priceError: "" });
   onDetailsChange = e => {
     const newDetails = e.editor.getData();
     this.setState({
-      details: newDetails
+      details: newDetails,
+      detailsError: ""
     });
   };
 
@@ -74,9 +79,12 @@ class AddProduct extends Component {
 
   renderCategoriesOptions = () => {
     if (!this.props.categories.fetched) return;
-    return this.props.categories.lists.map(({ title, _id }) => (
-      <option value={_id}>{title}</option>
-    ));
+    const options = [];
+    this.props.categories.lists.map(({ title, _id }) =>
+      options.push({ value: _id, label: title })
+    );
+    console.log("Render categories options is called", options);
+    return options;
   };
 
   //It creates a formData of all the uploaded images and saves it in the state
@@ -119,7 +127,7 @@ class AddProduct extends Component {
     try {
       await axios.all(uploads);
       console.log("Images have been successfully updated");
-      //Puttinb back authorization header
+      //Putting back authorization header
       axios.defaults.headers.common["authorization"] = token;
       return imagesId;
     } catch (error) {
@@ -147,10 +155,12 @@ class AddProduct extends Component {
 
   renderLocalImages = () => {
     return this.state.localImages.map((image, index) => (
-      <AddProductImage
-        image={image}
-        onImageDelete={() => this.removeUploadImage(index)}
-      />
+      <div className="col-md-3 col-sm-6">
+        <AddProductImage
+          image={image}
+          onImageDelete={() => this.removeUploadImage(index)}
+        />
+      </div>
     ));
   };
 
@@ -175,61 +185,142 @@ class AddProduct extends Component {
 
   render() {
     const optionDefault = <option value="">Choose a Category</option>;
+    const selectOptions = this.renderCategoriesOptions();
     return (
       <div className="AddProduct">
-        <h2>This is An Add Product</h2>
-        <h3>Title</h3>
-        <textarea
-          cols="30"
-          rows="1"
-          value={this.state.title}
-          onChange={this.onTitleChange}
-        />
-        {this.state.titleError}
-        <h3>Short Description</h3>
-        <textarea
-          value={this.state.desc}
-          onChange={this.onDescChange}
-          cols="30"
-          rows="1"
-        />
-        {this.state.descError}
-        <h3>Product Details</h3>
-        <CKEditor
-          content={this.state.details}
-          events={{
-            change: this.onDetailsChange
-          }}
-        />
-        {this.state.detailsError}
-        <h3>Price</h3>
-        <textarea
-          value={this.state.price}
-          onChange={this.onPriceChange}
-          cols="30"
-          rows="1"
-        />
-        {this.state.priceError}
-        <h3>Categories</h3>
-        <select
-          name="categories"
-          id=""
-          onChange={this.onCategoryChange}
-          value={this.state.category}
-        >
-          {optionDefault}
-          {this.renderCategoriesOptions()}
-        </select>
-        {this.state.categoryError}
-        {this.renderLocalImages()}
+        <AdminSideNav />
+        {/* Margin left of -260px */}
+        <div className="AddProduct__main-area">
+          <AdminHeader />
+          <div className="AddProduct__main-area__wrapper">
+            <div className="AddProduct__main-area__content">
+              <h2 className="AddProduct__main-area__header"> Add Product</h2>
+              <div className="AddProduct__single-field">
+                <h3 className="AddProduct__single-field__title">Title</h3>
+                <input
+                  className={classnames({
+                    "AddProduct__single-field__input": true,
+                    "AddProduct__single-field__input--error": this.state
+                      .titleError
+                  })}
+                  cols="30"
+                  rows="1"
+                  placeholder="Provide the title of the product"
+                  value={this.state.title}
+                  onChange={this.onTitleChange}
+                />
+                {this.state.titleError && (
+                  <p className="AddProduct__single-field__error">
+                    {this.state.titleError}
+                  </p>
+                )}
+              </div>
+              <div className="AddProduct__single-field">
+                <h3 className="AddProduct__single-field__title">Short Desc</h3>
+                <textarea
+                  className={classnames({
+                    "AddProduct__single-field__textarea": true,
+                    "AddProduct__single-field__textarea--error": this.state
+                      .descError
+                  })}
+                  placeholder="Please provide a short description of the product"
+                  value={this.state.desc}
+                  onChange={this.onDescChange}
+                  rows="5"
+                />
+                {this.state.descError && (
+                  <p className="AddProduct__single-field__error">
+                    {this.state.descError}
+                  </p>
+                )}
+              </div>
+              <div className="AddProduct__single-field AddProduct__single-field--column">
+                <h3 className="AddProduct__single-field__title AddProduct__single-field__title--full-line align-left">
+                  Product Details
+                </h3>
+                <div className="AddProduct__single-field__full-line">
+                  <CKEditor
+                    content={this.state.details}
+                    events={{
+                      change: this.onDetailsChange
+                    }}
+                  />
+                </div>
+                {this.state.detailsError && (
+                  <p className="AddProduct__single-field__error">
+                    {this.state.detailsError}
+                  </p>
+                )}
+              </div>
+              <div className="AddProduct__single-field">
+                <h3 className="AddProduct__single-field__title">Price</h3>
+                <input
+                  className={classnames({
+                    "AddProduct__single-field__input": true,
+                    "AddProduct__single-field__input--error": this.state
+                      .priceError
+                  })}
+                  value={this.state.price}
+                  placeholder="Please provide a price"
+                  onChange={this.onPriceChange}
+                  cols="30"
+                  rows="1"
+                />
+                {this.state.priceError && (
+                  <p className="AddProduct__single-field__error">
+                    {this.state.priceError}
+                  </p>
+                )}
+              </div>
 
-        {/* Image Upload startes here */}
+              <div className="AddProduct__single-field">
+                <h3 className="AddProduct__single-field__title">Categories</h3>
+                <Select
+                  name="categories"
+                  className="AddProduct__single-field__select"
+                  id=""
+                  onChange={this.onCategoryChange}
+                  value={this.state.category}
+                  options={selectOptions}
+                />
+                {this.state.categoryError && (
+                  <p className="AddProduct__single-field__error">
+                    {this.state.categoryError}
+                  </p>
+                )}
+              </div>
+              <div className="row AddProduct__row">
+                {this.renderLocalImages()}
+              </div>
 
-        <Dropzone onDrop={this.handleUploadImages} multiple accept="image/*">
-          Try dropping some files here, or click to select files to upload.
-        </Dropzone>
-        {this.state.imagesError}
-        <button onClick={this.onCreateProduct}>Create a Product</button>
+              {/* Image Upload startes here */}
+
+              <Dropzone
+                onDrop={this.handleUploadImages}
+                multiple
+                accept="image/*"
+              >
+                <div className="AddProduct__dropzone__content">
+                  <i class="fas fa-upload" />
+                  <p className="AddProduct__dropzone__content__text">
+                    Upload images
+                  </p>
+                </div>
+              </Dropzone>
+              {this.state.imagesError && (
+                <p className="AddProduct__single-field__error">
+                  {this.state.imagesError}
+                </p>
+              )}
+              <button
+                className="AddProduct__create-btn"
+                onClick={this.onCreateProduct}
+              >
+                Create a Product
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
@@ -237,10 +328,10 @@ class AddProduct extends Component {
 
 const mapStateToProps = state => ({
   profile: state.profile,
-  categories: state.adminCategories
+  categories: state.categories
 });
 
 export default connect(
   mapStateToProps,
-  { fetchAdminCategories, addProduct }
+  { fetchCategories, addProduct }
 )(AddProduct);
