@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchAdminProducts } from "../../../store/actions/products/adminProducts";
+import AdminSideNav from "../../common/admin/AdminSideNav/AdminSideNav";
 import AdminProduct from "./AdminProduct/AdminProduct";
+import AdminHeader from "../../common/admin/AdminHeader/AdminHeader";
+import AdminProductsHeader from "./AdminProductsHeader/AdminProductsHeader";
 
 class AdminProducts extends Component {
   componentDidUpdate = (prevProps, prevState) => {
@@ -23,6 +26,7 @@ class AdminProducts extends Component {
             title={product.title}
             price={product.price}
             desc={product.desc}
+            images={product.images}
             category={product.category}
             id={product._id}
           />
@@ -32,18 +36,18 @@ class AdminProducts extends Component {
   };
   render() {
     return (
-      <div className="Products">
-        <thead>
-          <tr>
-            <th>Product</th>
-            <th>Price</th>
-            <th>Category</th>
-            <th>Product Image</th>
-            <th>Edit</th>
-            <th>Delete</th>
-          </tr>
-        </thead>
-        {this.renderProducts()}
+      <div className="AdminProducts">
+        <AdminSideNav />
+        {/* Margin left of -260px */}
+        <div className="AdminProducts__main-area">
+          <AdminHeader />
+
+          {/* Applies some padding */}
+          <div className="AdminProducts__main-area__content">
+            <AdminProductsHeader />
+            {this.renderProducts()}
+          </div>
+        </div>
       </div>
     );
   }

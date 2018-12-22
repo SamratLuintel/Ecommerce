@@ -1,0 +1,17 @@
+@import "AdminProductsHeader/AdminProductsHeader";
+@import "AdminProduct/AdminProduct";
+
+.AdminProducts {
+  display: flex;
+}
+
+.AdminProducts__main-area {
+  margin-left: 260px;
+  position: relative;
+  flex-grow: 1;
+}
+
+.AdminProducts__main-area__content {
+  padding: 2.2rem;
+  background-color: #f4f5fa;
+}

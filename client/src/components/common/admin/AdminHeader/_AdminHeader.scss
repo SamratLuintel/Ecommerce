@@ -1,4 +1,4 @@
-.DashboardHeader {
+.AdminHeader {
   position: fixed;
   padding: 0rem 18px;
   height: 66px;
@@ -11,7 +11,7 @@
   justify-content: space-between;
 }
 
-.DashboardHeader__scroll-top-btn {
+.AdminHeader__scroll-top-btn {
   color: #6b6f82;
   font-weight: 400;
   font-size: 1.3125rem;
@@ -19,7 +19,7 @@
   display: inline-block;
 }
 
-.DashboardHeader__user {
+.AdminHeader__user {
   align-self: flex-end;
   float: right;
   color: #6b6f82;

@@ -1,0 +1,51 @@
+.AdminProductsHeader {
+  margin-top: 50px;
+  background: url("./assets/images/bg/laptop.jpg") no-repeat scroll 0 40%;
+  height: 200px;
+  padding: 2rem 1rem;
+  position: relative;
+  margin-bottom: 50px;
+  &:before {
+    content: "";
+    background-color: #000000;
+    opacity: 0.3;
+    width: 100%;
+    height: 200px;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}
+
+.AdminProductsHeader__content {
+  position: relative;
+  z-index: 99;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #ffffff;
+}
+.AdminProductsHeader__content__title {
+  font-weight: 500;
+  font-size: 1.75rem;
+  line-height: 34px;
+}
+
+.AdminProductHeader__content__create-product-btn {
+  float: right;
+  border-color: #168dee !important;
+  background-color: #1e9ff2 !important;
+  color: #ffffff;
+  font-weight: 400;
+  cursor: pointer;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  user-select: none;
+  border: 1px solid transparent;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  line-height: 1.25;
+  border-radius: 0.25rem;
+}
