@@ -9,7 +9,8 @@ class EditCategory extends Component {
   state = {
     disabled: true,
     title: "",
-    titleError: ""
+    icon: "",
+    titleErr: ""
   };
 
   static getDerivedStateFromProps = (nextProps, nextState) => {
@@ -19,6 +20,7 @@ class EditCategory extends Component {
     if (nextProps.editCategory.fetched && nextState.disabled) {
       return {
         title: nextProps.editCategory.title,
+        icon: nextProps.editCategory.icon,
         disabled: false
       };
     }
@@ -44,7 +46,8 @@ class EditCategory extends Component {
   onSaveCategory = async () => {
     const category = {
       id: this.props.match.params.id,
-      title: this.state.title
+      title: this.state.title,
+      icon: this.state.icon
     };
     try {
       await this.props.updateCategory(category);

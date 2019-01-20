@@ -17,17 +17,31 @@ class AdminCategory extends Component {
     await this.props.deleteCategory(id);
     this.props.fetchAdminCategories();
   };
+
   render() {
     const { props } = this;
     return (
       <div>
-        <tbody>
-          <tr>
-            <td>{props.title}</td>
-            <td onClick={this.redirectToEditCategory}>Edit</td>
-            <td onClick={this.onDeleteCategory}>Delete</td>
-          </tr>
-        </tbody>
+        <tr className="AdminCategory">
+          <td className="AdminCategory__td AdminCategory__title">
+            {props.title}
+          </td>
+          <td className="AdminCategory__td">
+            <i className={props.icon} />
+          </td>
+          <td
+            className="AdminCategory__td AdminCategory__action-btn"
+            onClick={this.redirectToEditCategory}
+          >
+            Edit
+          </td>
+          <td
+            className="AdminCategory__td AdminCategory__action-btn"
+            onClick={this.onDeleteCategory}
+          >
+            Delete
+          </td>
+        </tr>
       </div>
     );
   }

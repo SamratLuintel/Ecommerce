@@ -1,0 +1,40 @@
+@import "AdminCategory/AdminCategory";
+
+.AdminCategories {
+  display: flex;
+  background-color: #f4f5fa;
+  min-height: 100vh;
+}
+
+.AdminCategories__main-area {
+  margin-left: 260px;
+  position: relative;
+  flex-grow: 1;
+}
+
+.AdminCategories__table {
+  margin: 0 auto;
+  margin-top: 60px;
+  box-sizing: border-box;
+  width: 90%;
+  background-color: #fff;
+}
+
+.AdminCategories__header__tr {
+  display: flex;
+  color: #3b3b3b;
+  font-size: 0.875rem;
+}
+
+.AdminCategories__header__item {
+  border-bottom: 2px solid #ebebeb;
+  padding: 8px;
+  padding-top: 10px;
+  flex-basis: 32.07%;
+  text-align: right;
+
+  &:first-child {
+    flex-basis: 33.37%;
+    text-align: left;
+  }
+}

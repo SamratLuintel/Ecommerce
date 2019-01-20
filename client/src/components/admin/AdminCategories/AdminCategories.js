@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchAdminCategories } from "../../../store/actions/categories/adminCategories";
 import AdminCategory from "./AdminCategory/AdminCategory";
+import AdminHeader from "../../common/admin/AdminHeader/AdminHeader";
+import AdminSideNav from "../../common/admin/AdminSideNav/AdminSideNav";
 import { withRouter } from "react-router-dom";
 
 class AdminCategories extends Component {
@@ -21,7 +23,13 @@ class AdminCategories extends Component {
   renderCategories = () => {
     if (this.props.categories.fetched && this.props.profile.authenticated) {
       return this.props.categories.lists.map(category => {
-        return <AdminCategory title={category.title} id={category._id} />;
+        return (
+          <AdminCategory
+            icon={category.icon}
+            title={category.title}
+            id={category._id}
+          />
+        );
       });
     }
   };
@@ -32,18 +40,26 @@ class AdminCategories extends Component {
 
   render() {
     return (
-      <div className="Categories">
-        <button onClick={this.redirectToCreateCategory}>
-          Create A Category
-        </button>
-        <thead>
-          <tr>
-            <th>Categories</th>
-            <th>Edit</th>
-            <th>Delete</th>
-          </tr>
-        </thead>
-        {this.renderCategories()}
+      <div className="AdminCategories">
+        <AdminSideNav />
+        {/* Margin left of 260px */}
+        <div className="AdminCategories__main-area">
+          <AdminHeader />
+          <button onClick={this.redirectToCreateCategory}>
+            Create A Category
+          </button>
+          <table className="AdminCategories__table">
+            <thead className="AdminCategories__header">
+              <tr className="AdminCategories__header__tr">
+                <th className="AdminCategories__header__item">Category Name</th>
+                <th className="AdminCategories__header__item">Icon</th>
+                <th className="AdminCategories__header__item">Edit</th>
+                <th className="AdminCategories__header__item">Delete</th>
+              </tr>
+            </thead>
+            <tbody> {this.renderCategories()}</tbody>
+          </table>
+        </div>
       </div>
     );
   }

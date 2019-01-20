@@ -28,7 +28,8 @@ class Product extends Component {
     amount: 10,
     //Three options
     //details , reviews and add-review
-    selectedTab: "details"
+    selectedTab: "details",
+    error: null
   };
 
   componentDidMount = () => {
@@ -39,9 +40,7 @@ class Product extends Component {
     try {
       const id = this.props.match.params.id;
       const res = await axios.get(`/api/product/${id}`);
-
       console.log("From fetch product", res.data);
-
       this.setState({
         title: res.data.title,
         desc: res.data.desc,
@@ -52,15 +51,10 @@ class Product extends Component {
         reviews: res.data.reviews,
         fetched: true
       });
-
-      if (this.props.profile.authenticated)
-        this.setState({
-          hasReviewed: this.hasAlreadyReviewed(res.data.reviews)
-        });
     } catch (error) {
       console.log(error.response);
       //If the server has send some error message display them
-      if (error.response.data.message) {
+      if (error.response && error.response.data.message) {
         return this.setState({
           errorMessage: error.response.data.message,
           error: true,

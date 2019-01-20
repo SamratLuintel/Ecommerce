@@ -1,0 +1,29 @@
+.AdminCategory {
+  display: flex;
+}
+.AdminCategory__td {
+  flex-grow: 1;
+  padding: 8px;
+  text-align: right;
+  flex-basis: 32.07%;
+  align-self: center;
+  justify-content: center;
+  &:first-child {
+    text-align: left;
+    flex-basis: 33.37%;
+  }
+}
+
+.AdminCategory__title {
+  font-size: 0.85rem;
+}
+
+.AdminCategory__action-btn {
+  font-size: 0.85rem;
+  transition: 0.3s;
+  cursor: pointer;
+
+  &:hover {
+    color: #20c997;
+  }
+}
