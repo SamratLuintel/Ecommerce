@@ -1,0 +1,116 @@
+$input-label-width: 100px;
+.AddCategory {
+  display: flex;
+  background-color: #f4f5fa;
+  min-height: 100vh;
+}
+
+.AddCategory__main-area {
+  margin-left: 260px;
+  position: relative;
+  flex-grow: 1;
+}
+
+.AddCategory__main-area__wrapper {
+  margin-top: 60px;
+  padding: 2.2rem;
+}
+
+.AddCategory__main-area__content {
+  background-color: #fff;
+  padding: 1.5rem;
+}
+
+.AddCategory__main-area__header {
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 19px;
+  margin-bottom: 1rem;
+  color: #464855;
+}
+
+.AddCategory__main-area__icon-demo {
+  text-align: center;
+  font-size: 1.6rem;
+  color: #2b335e;
+  margin-bottom: 10px;
+  span {
+    font-size: 1.2rem;
+  }
+}
+
+.AddCategory__single-field {
+  display: flex;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+.AddCategory__single-field--no-bottom-margin {
+  margin-bottom: 0;
+}
+.AddCategory__single-field__title {
+  display: inline-block;
+  width: $input-label-width;
+  align-self: center;
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 20px;
+  height: 100%;
+  color: #2b335e;
+}
+
+.AddCategory__single-field__input {
+  flex-grow: 2;
+  display: inline-block;
+  height: calc(2.75rem + 2px);
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  line-height: 1.25;
+  color: #4e5154;
+  background-color: #ffffff;
+  background-clip: padding-box;
+  border: 1px solid #babfc7;
+  transition: 0.4s all ease-in-out;
+  border-radius: 0.25rem;
+}
+
+.AddCategory__single-field__input--error {
+  border-color: red;
+}
+.AddCategory__short-info {
+  color: #4e5154;
+  font-size: 0.8rem;
+  text-align: right;
+  margin-top: 0.6rem;
+  margin-bottom: 1.5rem;
+}
+
+.AddCategory__short-info__link {
+  color: #20c997;
+  text-decoration: none;
+}
+
+.AddCategory__create-btn {
+  background-color: $primary-blue;
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  user-select: none;
+  border: 1px solid transparent;
+  margin-top: 30px;
+  padding: 1rem 2rem;
+  font-size: 0.875rem;
+  color: #fff;
+  line-height: 1;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+
+.AddCategory__single-field__error {
+  flex: 0 0 100%;
+  margin-left: $input-label-width;
+  margin-top: 2px;
+  font-size: 0.875rem;
+  color: red;
+}

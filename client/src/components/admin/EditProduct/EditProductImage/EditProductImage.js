@@ -5,9 +5,16 @@ class EditProductImage extends Component {
     const { props } = this;
     return (
       <div className="EditProductImage">
-        <img src={props.image} alt="Product" />
-        <div className="EditProductImage__cross" onClick={props.onImageDelete}>
-          Cross
+        <img
+          src={props.image}
+          alt="Product"
+          className="EditProductImage__image"
+        />
+        <div
+          className="EditProductImage__cross"
+          onClick={() => props.onImageDelete(props.index)}
+        >
+          <i class="fas fa-times" />
         </div>
       </div>
     );

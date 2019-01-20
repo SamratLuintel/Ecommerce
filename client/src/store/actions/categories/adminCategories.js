@@ -15,10 +15,10 @@ export const fetchAdminCategories = () => async dispatch => {
 };
 
 //Add the category
-export const addCategory = title => async dispatch => {
+export const addCategory = (title, icon) => async dispatch => {
   try {
     console.log("Add Category Action is Called");
-    const res = await axios.post("/api/add-category", { title });
+    const res = await axios.post("/api/add-category", { title, icon });
     console.log("The category is successfully added");
   } catch (err) {
     const errMessage = err.response ? err.response.data : err.response;

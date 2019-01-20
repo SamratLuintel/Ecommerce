@@ -184,7 +184,6 @@ class AddProduct extends Component {
   };
 
   render() {
-    const optionDefault = <option value="">Choose a Category</option>;
     const selectOptions = this.renderCategoriesOptions();
     return (
       <div className="AddProduct">

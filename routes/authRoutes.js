@@ -85,6 +85,7 @@ module.exports = app => {
   app.get(
     "/api/auth/google",
     passport.authenticate("google", {
+      scope: "profile",
       prompt: "select_account",
       session: false,
       scope: ["openid", "profile", "email"]

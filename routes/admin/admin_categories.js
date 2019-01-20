@@ -12,6 +12,7 @@ module.exports = app => {
     if (!isValid) return res.status(400).send(errors);
 
     const title = req.body.title;
+    const icon = req.body.icon;
     let slug = req.body.title.replace(/\s+/g, "-").toLowerCase();
 
     //Check to see if the slug is unique
@@ -30,6 +31,7 @@ module.exports = app => {
     await new Category({
       title,
       slug,
+      icon,
       createdBy: req.user
     }).save();
 
