@@ -4,10 +4,13 @@ import DashboardContent from "./DashboardContent/DashboardContent";
 import AdminHeader from "../../common/admin/AdminHeader/AdminHeader";
 
 class AdminDashboard extends Component {
+  state = {
+    nav: "dashboard"
+  };
   render() {
     return (
       <div className="AdminDashboard">
-        <AdminSideNav />
+        <AdminSideNav nav={this.state.nav} />
         {/* Margin left of -260px */}
         <div className="AdminDashboard__main-dashboard-area">
           <AdminHeader />

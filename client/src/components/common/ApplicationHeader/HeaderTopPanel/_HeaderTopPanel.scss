@@ -3,6 +3,11 @@
   color: #636363;
   height: 40px;
   line-height: 40px;
+  display: none;
+
+  @include for-tablet-landscape-up {
+    display: block;
+  }
 }
 
 .HeaderTopPanel__wrapper {
@@ -18,11 +23,17 @@
     padding-right: 13px;
     font-size: 0.7rem !important;
   }
-  span {
-    padding-right: 23px;
-  }
+}
 
-  span:last-child {
-    padding-right: 0px;
+.HeaderTopPanel__icon--left-margin {
+  margin-left: 15px;
+}
+
+.HeaderTopPanel__admin {
+  color: $primary-green;
+  font-weight: 600;
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
   }
 }

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 
 class HeaderTopPanel extends Component {
   renderUserInfo = () => {
@@ -7,7 +8,13 @@ class HeaderTopPanel extends Component {
     if (this.props.profile.authenticated) {
       return (
         <div className="HeaderTopPanel__right-section HeaderTopPanel__info">
-          <span>Welcome , {this.props.profile.fullname}</span>
+          <span>Welcome {this.props.profile.fullname}</span>,{" "}
+          <span
+            className="HeaderTopPanel__admin"
+            onClick={this.redirectToDashboard}
+          >
+            Admin Page
+          </span>
         </div>
       );
     } else {
@@ -22,6 +29,8 @@ class HeaderTopPanel extends Component {
     }
   };
 
+  redirectToDashboard = () => this.props.history.push("/admin/dashboard");
+
   render() {
     return (
       <div className="HeaderTopPanel">
@@ -31,7 +40,7 @@ class HeaderTopPanel extends Component {
               <span>
                 <i class="fa fa-phone">&nbsp;</i>(+8400) 123 456 789
               </span>
-              <span>
+              <span className="HeaderTopPanel__icon--left-margin">
                 <i class="far fa-envelope" />
                 Email: hello@company.co
               </span>
@@ -48,4 +57,4 @@ const mapStateToProps = state => ({
   profile: state.profile
 });
 
-export default connect(mapStateToProps)(HeaderTopPanel);
+export default withRouter(connect(mapStateToProps)(HeaderTopPanel));

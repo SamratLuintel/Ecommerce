@@ -7,6 +7,8 @@ import AdminHeader from "../../common/admin/AdminHeader/AdminHeader";
 import AdminProductsHeader from "./AdminProductsHeader/AdminProductsHeader";
 
 class AdminProducts extends Component {
+  state = { nav: "admin-products" };
+
   componentDidUpdate = (prevProps, prevState) => {
     if (this.props.profile.authenticated && !this.props.products.fetched) {
       this.props.fetchAdminProducts();
@@ -37,7 +39,7 @@ class AdminProducts extends Component {
   render() {
     return (
       <div className="AdminProducts">
-        <AdminSideNav />
+        <AdminSideNav nav={this.state.nav} />
         {/* Margin left of -260px */}
         <div className="AdminProducts__main-area">
           <AdminHeader />

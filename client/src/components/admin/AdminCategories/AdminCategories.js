@@ -7,6 +7,9 @@ import AdminSideNav from "../../common/admin/AdminSideNav/AdminSideNav";
 import { withRouter } from "react-router-dom";
 
 class AdminCategories extends Component {
+  state = {
+    nav: "admin-categories"
+  };
   componentDidUpdate = (prevProps, prevState) => {
     //Fetched the edit page
     if (this.props.profile.authenticated && !this.props.categories.fetched) {
@@ -41,7 +44,7 @@ class AdminCategories extends Component {
   render() {
     return (
       <div className="AdminCategories">
-        <AdminSideNav />
+        <AdminSideNav nav={this.state.nav} />
         {/* Margin left of 260px */}
         <div className="AdminCategories__main-area">
           <AdminHeader />

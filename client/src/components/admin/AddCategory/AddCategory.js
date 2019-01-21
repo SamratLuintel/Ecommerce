@@ -10,7 +10,8 @@ class AddCategory extends Component {
   state = {
     title: "",
     icon: "fas fa-calendar-alt",
-    titleErr: ""
+    titleErr: "",
+    nav: "add-category"
   };
 
   onTitleChange = e => this.setState({ title: e.target.value, titleErr: "" });
@@ -55,7 +56,7 @@ class AddCategory extends Component {
   render() {
     return (
       <div className="AddCategory">
-        <AdminSideNav />
+        <AdminSideNav nav={this.state.nav} />
         {/* Margin left of 260px */}
         <div className="AddCategory__main-area">
           <AdminHeader />

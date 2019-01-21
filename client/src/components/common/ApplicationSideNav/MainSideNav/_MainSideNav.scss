@@ -1,0 +1,36 @@
+.MainSideNav {
+  position: fixed;
+  width: 0px;
+  z-index: 9999;
+  min-height: 100vh;
+  background-color: #373a47;
+  box-sizing: border-box;
+  white-space: nowrap;
+  display: block;
+  overflow: hidden;
+
+  transition: 0.7s width ease-in-out;
+}
+
+.MainSideNav--open {
+  width: 250px;
+}
+.MainSideNav__nav-wrapper {
+  padding: 3.3em 2.3em 0.8em;
+}
+
+.MainSideNav__close-btn {
+  position: absolute;
+  right: 15px;
+  top: 10px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.MainSideNav__single-nav {
+  color: #b8b7ad;
+  padding: 0.8em;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.5s all ease-in-out;
+}

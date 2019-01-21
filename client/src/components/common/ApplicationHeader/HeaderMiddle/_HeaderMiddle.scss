@@ -1,32 +1,62 @@
 @import "HeaderControlBlock/HeaderControlBlock";
 
 .HeaderMiddle__content {
-  padding-top: 30px;
-  padding-bottom: 30px;
+  //The container is attached with it. We will override that
+  padding-top: 15px;
+  padding-bottom: 15px;
   background: #fff;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
+  align-items: center;
+
+  @media (min-width: 650px) {
+    justify-content: space-between;
+  }
+
+  @include for-tablet-landscape-up {
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
 }
 .HeaderMiddle__title {
   font-weight: 800;
   font-style: italic;
-
   .green {
     color: #62a70f;
   }
   color: #252525;
+  font-size: 1rem;
+
+  @media (min-width: 500px) {
+    font-size: 1.5rem;
+  }
+  @include for-tablet-landscape-up {
+    font-size: 2rem;
+  }
 }
 
 .HeaderMiddle__search {
   height: 50px;
   line-height: 50px;
-  width: 500px;
+  width: 100%;
   padding-left: 15px;
   border: 1px solid #ebebeb;
+
+  @media (min-width: 650px) {
+    width: 350px;
+  }
+  @media (min-width: 1250px) {
+    width: 500px;
+  }
 }
 
 .HeaderMiddle__search-wrapper {
   display: flex;
+
+  @media (max-width: 650px) {
+    width: 90%;
+    margin: 0 auto;
+  }
 }
 
 .HeaderMiddle__search-icon {
@@ -41,6 +71,9 @@
 
 .HeaderMiddle__right {
   display: flex;
+  @media (max-width: 650px) {
+    flex-grow: 3;
+  }
 }
 
 .HeaderMiddle__user-cart {
@@ -48,6 +81,11 @@
   line-height: 1.3;
   font-size: 0.875rem;
   margin-left: 20px;
+  display: none;
+
+  @media (min-width: 1050px) {
+    display: block;
+  }
 }
 
 .HeaderMiddle__user-cart__price {

@@ -9,6 +9,7 @@ import PopularProducts from "./PopularProducts/PopularProducts";
 import RecentProducts from "./RecentProducts/RecentProducts";
 import SiteFeatures from "./SiteFeatures/SiteFeatures";
 import NewsLetter from "./NewsLetter/NewsLetter";
+import ApplicationSideNav from "../common/ApplicationSideNav/ApplicationSideNav";
 
 class Home extends Component {
   componentDidMount = () => {
@@ -35,6 +36,7 @@ class Home extends Component {
   render() {
     return (
       <div>
+        <ApplicationSideNav />
         <ApplicationHeader />
         <FeaturedProduct />
         <HomeBanner />

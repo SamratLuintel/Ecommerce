@@ -7,3 +7,10 @@
 .ApplicationHeader {
   font-family: "Open Sans";
 }
+
+.ApplicationHeader .container {
+  @media (max-width: 1000px) {
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+}

@@ -30,7 +30,8 @@ class AddProduct extends Component {
     priceError: "",
     descError: "",
     imagesError: "",
-    detailsError: ""
+    detailsError: "",
+    nav: "add-product"
   };
 
   componentDidMount = async () => {
@@ -187,7 +188,7 @@ class AddProduct extends Component {
     const selectOptions = this.renderCategoriesOptions();
     return (
       <div className="AddProduct">
-        <AdminSideNav />
+        <AdminSideNav nav={this.state.nav} />
         {/* Margin left of -260px */}
         <div className="AddProduct__main-area">
           <AdminHeader />

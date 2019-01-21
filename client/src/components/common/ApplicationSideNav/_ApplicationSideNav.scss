@@ -1,0 +1,16 @@
+@import "MainSideNav/MainSideNav";
+
+.ApplicationSideNav {
+  @media (min-width: 850px) {
+    display: none;
+  }
+}
+
+.ApplicationSideNav__open-btn {
+  position: absolute;
+  right: 35px;
+  color: #fff;
+  top: 93px;
+  font-size: 1.5rem;
+  cursor: pointer;
+}

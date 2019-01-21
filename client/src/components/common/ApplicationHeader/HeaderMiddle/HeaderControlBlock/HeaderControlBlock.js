@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import ApplicationHeaderContext from "../../applicationHeaderContext";
 import { logOutUser } from "../../../../../store/actions/profile/profile";
 import { withRouter } from "react-router-dom";
+import ReactTooltip from "react-tooltip";
 
 class HeaderControlBlock extends Component {
   static contextType = ApplicationHeaderContext;
@@ -14,32 +15,68 @@ class HeaderControlBlock extends Component {
       return (
         <div
           className="HeaderControlBlock__action-btn"
+          data-tip="Logout"
           onClick={() => this.props.logOutUser(this.props.history)}
         >
-          <i class="fas fa-sign-out-alt" />
+          <i className="fas fa-sign-out-alt" />
         </div>
       );
     } else {
       return (
         <div
           className="HeaderControlBlock__action-btn"
+          data-tip="Login"
           onClick={this.context.openLoginModal}
         >
-          <i class="fas fa-user" />
+          <i className="fas fa-user" />
         </div>
       );
     }
+  };
+
+  renderAdmin = () => {
+    if (!this.props.profile.fetched) return;
+    if (this.props.profile.authenticated) {
+      return (
+        <div
+          className="HeaderControlBlock__action-btn"
+          data-tip="Admin"
+          onClick={this.redirectToAdminDashboard}
+        >
+          <i className="fas fa-cog" />
+        </div>
+      );
+    }
+    return;
+  };
+  componentDidUpdate = (prevProps, prevState) => {
+    console.log("Component did update is called");
+    ReactTooltip.rebuild();
+  };
+
+  redirectToAdminDashboard = () => {
+    this.props.history.push("/admin/dashboard");
+  };
+
+  redirectToCheckout = () => {
+    this.props.history.push("/checkout");
   };
   render() {
     const { props } = this;
     return (
       <div className="HeaderControlBlock">
-        <div className="HeaderControlBlock__action-btn">
-          <i class="fas fa-shopping-cart" />
+        <ReactTooltip effect="solid" />
+        <div
+          className="HeaderControlBlock__action-btn"
+          data-tip="Checkout"
+          onClick={this.redirectToCheckout}
+        >
+          <i className="fas fa-shopping-cart" />
           <span className="HeaderControlBlock__action-btn__counter">
             {props.carts.totalItems}
           </span>
         </div>
+        {this.renderAdmin()}
         {this.logInOrLogOutBtn()}
       </div>
     );
