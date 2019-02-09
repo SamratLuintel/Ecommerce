@@ -11,8 +11,8 @@ class AdminDashboard extends Component {
     return (
       <div className="AdminDashboard">
         <AdminSideNav nav={this.state.nav} />
-        {/* Margin left of -260px */}
-        <div className="AdminDashboard__main-dashboard-area">
+        {/* Margin left of -260px check _general.scss*/}
+        <div className="AdminDashboard__main-dashboard-area admin-default-left-margin-mid ">
           <AdminHeader />
           <DashboardContent />
         </div>

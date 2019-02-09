@@ -3,15 +3,36 @@ import classnames from "classnames";
 import { withRouter } from "react-router-dom";
 
 class AdminSideNav extends Component {
+  state = {
+    shrinked: false
+  };
+
   redirectTo = name => {
     this.props.history.push(`/admin/${name}`);
+  };
+
+  onShrink = bool => {
+    this.setState({ shrinked: bool });
   };
   render() {
     //props.nav is set in the respected component
     //props.nav ==='dashboard' is passed from Dashboard component
     return (
-      <div className="AdminSideNav">
-        <h2 className="AdminSideNav__header">Mart Admin</h2>
+      <div
+        className={classnames({
+          AdminSideNav: true,
+          "AdminSideNav--shrink": this.state.shrinked
+        })}
+      >
+        <h2 className="AdminSideNav__header">
+          Mart Admin
+          <span
+            class="AdminSideNav__header__shrink-btn"
+            onClick={() => this.onShrink(true)}
+          >
+            <i className="fas fa-times" />
+          </span>
+        </h2>
         <div className="AdminSideNav__nav-lists">
           <div
             className={classnames({

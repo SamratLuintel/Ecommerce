@@ -1,3 +1,16 @@
 @import "EmailCard/EmailCard";
 @import "TopProducts/TopProducts";
 @import "AverageDealCard/AverageDealCard";
+
+.DashboardMiddleRow__first-col {
+  @media (max-width: 1000px) {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+}
+.DashboardMiddleRow__second-col {
+  @media (max-width: 1000px) {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+}

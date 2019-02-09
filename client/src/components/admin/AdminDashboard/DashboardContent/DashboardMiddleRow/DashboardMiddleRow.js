@@ -8,10 +8,10 @@ class DashboardMiddleRow extends Component {
     return (
       <div className="DashboardMiddleRow">
         <div className="row">
-          <div className="col-md-3">
+          <div className="col-md-3 DashboardMiddleRow__first-col">
             <EmailCard />
           </div>
-          <div className="col-md-3">
+          <div className="col-md-3 DashboardMiddleRow__second-col">
             <TopProducts />
           </div>
           <div className="col-md-6">

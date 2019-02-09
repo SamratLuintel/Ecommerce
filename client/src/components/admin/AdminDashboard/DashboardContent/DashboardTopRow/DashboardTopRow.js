@@ -14,18 +14,18 @@ class DashboardTopRow extends Component {
         </div>
         <div className="col-lg-6 col-12 DashboardTopRow__right-wrapper">
           <div className="row DashboardTopRow__upper-row">
-            <div className="col-lg-6 col-12">
+            <div className="col-lg-6 col-6">
               <HitRateCard />
             </div>
-            <div className="col-lg-6 col-12">
+            <div className="col-lg-6 col-6">
               <DealsCard />
             </div>
           </div>
           <div className="row DashboardTopRow__bottom-row">
-            <div className="col-lg-6 col-12">
+            <div className="col-lg-6 col-6">
               <OrderValueCard />
             </div>
-            <div className="col-lg-6 col-12">
+            <div className="col-lg-6 col-6">
               <CallsCard />
             </div>
           </div>

@@ -2,6 +2,10 @@
   background-color: #fff;
 }
 
+.TopProducts__table {
+  width: 100%;
+}
+
 .TopProducts__header {
   padding: 1.5rem;
   padding-bottom: 1rem;
@@ -10,12 +14,17 @@
   font-weight: 500;
 }
 
+.TopProducts__table__tr {
+  width: 100%;
+}
+
 .TopProducts__table__th {
   padding: 0.75rem 2rem;
   border-bottom: 1px solid #e3ebf3;
   color: #6b6f82;
   line-height: 20px;
   font-weight: 700;
+  text-align: left;
   font-size: 0.875rem;
 }
 
@@ -26,4 +35,5 @@
   line-height: 20px;
   padding: 0.75rem 2rem;
   border-bottom: 1px solid #e3ebf3;
+  text-align: right;
 }

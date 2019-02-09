@@ -13,3 +13,11 @@
 .align-left {
   align-self: flex-start !important;
 }
+
+.admin-default-left-margin-mid {
+  position: relative;
+  flex-grow: 1;
+  @media (min-width: 1000px) {
+    margin-left: 260px;
+  }
+}

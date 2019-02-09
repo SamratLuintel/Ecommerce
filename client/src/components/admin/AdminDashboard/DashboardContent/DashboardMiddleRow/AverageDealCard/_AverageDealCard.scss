@@ -1,5 +1,9 @@
 .AverageDealCard {
   background-color: #fff;
+
+  @media (max-width: 1000px) {
+    margin-top: 70px;
+  }
 }
 
 .AverageDealCard__header {

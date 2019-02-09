@@ -3,12 +3,16 @@
   padding: 0rem 18px;
   height: 66px;
   line-height: 66px;
-  width: calc(100% - 260px);
+  width: 100%;
   background-color: #fff;
   box-shadow: 0 0.25rem 0.125rem 0 rgba(0, 0, 0, 0.05);
   display: flex;
   z-index: 99;
   justify-content: space-between;
+
+  @media (min-width: 1000px) {
+    width: calc(100% - 260px);
+  }
 }
 
 .AdminHeader__scroll-top-btn {
