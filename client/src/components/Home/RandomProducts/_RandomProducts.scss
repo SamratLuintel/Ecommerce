@@ -4,3 +4,20 @@
 .RandomProducts {
   padding-bottom: 60px;
 }
+
+.RandomProducts {
+  .col-md-9 {
+    @media (max-width: 1000px) {
+      flex: 0 0 100%;
+      max-width: 100%;
+    }
+  }
+}
+
+.RandomProducts__first-col {
+  @media (max-width: 1000px) {
+    order: 2;
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}

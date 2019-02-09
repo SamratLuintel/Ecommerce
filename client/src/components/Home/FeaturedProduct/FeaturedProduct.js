@@ -12,7 +12,7 @@ class FeaturedProduct extends Component {
     return (
       <div className="FeaturedProduct">
         <div className="container">
-          <div className="row">
+          <div className="row FeaturedProduct__row">
             <div className="offset-md-3 col-md-9">
               <FeaturedProductSlider />
             </div>

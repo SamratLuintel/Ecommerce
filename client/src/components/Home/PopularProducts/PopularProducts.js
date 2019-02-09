@@ -12,7 +12,7 @@ class PopularProducts extends Component {
     if (!this.props.products.popular.fetched) return;
 
     return this.props.products.popular.lists.map(product => (
-      <div className="col-md-3">
+      <div className="col-md-3 col-sm-6">
         <ProductItemCard
           title={product.title}
           images={product.images}

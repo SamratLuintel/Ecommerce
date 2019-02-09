@@ -39,3 +39,11 @@
 .RecentProducts__product-lists {
   margin-top: 40px;
 }
+
+.RecentProducts__first-col,
+.RecentProducts__second-col {
+  @media (max-width: 1000px) {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}

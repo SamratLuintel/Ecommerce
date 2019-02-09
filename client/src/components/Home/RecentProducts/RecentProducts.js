@@ -13,7 +13,7 @@ class RecentProducts extends Component {
     if (!this.props.products.recent.fetched) return;
 
     return this.props.products.recent.lists.map(product => (
-      <div className="col-md-3">
+      <div className="col-md-3 col-sm-6">
         <ProductItemCard
           title={product.title}
           images={product.images}
@@ -32,10 +32,10 @@ class RecentProducts extends Component {
           </div>
           <div className="RecentProducts__product-lists">
             <div className="row">
-              <div className="col-md-9">
+              <div className="col-md-9 RecentProducts__first-col">
                 <div className="row">{this.renderProducts()}</div>
               </div>
-              <div className="col-md-3">
+              <div className="col-md-3 RecentProducts__second-col">
                 <MobileBanner />
               </div>
             </div>

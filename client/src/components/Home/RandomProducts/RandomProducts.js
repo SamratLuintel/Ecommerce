@@ -8,7 +8,7 @@ class RandomProducts extends Component {
       <div className="RandomProducts">
         <div className="container">
           <div className="row">
-            <div className="col-md-3">
+            <div className="col-md-3 RandomProducts__first-col">
               <CatesBanner />
             </div>
             <div className="col-md-9">

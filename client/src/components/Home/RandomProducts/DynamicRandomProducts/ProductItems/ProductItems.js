@@ -17,7 +17,7 @@ class ProductItems extends Component {
       3
     );
     return slicedProducts.map(product => (
-      <div className="col-md-3">
+      <div className="col-md-3 col-sm-6">
         <ProductItemCard
           title={product.title}
           images={product.images}

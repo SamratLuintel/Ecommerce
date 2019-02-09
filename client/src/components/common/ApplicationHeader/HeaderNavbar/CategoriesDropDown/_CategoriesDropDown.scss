@@ -2,7 +2,14 @@
   height: 60px;
   color: #fff;
   font-family: "Open Sans";
-  width: 25%;
+  width: 65%;
+
+  @media (max-width: 600px) and (min-width: 800px) {
+    width: 45%;
+  }
+  @media (min-width: 800px) {
+    width: 25%;
+  }
   background: #529501;
 }
 

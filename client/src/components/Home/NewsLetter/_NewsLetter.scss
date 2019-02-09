@@ -30,9 +30,14 @@
 }
 
 .NewsLetter__form-content {
-  padding-left: 20%;
-  padding-right: 20%;
-  display: flex;
+  @include for-tablet-landscape-up {
+    padding-left: 20%;
+    padding-right: 20%;
+  }
+
+  @include for-tablet-portrait-up {
+    display: flex;
+  }
 }
 
 .NewsLetter__form-content__input {
@@ -43,6 +48,10 @@
   border: 1px solid transparent;
   height: 50px;
   padding-right: 52px;
+  width: 100%;
+  @include for-tablet-portrait-up {
+    width: auto;
+  }
 }
 
 .NewsLetter__btn-wrapper {
@@ -51,7 +60,6 @@
 
 .NewsLetter__action-btn {
   flex-grow: 1;
-  margin-left: 30px;
   padding: 0 53px;
   transition: all 0.4s ease-in;
   border: none !important;
@@ -65,4 +73,10 @@
   background: #529501;
   height: 50px;
   font-size: 0.875rem;
+  margin-top: 20px;
+
+  @include for-tablet-portrait-up {
+    margin-top: 0px;
+    margin-left: 30px;
+  }
 }

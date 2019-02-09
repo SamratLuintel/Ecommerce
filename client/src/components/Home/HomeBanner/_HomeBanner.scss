@@ -4,3 +4,12 @@
   margin: 60px 0 0;
   margin-bottom: 50px;
 }
+
+.HomeBanner {
+  .col-md-4 {
+    @media (max-width: 1000px) {
+      flex: 0 0 100%;
+      max-width: 100%;
+    }
+  }
+}

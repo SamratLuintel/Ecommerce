@@ -28,7 +28,11 @@ class FeaturedProductSlider extends Component {
 
       const productDiv = (
         <div className="FeaturedProductSlider" key={i}>
-          <img src={fullImageUrl} alt="Smart watch " />
+          <img
+            src={fullImageUrl}
+            className="FeaturedProductSlider__image"
+            alt="Smart watch "
+          />
           <div className="FeaturedProductSlider__content">
             <h2 className="FeaturedProductSlider__content__title">
               {product.title}

@@ -5,7 +5,10 @@ class MobileBanner extends Component {
   render() {
     return (
       <div className="MobileBanner">
-        <img src={bannerImg} alt="" className="MobileBanner__image" />
+        <div
+          className="MobileBanner__image"
+          style={{ backgroundImage: `url(${bannerImg})` }}
+        />
       </div>
     );
   }

@@ -2,6 +2,9 @@
   background-color: #fff;
   position: relative;
   height: 100%;
+  margin-bottom: 20px;
+  @include for-tablet-landscape-up {
+  }
 }
 
 .ProductItemCard__main-content {
@@ -76,8 +79,12 @@
   background-color: #333333;
   color: #ffffff;
   border-color: #333333;
-  font-size: 0.8rem;
+  font-size: 0.6rem;
   transition: 0.4s all ease-out;
+
+  @media (min-width: 1000px) {
+    font-size: 0.8rem;
+  }
   cursor: pointer;
 
   &:hover {

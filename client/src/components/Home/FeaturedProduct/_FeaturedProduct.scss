@@ -7,3 +7,20 @@
 .FeaturedProduct__slider-container {
   justify-content: flex-end !important;
 }
+
+.FeaturedProduct__row {
+  width: 100%;
+  justify-content: flex-start;
+  .offset-md-3 {
+    @media (max-width: 900px) {
+      margin-left: 0% !important;
+    }
+  }
+
+  .col-md-9 {
+    @media (max-width: 900px) {
+      flex: 0 0 100% !important;
+      max-width: 100% !important;
+    }
+  }
+}
