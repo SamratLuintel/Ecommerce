@@ -41,7 +41,7 @@ class AdminProducts extends Component {
       <div className="AdminProducts">
         <AdminSideNav nav={this.state.nav} />
         {/* Margin left of -260px */}
-        <div className="AdminProducts__main-area">
+        <div className="AdminProducts__main-area admin-default-left-margin-mid">
           <AdminHeader />
 
           {/* Applies some padding */}
