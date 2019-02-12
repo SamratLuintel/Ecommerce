@@ -190,7 +190,7 @@ class AddProduct extends Component {
       <div className="AddProduct">
         <AdminSideNav nav={this.state.nav} />
         {/* Margin left of -260px */}
-        <div className="AddProduct__main-area">
+        <div className="AddProduct__main-area admin-default-left-margin-mid ">
           <AdminHeader />
           <div className="AddProduct__main-area__wrapper">
             <div className="AddProduct__main-area__content">

@@ -58,7 +58,7 @@ class AddCategory extends Component {
       <div className="AddCategory">
         <AdminSideNav nav={this.state.nav} />
         {/* Margin left of 260px */}
-        <div className="AddCategory__main-area">
+        <div className="AddCategory__main-area admin-default-left-margin-mid">
           <AdminHeader />
           <div className="AddCategory__main-area__wrapper">
             <div className="AddCategory__main-area__content">
