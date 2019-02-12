@@ -46,7 +46,7 @@ class AdminCategories extends Component {
       <div className="AdminCategories">
         <AdminSideNav nav={this.state.nav} />
         {/* Margin left of 260px */}
-        <div className="AdminCategories__main-area">
+        <div className="AdminCategories__main-area admin-default-left-margin-mid">
           <AdminHeader />
           <button onClick={this.redirectToCreateCategory}>
             Create A Category
