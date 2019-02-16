@@ -1,13 +1,18 @@
 import React, { Component } from "react";
 import HeaderControlBlock from "./HeaderControlBlock/HeaderControlBlock";
+import { withRouter } from "react-router-dom";
 
 class HeaderMiddle extends Component {
+  redirectToHome = () => {
+    this.props.history.push("/");
+  };
+
   render() {
     return (
       <div className="HeaderMiddle">
         <div className="container HeaderMiddle__content">
           <div className="HeaderMiddle__left">
-            <h1 className="HeaderMiddle__title">
+            <h1 onClick={this.redirectToHome} className="HeaderMiddle__title">
               <span className="green">SAMRAT</span>MART
             </h1>
           </div>
@@ -34,4 +39,4 @@ class HeaderMiddle extends Component {
     );
   }
 }
-export default HeaderMiddle;
+export default withRouter(HeaderMiddle);

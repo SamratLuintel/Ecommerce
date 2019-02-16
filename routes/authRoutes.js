@@ -99,7 +99,7 @@ module.exports = app => {
       console.log("callback is passed", req.user);
       const token = await tokenForUser(req.user);
       const queryToken = encodeURIComponent(token);
-      res.redirect(`/home/${token}`);
+      res.redirect(`/${token}`);
     }
   );
 
@@ -123,7 +123,7 @@ module.exports = app => {
       const queryToken = encodeURIComponent(token);
       //Facebook adds *_* at the end which will create problem with our token verification
       //so we are adding rr so that the token will be unchanged and *_* will be added to rr
-      res.redirect(`/home/${token}/rr`);
+      res.redirect(`/${token}/rr`);
     }
   );
   //We will make sure the token stored in the local storage is valid

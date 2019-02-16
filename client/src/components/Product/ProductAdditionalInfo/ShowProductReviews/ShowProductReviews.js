@@ -6,7 +6,11 @@ class ShowProductReviews extends Component {
   static contextType = ProductContext;
 
   renderProductReviews = () => {
-    if (this.context.reviews.length === 0) return;
+    if (this.context.reviews.length === 0)
+      return (
+        <p className="ShowProductReviews__text">There are no reviews to show</p>
+      );
+
     return this.context.reviews.map(review => (
       <SingleProductReview
         name={review.createdBy.fullname}

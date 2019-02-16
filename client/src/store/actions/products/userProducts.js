@@ -3,7 +3,10 @@ import {
   UPDATE_FEATURED_PRODUCTS,
   UPDATE_POPULAR_PRODUCTS,
   UPDATE_RECENT_PRODUCTS,
-  UPDATE_PRODUCTS_PER_CATEGORY
+  UPDATE_PRODUCTS_PER_CATEGORY,
+  UPDATE_PRODUCTS_OF_CATEGORIES_SCROLLABLE,
+  UPDATE_PRODUCTS_OF_CATEGORIES,
+  RESET_PRODUCTS_OF_CATEGORIES
 } from "../../types";
 
 export const fetchFeaturedProducts = () => async dispatch => {
@@ -45,6 +48,7 @@ export const fetchRecentProducts = () => async dispatch => {
   }
 };
 
+//It fetches a single product
 export const fetchProductPerCategory = categoryId => async dispatch => {
   try {
     const res = await axios.get(`/api/product/per-category/${categoryId}`);
@@ -56,4 +60,36 @@ export const fetchProductPerCategory = categoryId => async dispatch => {
   } catch (error) {
     console.log(error);
   }
+};
+
+//It fetches all the needed products of a particular category
+export const fetchProductsOfCategories = (
+  categoryId,
+  skip,
+  limit
+) => async dispatch => {
+  try {
+    const res = await axios.get(`/api/products/${categoryId}/${skip}/${limit}`);
+    console.log("fetch products of categories", res.data);
+
+    if (!res.data || res.data.length === 0) {
+      dispatch({
+        type: UPDATE_PRODUCTS_OF_CATEGORIES_SCROLLABLE,
+        payload: false
+      });
+    }
+
+    dispatch({
+      type: UPDATE_PRODUCTS_OF_CATEGORIES,
+      payload: res.data
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const resetProductsOfCategories = () => async dispatch => {
+  dispatch({
+    type: RESET_PRODUCTS_OF_CATEGORIES
+  });
 };

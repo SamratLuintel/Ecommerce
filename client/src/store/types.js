@@ -25,3 +25,9 @@ export const UPDATE_PRODUCTS_PER_CATEGORY = "update_products_per_category";
 
 export const UPDATE_CART_PRODUCT_AMOUNT = "update_cart_product_amount";
 export const DELETE_CART_ITEM = "delete_cart_item";
+
+export const UPDATE_PRODUCTS_OF_CATEGORIES = "update_products_of_categories";
+export const UPDATE_PRODUCTS_OF_CATEGORIES_SCROLLABLE =
+  "update_products_of_categories_scrollable";
+
+export const RESET_PRODUCTS_OF_CATEGORIES = "reset_products_of_categories";

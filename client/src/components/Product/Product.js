@@ -7,6 +7,10 @@ import ProductContext from "./productContext";
 import ProductGallery from "./ProductGallery/ProductGallery";
 import ProductShortDescription from "./ProductShortDescription/ProductShortDescription";
 import ProductAdditionalInfo from "./ProductAdditionalInfo/ProductAdditionalInfo";
+import {
+  NotificationContainer,
+  NotificationManager
+} from "react-notifications";
 
 class Product extends Component {
   state = {
@@ -100,6 +104,9 @@ class Product extends Component {
     return true;
   };
   onAddProductToCart = async () => {
+    if (!this.props.profile.authenticated) {
+      return NotificationManager.info("you need to login to shop");
+    }
     const product = this.props.match.params.id;
     const amount = this.state.amount;
     const data = { product, amount };
@@ -140,6 +147,7 @@ class Product extends Component {
               </div>
             </div>
             <ProductAdditionalInfo />
+            <NotificationContainer />
           </div>
         </div>
       </ProductContext.Provider>

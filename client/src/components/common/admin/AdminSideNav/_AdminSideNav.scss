@@ -58,3 +58,24 @@
   font-weight: 700;
   background-color: #1f2229;
 }
+
+.AdminSideNav__expand-left-nav-btn {
+  background-color: #202225;
+  color: #fff;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  border-top-right-radius: 100%;
+  border-bottom-right-radius: 100%;
+  position: fixed;
+  top: 10%;
+  left: 0;
+  cursor: pointer;
+  z-index: 9999;
+  display: none;
+}
+
+.AdminSideNav__expand-left-nav-btn--visible {
+  display: block;
+}

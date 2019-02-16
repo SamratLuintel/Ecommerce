@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import FadeIn from "react-fade-in";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 
 class CategoriesDropDown extends Component {
   state = {
@@ -29,11 +30,18 @@ class CategoriesDropDown extends Component {
     }
   };
 
+  redirectToCategoryPage = id => {
+    this.props.history.push(`/categories/${id}`);
+  };
+
   renderCategoriesList = () => {
     if (!this.props.categories.fetched) return;
 
     return this.props.categories.lists.map(category => (
-      <div className="CategoriesDropDown__menu-item">
+      <div
+        className="CategoriesDropDown__menu-item"
+        onClick={() => this.redirectToCategoryPage(category._id)}
+      >
         <i className={category.icon} />
         <span> {category.title}</span>
       </div>
@@ -61,4 +69,4 @@ class CategoriesDropDown extends Component {
 const mapStateToProps = state => ({
   categories: state.categories
 });
-export default connect(mapStateToProps)(CategoriesDropDown);
+export default withRouter(connect(mapStateToProps)(CategoriesDropDown));

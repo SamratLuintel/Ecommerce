@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Home from "./components/Home/Home";
-import { Route, withRouter } from "react-router-dom";
+import { Route, withRouter, Switch } from "react-router-dom";
 import { fetchUser } from "./store/actions/profile/profile";
 import { connect } from "react-redux";
 import AddCategory from "./components/admin/AddCategory/AddCategory";
@@ -14,6 +14,8 @@ import Product from "./components/Product/Product";
 import { fetchCart } from "./store/actions/carts/carts";
 import Checkout from "./components/Checkout/Checkout";
 import AdminDashboard from "./components/admin/AdminDashboard/AdminDashboard";
+import Categories from "./components/Categories/Categories";
+import PrivateRoute from "./hoc/PrivateRoute";
 
 class App extends Component {
   componentDidMount = async () => {
@@ -37,7 +39,6 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Route path="/home/:token?" component={Home} />
         {/* All the admin routes */}
         <Route exact path="/admin/add-category" component={AddCategory} />
         <Route exact path="/admin/add-product" component={AddProduct} />
@@ -49,8 +50,14 @@ class App extends Component {
 
         {/* General User Routes */}
         <Route exact path="/products" component={Products} />
+
+        <Route exact path="/categories/:id" component={Categories} />
+
         <Route exact path="/product/:id" component={Product} />
-        <Route exact path="/checkout" component={Checkout} />
+        <Switch>
+          <Route exact path="/checkout" component={Checkout} />
+          <Route exact path="/:token?" component={Home} />
+        </Switch>
       </div>
     );
   }

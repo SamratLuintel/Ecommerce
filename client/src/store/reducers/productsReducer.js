@@ -4,7 +4,10 @@ import {
   UPDATE_FEATURED_PRODUCTS,
   UPDATE_POPULAR_PRODUCTS,
   UPDATE_PRODUCTS_PER_CATEGORY,
-  UPDATE_RECENT_PRODUCTS
+  UPDATE_RECENT_PRODUCTS,
+  UPDATE_PRODUCTS_OF_CATEGORIES,
+  UPDATE_PRODUCTS_OF_CATEGORIES_SCROLLABLE,
+  RESET_PRODUCTS_OF_CATEGORIES
 } from "../types";
 
 const initialState = {
@@ -26,6 +29,13 @@ const initialState = {
   recent: {
     fetched: false,
     lists: []
+  },
+
+  //Fetch the products when the user is visiting categories page
+  categories: {
+    fetched: false,
+    lists: [],
+    scrollable: true
   }
 };
 
@@ -45,6 +55,7 @@ export default (state = initialState, { type, payload }) => {
 
     case UPDATE_RECENT_PRODUCTS:
       return { ...state, recent: { fetched: true, lists: payload } };
+
     case UPDATE_PRODUCTS_PER_CATEGORY:
       return {
         ...state,
@@ -54,6 +65,33 @@ export default (state = initialState, { type, payload }) => {
         }
       };
 
+    case UPDATE_PRODUCTS_OF_CATEGORIES:
+      return {
+        ...state,
+        categories: {
+          ...state.categories,
+          lists: [...state.categories.lists, ...payload]
+        }
+      };
+
+    case UPDATE_PRODUCTS_OF_CATEGORIES_SCROLLABLE:
+      return {
+        ...state,
+        categories: {
+          ...state.categories,
+          scrollable: false
+        }
+      };
+
+    case RESET_PRODUCTS_OF_CATEGORIES:
+      return {
+        ...state,
+        categories: {
+          fetched: false,
+          lists: [],
+          scrollable: true
+        }
+      };
     default:
       return state;
   }

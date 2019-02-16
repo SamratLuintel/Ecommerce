@@ -92,4 +92,23 @@ module.exports = app => {
       });
     }
   });
+
+  //Fetch products of particular category
+  app.get(`/api/products/:id/:skip/:limit`, async (req, res) => {
+    try {
+      const skipNumber = parseInt(req.params.skip);
+      const limitNumber = parseInt(req.params.limit);
+
+      console.log("Product of partcular category", req.params.id);
+      const products = await Product.find({ category: req.params.id })
+        .sort({ createdOn: -1 })
+        .skip(skipNumber)
+        .limit(limitNumber);
+
+      res.status(200).send(products);
+    } catch (error) {
+      console.log(error);
+      res.status(422).send(error);
+    }
+  });
 };

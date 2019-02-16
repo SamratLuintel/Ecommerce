@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import classnames from "classnames";
+import { withRouter } from "react-router-dom";
 
 class ProductItemCard extends Component {
   state = {
@@ -13,6 +14,10 @@ class ProductItemCard extends Component {
 
   onHoveredOff = () => {
     this.setState({ hovered: false });
+  };
+
+  redirectToProductPage = () => {
+    this.props.history.push(`/product/${this.props.id}`);
   };
   render() {
     const { props } = this;
@@ -41,7 +46,10 @@ class ProductItemCard extends Component {
             <div className="ProductItemCard__swap-wrap">
               <div className={swapElmClass}>
                 <div className="ProductItemCard__price">${props.price}</div>
-                <div className="ProductItemCard__view-product">
+                <div
+                  className="ProductItemCard__view-product"
+                  onClick={this.redirectToProductPage}
+                >
                   View Product
                 </div>
               </div>
@@ -52,4 +60,4 @@ class ProductItemCard extends Component {
     );
   }
 }
-export default ProductItemCard;
+export default withRouter(ProductItemCard);
