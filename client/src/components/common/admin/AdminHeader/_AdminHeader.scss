@@ -21,6 +21,10 @@
   font-size: 1.3125rem;
   cursor: pointer;
   display: inline-block;
+
+  &:hover {
+    color: $primary-green;
+  }
 }
 
 .AdminHeader__user {

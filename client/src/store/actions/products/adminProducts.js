@@ -1,5 +1,9 @@
 import axios from "axios";
-import { UPDATE_PRODUCTS, UPDATE_EDIT_PRODUCT } from "../../types";
+import {
+  UPDATE_PRODUCTS,
+  UPDATE_EDIT_PRODUCT,
+  RESET_EDIT_PRODUCT
+} from "../../types";
 
 export const uploadProductImages = images => {};
 
@@ -49,6 +53,12 @@ export const updateProduct = product => async dispatch => {
   } catch (error) {
     console.log(error);
   }
+};
+
+export const resetEditProduct = () => async dispatch => {
+  dispatch({
+    type: RESET_EDIT_PRODUCT
+  });
 };
 
 //Delete the product

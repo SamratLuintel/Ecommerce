@@ -4,6 +4,7 @@ import InfiniteCategories from "./InfiniteCategories/InfiniteCategories";
 import { connect } from "react-redux";
 import { resetProductsOfCategories } from "../../store/actions/products/userProducts";
 import { withRouter } from "react-router-dom";
+import ApplicationSideNav from "../common/ApplicationSideNav/ApplicationSideNav";
 
 class Categories extends Component {
   render() {
@@ -21,6 +22,7 @@ class Categories extends Component {
     return (
       <div className="Categories">
         <ApplicationHeader />
+        <ApplicationSideNav />
         <div className="container">
           <div className="Categories__header">{name}</div>
           <InfiniteCategories id={this.props.match.params.id} />

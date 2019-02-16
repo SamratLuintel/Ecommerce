@@ -4,6 +4,7 @@ import { fetchPublicProducts } from "../../store/actions/public/publicProducts/p
 import CategoriesFilter from "./CategoriesFilter/CategoriesFilter";
 import ProductCard from "./ProductCard/ProductCard";
 import ApplicationHeader from "../common/ApplicationHeader/ApplicationHeader";
+import ApplicationSideNav from "../common/ApplicationSideNav/ApplicationSideNav";
 
 class Products extends Component {
   componentDidMount = () => {
@@ -37,6 +38,7 @@ class Products extends Component {
     return (
       <div className="Products">
         <ApplicationHeader />
+        <ApplicationSideNav />
         <CategoriesFilter />
         {this.renderProducts()}
       </div>

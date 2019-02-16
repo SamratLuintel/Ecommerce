@@ -5,6 +5,10 @@ import AdminSideNav from "../../common/admin/AdminSideNav/AdminSideNav";
 import AdminProduct from "./AdminProduct/AdminProduct";
 import AdminHeader from "../../common/admin/AdminHeader/AdminHeader";
 import AdminProductsHeader from "./AdminProductsHeader/AdminProductsHeader";
+import {
+  NotificationContainer,
+  NotificationManager
+} from "react-notifications";
 
 class AdminProducts extends Component {
   state = { nav: "admin-products" };
@@ -20,11 +24,13 @@ class AdminProducts extends Component {
       this.props.fetchAdminProducts();
     }
   };
+
   renderProducts = () => {
     if (this.props.products.fetched && this.props.profile.authenticated) {
       return this.props.products.lists.map(product => {
         return (
           <AdminProduct
+            showDeletedMessage={this.showDeletedMessage}
             title={product.title}
             price={product.price}
             desc={product.desc}
@@ -35,6 +41,10 @@ class AdminProducts extends Component {
         );
       });
     }
+  };
+
+  showDeletedMessage = () => {
+    NotificationManager.info("Item have been successfully deleted");
   };
   render() {
     return (
@@ -49,6 +59,7 @@ class AdminProducts extends Component {
             <AdminProductsHeader />
             {this.renderProducts()}
           </div>
+          <NotificationContainer />
         </div>
       </div>
     );

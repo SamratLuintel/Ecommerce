@@ -11,6 +11,7 @@ import {
   NotificationContainer,
   NotificationManager
 } from "react-notifications";
+import ApplicationSideNav from "../common/ApplicationSideNav/ApplicationSideNav";
 
 class Product extends Component {
   state = {
@@ -137,6 +138,7 @@ class Product extends Component {
       <ProductContext.Provider value={contextValue}>
         <div className="Product">
           <ApplicationHeader />
+          <ApplicationSideNav />
           <div className="container">
             <div className="row">
               <div className="col-md-6 col-sm-12">

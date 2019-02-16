@@ -1,4 +1,8 @@
-import { UPDATE_PRODUCTS, UPDATE_EDIT_PRODUCT } from "../../types";
+import {
+  UPDATE_PRODUCTS,
+  UPDATE_EDIT_PRODUCT,
+  RESET_EDIT_PRODUCT
+} from "../../types";
 
 const initialState = {
   //Below fetched variable is for the list of all pages on /pages route
@@ -20,6 +24,13 @@ export default (state = initialState, { type, payload }) => {
         editProduct: {
           fetched: true,
           ...payload
+        }
+      };
+    case RESET_EDIT_PRODUCT:
+      return {
+        ...state,
+        editProduct: {
+          fetched: false
         }
       };
     default:

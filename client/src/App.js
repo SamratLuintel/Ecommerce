@@ -44,10 +44,15 @@ class App extends Component {
         <Route exact path="/admin/add-category" component={AddCategory} />
         <Route exact path="/admin/add-product" component={AddProduct} />
         <Route exact path="/admin/edit-category/:id" component={EditCategory} />
-        <Route exact path="/admin/edit-product/:id" component={EditProduct} />
+
         <Route exact path="/admin/categories" component={AdminCategories} />
         <Route exact path="/admin/products" component={AdminProducts} />
         <Route exact path="/admin/dashboard" component={AdminDashboard} />
+        <PrivateRoute
+          exact
+          path="/admin/edit-product/:id"
+          component={EditProduct}
+        />
 
         {/* General User Routes */}
         <Route exact path="/products" component={Products} />

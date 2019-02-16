@@ -4,12 +4,14 @@ import { connect } from "react-redux";
 import ApplicationHeader from "../common/ApplicationHeader/ApplicationHeader";
 import CheckoutCart from "./CheckoutCart/CheckoutCart";
 import CartSummary from "./CartSummary/CartSummary";
+import ApplicationSideNav from "../common/ApplicationSideNav/ApplicationSideNav";
 
 class Checkout extends Component {
   render() {
     return (
       <div className="Checkout">
         <ApplicationHeader />
+        <ApplicationSideNav />
         <div className="container">
           <h1 className="Checkout__heading">Shopping Cart</h1>
           <div className="row">

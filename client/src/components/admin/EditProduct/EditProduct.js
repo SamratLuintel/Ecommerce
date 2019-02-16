@@ -10,10 +10,14 @@ import Select from "react-select";
 import AdminHeader from "../../common/admin/AdminHeader/AdminHeader";
 import AdminSideNav from "../../common/admin/AdminSideNav/AdminSideNav";
 import classnames from "classnames";
-
+import {
+  NotificationContainer,
+  NotificationManager
+} from "react-notifications";
 import {
   getEditProduct,
-  updateProduct
+  updateProduct,
+  resetEditProduct
 } from "../../../store/actions/products/adminProducts";
 import { fetchCategories } from "../../../store/actions/categories/userCategories";
 
@@ -30,6 +34,7 @@ class EditProduct extends Component {
     details: "",
     price: "",
     id: "",
+    saving: false,
     //contains the list of images fetched from server
     images: [],
     //Images which will be live previewed without being saved on any kind of database
@@ -64,12 +69,28 @@ class EditProduct extends Component {
   };
 
   componentDidMount = async () => {
+    console.log("Component did mount of edit product is called");
+
+    //In this condition both categories and products are not called
     if (
       this.props.profile.authenticated &&
       !this.props.categories.fetched &&
       !this.state.loaded
     ) {
       this.fetchCategoryAndEditProduct();
+    }
+
+    //In this categories already exist
+    //mostly the user has already visited this page before and
+    //just coming again
+    if (
+      this.props.profile.authenticated &&
+      this.props.categories.fetched &&
+      !this.state.loaded
+    ) {
+      const id = this.props.match.params.id;
+      await this.props.getEditProduct(id);
+      this.setState({ fetched: true, disabled: false });
     }
   };
 
@@ -93,8 +114,8 @@ class EditProduct extends Component {
   };
   onTitleChange = e => this.setState({ title: e.target.value, titleError: "" });
   onDescChange = e => this.setState({ desc: e.target.value, descError: "" });
-  onCategoryChange = e =>
-    this.setState({ category: e.target.value, categoryError: "" });
+  onCategoryChange = categoryValue =>
+    this.setState({ category: categoryValue, categoryError: "" });
   onPriceChange = e => this.setState({ price: e.target.value, priceError: "" });
   onDetailsChange = e => {
     const newDetails = e.editor.getData();
@@ -205,6 +226,18 @@ class EditProduct extends Component {
     ));
   };
 
+  selectedCategoryOption = () => {
+    const allOptions = this.renderCategoriesOptions();
+    let selectedOption;
+    if (!allOptions) return null;
+    allOptions.map(option => {
+      if (option.value === this.state.category) {
+        selectedOption = option;
+      }
+    });
+    return selectedOption;
+  };
+
   renderServerImages = () => {
     const rawURL = "https://res.cloudinary.com/samrat/image/upload/";
     return this.state.images.map((image, index) => {
@@ -222,6 +255,7 @@ class EditProduct extends Component {
   };
   onEditProduct = async () => {
     try {
+      this.setState({ saving: true });
       const uploadedImages = await this.saveUploadImages();
       const data = {
         title: this.state.title,
@@ -232,21 +266,25 @@ class EditProduct extends Component {
         id: this.state.id,
         images: [...this.state.images, ...uploadedImages]
       };
-      console.log(data.category);
+      NotificationManager.info("Product have been successfully saved");
       await this.props.updateProduct(data);
-      console.log("Product is successfuly saved");
+      this.setState({ saving: false });
     } catch (error) {
       this.setFormError(error);
     }
   };
 
+  componentWillUnmount = () => {
+    this.props.resetEditProduct();
+  };
   render() {
     const selectOptions = this.renderCategoriesOptions();
+    const selectedOption = this.selectedCategoryOption();
     return (
       <div className="EditProduct">
         <AdminSideNav />
         {/* Margin left of -260px */}
-        <div className="EditProduct__main-area">
+        <div className="admin-default-left-margin-mid">
           <AdminHeader />
           <div className="EditProduct__main-area__wrapper">
             <div className="EditProduct__main-area__content">
@@ -338,7 +376,7 @@ class EditProduct extends Component {
                   className="EditProduct__single-field__select"
                   id=""
                   onChange={this.onCategoryChange}
-                  value={this.state.category}
+                  value={selectedOption}
                   options={selectOptions}
                 />
                 {this.state.categoryError && (
@@ -374,12 +412,14 @@ class EditProduct extends Component {
               <button
                 className="EditProduct__btn EditProduct__btn--blue"
                 onClick={this.onEditProduct}
+                disabled={this.state.saving}
               >
                 Save Changes
               </button>
               <button className="EditProduct__btn">Cancel</button>
             </div>
           </div>
+          <NotificationContainer />
         </div>
       </div>
     );
@@ -394,5 +434,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { fetchCategories, getEditProduct, updateProduct }
+  { fetchCategories, getEditProduct, updateProduct, resetEditProduct }
 )(EditProduct);

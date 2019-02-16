@@ -21,7 +21,7 @@ module.exports = app => {
     const product = await new Product({
       title: req.body.title,
       desc: req.body.desc,
-      category: req.body.category,
+      category: req.body.category.value,
       price: req.body.price,
       details: req.body.details,
       images: req.body.images,
@@ -73,12 +73,14 @@ module.exports = app => {
         {
           title: req.body.title,
           desc: req.body.desc,
-          category: req.body.category,
+          category: req.body.category.value,
           price: req.body.price,
           images: req.body.images
         },
         { new: true }
       );
+
+      res.status(200).send(newProduct);
     } catch (err) {
       console.log(err);
     }

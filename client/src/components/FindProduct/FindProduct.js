@@ -7,6 +7,7 @@ import {
   resetSearchProducts
 } from "../../store/actions/products/userProducts";
 import ProductItemCard from "../common/Card/ProductItemCard/ProductItemCard";
+import ApplicationSideNav from "../common/ApplicationSideNav/ApplicationSideNav";
 
 class FindProduct extends Component {
   state = {
@@ -40,7 +41,7 @@ class FindProduct extends Component {
 
     return this.props.products.lists.map(product => {
       return (
-        <div className="col-md-2 col-sm-6">
+        <div className="col-md-3 col-sm-6">
           <ProductItemCard
             title={product.title}
             images={product.images}
@@ -74,6 +75,7 @@ class FindProduct extends Component {
     return (
       <div className="FindProduct">
         <ApplicationHeader />
+        <ApplicationSideNav />
         <div className="container">{content}</div>
       </div>
     );

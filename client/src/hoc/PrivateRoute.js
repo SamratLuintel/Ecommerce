@@ -54,4 +54,4 @@ const mapStateToProps = state => ({
   profile: state.profile
 });
 
-export default connect(mapStateToProps)(withRouter(PrivateRoute));
+export default withRouter(connect(mapStateToProps)(PrivateRoute));

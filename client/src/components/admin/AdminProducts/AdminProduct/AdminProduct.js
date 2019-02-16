@@ -13,21 +13,13 @@ class Product extends Component {
     this.props.history.push(`/admin/edit-product/${id}`);
   };
 
-  onDeletePage = async () => {
+  onDeleteProduct = async () => {
     const id = this.props.id;
     await this.props.deleteProduct(id);
+    this.props.showDeletedMessage();
     this.props.fetchAdminProducts();
   };
-  //   <tbody>
-  //   <tr>
-  //     <td>{props.title}</td>
-  //     <td>{props.price}</td>
-  //     <td>{props.category}</td>
-  //     {/*Display all the images here*/}
-  //     <td onClick={this.redirectToEditPage}>Edit</td>
-  //     <td onClick={this.onDeletePage}>Delete</td>
-  //   </tr>
-  // </tbody>
+
   render() {
     const { props } = this;
     const rawURL = "https://res.cloudinary.com/samrat/image/upload/";
@@ -35,10 +27,16 @@ class Product extends Component {
     return (
       <div className="AdminProduct">
         <div className="AdminProduct__header">
-          <div className="AdminProduct__header__left AdminProduct__header__btn AdminProduct__header__btn--blue">
+          <div
+            onClick={this.redirectToEditPage}
+            className="AdminProduct__header__left AdminProduct__header__btn AdminProduct__header__btn--blue"
+          >
             Edit Product
           </div>
-          <div className="AdminProduct__header__right AdminProduct__header__btn AdminProduct__header__btn--red">
+          <div
+            onClick={this.onDeleteProduct}
+            className="AdminProduct__header__right AdminProduct__header__btn AdminProduct__header__btn--red"
+          >
             Delete
           </div>
         </div>
