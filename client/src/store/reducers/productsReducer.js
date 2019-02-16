@@ -7,7 +7,9 @@ import {
   UPDATE_RECENT_PRODUCTS,
   UPDATE_PRODUCTS_OF_CATEGORIES,
   UPDATE_PRODUCTS_OF_CATEGORIES_SCROLLABLE,
-  RESET_PRODUCTS_OF_CATEGORIES
+  RESET_PRODUCTS_OF_CATEGORIES,
+  UPDATE_SEARCHED_PRODUCTS,
+  RESET_SEARCHED_PRODUCTS
 } from "../types";
 
 const initialState = {
@@ -36,6 +38,11 @@ const initialState = {
     fetched: false,
     lists: [],
     scrollable: true
+  },
+
+  searchedProducts: {
+    fetched: false,
+    lists: []
   }
 };
 
@@ -90,6 +97,25 @@ export default (state = initialState, { type, payload }) => {
           fetched: false,
           lists: [],
           scrollable: true
+        }
+      };
+
+    case UPDATE_SEARCHED_PRODUCTS:
+      return {
+        ...state,
+        searchedProducts: {
+          fetched: true,
+          lists: payload
+        }
+      };
+
+    case RESET_SEARCHED_PRODUCTS:
+      return {
+        ...state,
+        searchedProducts: {
+          ...state.searchedProducts,
+          fetched: false,
+          lists: []
         }
       };
     default:

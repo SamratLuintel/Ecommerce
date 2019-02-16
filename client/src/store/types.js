@@ -31,3 +31,6 @@ export const UPDATE_PRODUCTS_OF_CATEGORIES_SCROLLABLE =
   "update_products_of_categories_scrollable";
 
 export const RESET_PRODUCTS_OF_CATEGORIES = "reset_products_of_categories";
+
+export const UPDATE_SEARCHED_PRODUCTS = "update_searched_products";
+export const RESET_SEARCHED_PRODUCTS = "reset_searched_products";

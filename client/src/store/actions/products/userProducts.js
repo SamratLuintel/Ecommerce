@@ -6,7 +6,9 @@ import {
   UPDATE_PRODUCTS_PER_CATEGORY,
   UPDATE_PRODUCTS_OF_CATEGORIES_SCROLLABLE,
   UPDATE_PRODUCTS_OF_CATEGORIES,
-  RESET_PRODUCTS_OF_CATEGORIES
+  RESET_PRODUCTS_OF_CATEGORIES,
+  UPDATE_SEARCHED_PRODUCTS,
+  RESET_SEARCHED_PRODUCTS
 } from "../../types";
 
 export const fetchFeaturedProducts = () => async dispatch => {
@@ -91,5 +93,24 @@ export const fetchProductsOfCategories = (
 export const resetProductsOfCategories = () => async dispatch => {
   dispatch({
     type: RESET_PRODUCTS_OF_CATEGORIES
+  });
+};
+
+export const fetchProductBySearchText = text => async dispatch => {
+  try {
+    const res = await axios.get(`/api/products/find/${text}`);
+    console.log("Fetch products by search text", res.data);
+    dispatch({
+      type: UPDATE_SEARCHED_PRODUCTS,
+      payload: res.data
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const resetSearchProducts = () => async dispatch => {
+  dispatch({
+    type: RESET_SEARCHED_PRODUCTS
   });
 };

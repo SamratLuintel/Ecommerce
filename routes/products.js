@@ -111,4 +111,19 @@ module.exports = app => {
       res.status(422).send(error);
     }
   });
+
+  //Find products
+  app.get("/api/products/find/:searchText", async (req, res) => {
+    console.log("Search product have been called", req.params.searchText);
+    const regex = `^${req.params.searchText}`;
+    try {
+      const products = await Product.find({
+        title: { $regex: regex, $options: "i" }
+      });
+      console.log(products);
+      res.status(200).send(products);
+    } catch (err) {
+      console.log(err);
+    }
+  });
 };

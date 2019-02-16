@@ -15,6 +15,7 @@ import { fetchCart } from "./store/actions/carts/carts";
 import Checkout from "./components/Checkout/Checkout";
 import AdminDashboard from "./components/admin/AdminDashboard/AdminDashboard";
 import Categories from "./components/Categories/Categories";
+import FindProduct from "./components/FindProduct/FindProduct";
 import PrivateRoute from "./hoc/PrivateRoute";
 
 class App extends Component {
@@ -52,8 +53,9 @@ class App extends Component {
         <Route exact path="/products" component={Products} />
 
         <Route exact path="/categories/:id" component={Categories} />
-
         <Route exact path="/product/:id" component={Product} />
+
+        <Route exact path="/findproduct/:text" component={FindProduct} />
         <Switch>
           <Route exact path="/checkout" component={Checkout} />
           <Route exact path="/:token?" component={Home} />
