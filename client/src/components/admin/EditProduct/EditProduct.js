@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchAdminCategories } from "../../../store/actions/categories/adminCategories";
 import Dropzone from "react-dropzone";
-import keys from "../../../config/keys";
 import axios from "axios";
 import EditProductImage from "./EditProductImage/EditProductImage";
 import CKEditor from "react-ckeditor-component";
@@ -147,6 +146,7 @@ class EditProduct extends Component {
   //It creates a formData of all the uploaded images and saves it in the state
 
   handleUploadImages = images => {
+    const keys = this.props.keys;
     this.setState({ imagesError: "" });
     this.updateLocalImages(images);
     let imagesFormData = this.state.imagesFormData;
@@ -173,11 +173,18 @@ class EditProduct extends Component {
     const token = axios.defaults.headers.common["authorization"];
     //Deleting authorization header
     delete axios.defaults.headers.common["authorization"];
+    const cloudinaryName = this.props.keys.cloudinary
+      ? this.props.keys.cloudinary.cloudName
+      : "";
     const uploads = formDatas.map(formData => {
       return axios
-        .post("https://api.cloudinary.com/v1_1/samrat/image/upload", formData, {
-          headers: { "X-Requested-With": "XMLHttpRequest" }
-        })
+        .post(
+          `https://api.cloudinary.com/v1_1/${cloudinaryName}/image/upload`,
+          formData,
+          {
+            headers: { "X-Requested-With": "XMLHttpRequest" }
+          }
+        )
         .then(response => imagesId.push(response.data.public_id));
     });
     // We would use axios `.all()` method to perform concurrent image upload to cloudinary.
