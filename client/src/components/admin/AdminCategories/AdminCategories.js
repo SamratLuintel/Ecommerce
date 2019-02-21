@@ -38,30 +38,49 @@ class AdminCategories extends Component {
   };
 
   redirectToCreateCategory = () => {
-    this.props.history.push("/add-category");
+    this.props.history.push("/admin/add-category");
   };
 
   render() {
+    let content = (
+      <table className="AdminCategories__table">
+        <thead className="AdminCategories__header">
+          <tr className="AdminCategories__header__tr">
+            <th className="AdminCategories__header__item">Category Name</th>
+            <th className="AdminCategories__header__item">Icon</th>
+            <th className="AdminCategories__header__item">Edit</th>
+            <th className="AdminCategories__header__item">Delete</th>
+          </tr>
+        </thead>
+        <tbody> {this.renderCategories()}</tbody>
+      </table>
+    );
+
+    if (
+      this.props.categories.fetched &&
+      this.props.categories.lists.length === 0
+    ) {
+      console.log("Alternate categories condition is called");
+      content = <p>You have not created any categories</p>;
+    }
     return (
       <div className="AdminCategories">
         <AdminSideNav nav={this.state.nav} />
         {/* Margin left of 260px */}
         <div className="AdminCategories__main-area admin-default-left-margin-mid">
           <AdminHeader />
-          <button onClick={this.redirectToCreateCategory}>
-            Create A Category
-          </button>
-          <table className="AdminCategories__table">
-            <thead className="AdminCategories__header">
-              <tr className="AdminCategories__header__tr">
-                <th className="AdminCategories__header__item">Category Name</th>
-                <th className="AdminCategories__header__item">Icon</th>
-                <th className="AdminCategories__header__item">Edit</th>
-                <th className="AdminCategories__header__item">Delete</th>
-              </tr>
-            </thead>
-            <tbody> {this.renderCategories()}</tbody>
-          </table>
+          <div className="AdminCategories__main-area__content">
+            <div className="AdminCategories__create-btn-wrapper">
+              <button
+                className="AdminCategories__create-btn"
+                onClick={this.redirectToCreateCategory}
+              >
+                Create A Category
+              </button>
+            </div>
+
+            {content}
+          </div>
         </div>
       </div>
     );

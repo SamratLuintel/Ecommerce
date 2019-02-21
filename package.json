@@ -4,10 +4,12 @@
   "description": "",
   "main": "server.js",
   "scripts": {
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start:client": "npm run start --prefix client",
     "start:server": "nodemon server.js",
-    "start": "npm-run-all --parallel start:*"
+    "start-dev": "npm-run-all --parallel start:*",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "author": "",
   "license": "ISC",

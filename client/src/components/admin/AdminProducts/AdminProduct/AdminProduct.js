@@ -6,6 +6,7 @@ import {
   deleteProduct,
   fetchAdminProducts
 } from "../../../../store/actions/products/adminProducts";
+import moment from "moment";
 
 class Product extends Component {
   redirectToEditPage = () => {
@@ -22,7 +23,10 @@ class Product extends Component {
 
   render() {
     const { props } = this;
-    const rawURL = "https://res.cloudinary.com/samrat/image/upload/";
+    const cloudinaryName = this.props.keys.cloudinary
+      ? this.props.keys.cloudinary.cloudName
+      : "";
+    const rawURL = `https://res.cloudinary.com/${cloudinaryName}/image/upload/`;
     const imageURL = rawURL + props.images[0];
     return (
       <div className="AdminProduct">
@@ -59,7 +63,7 @@ class Product extends Component {
           </div>
           <div className="AdminProduct__body__details">
             <h6 className="AdminProduct__body__delivered-on">
-              Delivered on 21st December 2019
+              Created On {moment(props.createdOn).format("YYYY-MM-DD")}
             </h6>
             <p className="AdminProduct__body__text-muted">Brief Description</p>
           </div>
@@ -68,9 +72,14 @@ class Product extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  keys: state.profile.keys
+});
+
 export default withRouter(
   connect(
-    null,
+    mapStateToProps,
     { deleteProduct, fetchAdminProducts }
   )(Product)
 );

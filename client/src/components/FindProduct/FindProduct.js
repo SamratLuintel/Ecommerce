@@ -74,8 +74,8 @@ class FindProduct extends Component {
     }
     return (
       <div className="FindProduct">
-        <ApplicationHeader />
         <ApplicationSideNav />
+        <ApplicationHeader />
         <div className="container">{content}</div>
       </div>
     );

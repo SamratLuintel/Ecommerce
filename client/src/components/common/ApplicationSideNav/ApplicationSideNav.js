@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import ApplicationSideNavContext from "./applicationSideNavContext";
 import MainSideNav from "./MainSideNav/MainSideNav";
+import ApplicationHeaderContextProvider from "../ApplicationHeader/ApplicationHeaderContextProvider";
 
 class ApplicationSideNav extends Component {
   state = {

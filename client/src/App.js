@@ -17,10 +17,13 @@ import AdminDashboard from "./components/admin/AdminDashboard/AdminDashboard";
 import Categories from "./components/Categories/Categories";
 import FindProduct from "./components/FindProduct/FindProduct";
 import PrivateRoute from "./hoc/PrivateRoute";
+import ApplicationHeaderContextProvider from "./components/common/ApplicationHeader/ApplicationHeaderContextProvider";
+import { fetchKeys } from "./store/actions/profile/profileInfo";
 
 class App extends Component {
   componentDidMount = async () => {
     try {
+      this.props.fetchKeys();
       await this.props.fetchUser();
       this.props.fetchCart();
     } catch (error) {
@@ -39,33 +42,39 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        {/* All the admin routes */}
-        <Route exact path="/admin/add-category" component={AddCategory} />
-        <Route exact path="/admin/add-product" component={AddProduct} />
-        <Route exact path="/admin/edit-category/:id" component={EditCategory} />
+      <ApplicationHeaderContextProvider>
+        <div className="App">
+          {/* All the admin routes */}
+          <Route exact path="/admin/add-category" component={AddCategory} />
+          <Route exact path="/admin/add-product" component={AddProduct} />
+          <Route
+            exact
+            path="/admin/edit-category/:id"
+            component={EditCategory}
+          />
 
-        <Route exact path="/admin/categories" component={AdminCategories} />
-        <Route exact path="/admin/products" component={AdminProducts} />
-        <Route exact path="/admin/dashboard" component={AdminDashboard} />
-        <PrivateRoute
-          exact
-          path="/admin/edit-product/:id"
-          component={EditProduct}
-        />
+          <Route exact path="/admin/categories" component={AdminCategories} />
+          <Route exact path="/admin/products" component={AdminProducts} />
+          <Route exact path="/admin/dashboard" component={AdminDashboard} />
+          <PrivateRoute
+            exact
+            path="/admin/edit-product/:id"
+            component={EditProduct}
+          />
 
-        {/* General User Routes */}
-        <Route exact path="/products" component={Products} />
+          {/* General User Routes */}
+          <Route exact path="/products" component={Products} />
 
-        <Route exact path="/categories/:id" component={Categories} />
-        <Route exact path="/product/:id" component={Product} />
+          <Route exact path="/categories/:id" component={Categories} />
+          <Route exact path="/product/:id" component={Product} />
 
-        <Route exact path="/findproduct/:text" component={FindProduct} />
-        <Switch>
-          <Route exact path="/checkout" component={Checkout} />
-          <Route exact path="/:token?" component={Home} />
-        </Switch>
-      </div>
+          <Route exact path="/findproduct/:text" component={FindProduct} />
+          <Switch>
+            <Route exact path="/checkout" component={Checkout} />
+            <Route exact path="/:token?" component={Home} />
+          </Switch>
+        </div>
+      </ApplicationHeaderContextProvider>
     );
   }
 }
@@ -77,6 +86,6 @@ const mapStateToProps = state => ({
 export default withRouter(
   connect(
     mapStateToProps,
-    { fetchUser, fetchCart }
+    { fetchUser, fetchCart, fetchKeys }
   )(App)
 );

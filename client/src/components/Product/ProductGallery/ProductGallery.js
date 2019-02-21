@@ -1,12 +1,16 @@
 import React, { Component } from "react";
 import { Carousel } from "react-responsive-carousel";
 import ProductContext from "../productContext";
+import { connect } from "react-redux";
 
 class ProductGallery extends Component {
   static contextType = ProductContext;
 
   renderGalleryImages = () => {
-    const imageRawUrl = "https://res.cloudinary.com/samrat/image/upload/";
+    const cloudinaryName = this.props.keys.cloudinary
+      ? this.props.keys.cloudinary.cloudName
+      : "";
+    const imageRawUrl = `https://res.cloudinary.com/${cloudinaryName}/image/upload/`;
     return this.context.images.map(singleImage => {
       const imageUrl = `${imageRawUrl}${singleImage}`;
       return (
@@ -25,4 +29,8 @@ class ProductGallery extends Component {
     );
   }
 }
-export default ProductGallery;
+const mapStateToProps = state => ({
+  keys: state.profile.keys
+});
+
+export default connect(mapStateToProps)(ProductGallery);

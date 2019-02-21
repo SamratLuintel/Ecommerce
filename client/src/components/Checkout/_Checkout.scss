@@ -10,3 +10,18 @@
   margin-top: 20px;
   margin-bottom: 40px;
 }
+
+.Checkout__row {
+  .col-md-8 {
+    @media (max-width: 1200px) {
+      flex: 0 0 100%;
+      max-width: 100%;
+    }
+  }
+  .col-md-4 {
+    @media (max-width: 1200px) {
+      flex: 0 0 100%;
+      max-width: 100%;
+    }
+  }
+}

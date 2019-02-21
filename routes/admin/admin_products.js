@@ -9,7 +9,9 @@ module.exports = app => {
   //Lists all the products
   app.get("/api/admin-products", requireToken, async (req, res) => {
     console.log("Fetch products is called");
-    const products = await Product.find({ createdBy: req.user.id });
+    const products = await Product.find({
+      createdBy: req.user.id
+    }).sort({ createdOn: -1 });
     res.status(200).send(products);
   });
 

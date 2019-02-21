@@ -5,6 +5,10 @@ import {
   deleteCategory,
   fetchAdminCategories
 } from "../../../../store/actions/categories/adminCategories";
+import {
+  NotificationContainer,
+  NotificationManager
+} from "react-notifications";
 
 class AdminCategory extends Component {
   redirectToEditCategory = () => {
@@ -15,6 +19,7 @@ class AdminCategory extends Component {
   onDeleteCategory = async () => {
     const id = this.props.id;
     await this.props.deleteCategory(id);
+    NotificationManager.info("Item have been deleted");
     this.props.fetchAdminCategories();
   };
 
@@ -42,6 +47,7 @@ class AdminCategory extends Component {
             Delete
           </td>
         </tr>
+        <NotificationContainer />
       </div>
     );
   }

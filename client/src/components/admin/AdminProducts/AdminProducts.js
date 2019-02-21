@@ -27,6 +27,14 @@ class AdminProducts extends Component {
 
   renderProducts = () => {
     if (this.props.products.fetched && this.props.profile.authenticated) {
+      if (this.props.products.lists.length === 0) {
+        return (
+          <p className="AdminProducts__message">
+            You have not created any products
+          </p>
+        );
+      }
+
       return this.props.products.lists.map(product => {
         return (
           <AdminProduct
@@ -36,6 +44,7 @@ class AdminProducts extends Component {
             desc={product.desc}
             images={product.images}
             category={product.category}
+            createdOn={product.createdOn}
             id={product._id}
           />
         );

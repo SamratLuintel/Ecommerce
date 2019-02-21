@@ -4,9 +4,22 @@ import ApplicationHeaderContext from "../../applicationHeaderContext";
 import { logOutUser } from "../../../../../store/actions/profile/profile";
 import { withRouter } from "react-router-dom";
 import ReactTooltip from "react-tooltip";
+import {
+  NotificationContainer,
+  NotificationManager
+} from "react-notifications";
 
 class HeaderControlBlock extends Component {
   static contextType = ApplicationHeaderContext;
+
+  onLogoutClick = async () => {
+    try {
+      await this.props.logOutUser(this.props.history);
+      NotificationManager.info("You have successfully logged out");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   //this button is set dynamically
   logInOrLogOutBtn = () => {
@@ -16,7 +29,7 @@ class HeaderControlBlock extends Component {
         <div
           className="HeaderControlBlock__action-btn"
           data-tip="Logout"
-          onClick={() => this.props.logOutUser(this.props.history)}
+          onClick={this.onLogoutClick}
         >
           <i className="fas fa-sign-out-alt" />
         </div>
@@ -78,6 +91,7 @@ class HeaderControlBlock extends Component {
         </div>
         {this.renderAdmin()}
         {this.logInOrLogOutBtn()}
+        <NotificationContainer />
       </div>
     );
   }

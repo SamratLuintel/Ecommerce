@@ -15,12 +15,9 @@ require("./models/carts");
 require("./services/passport");
 
 //Connect to Mongo DB
-mongoose.connect(
-  keys.mongoURI,
-  () => {
-    console.log("Connected to mongo server");
-  }
-);
+mongoose.connect(keys.mongoURI, () => {
+  console.log("Connected to mongo server");
+});
 
 //Initialize passport
 app.use(passport.initialize());
@@ -39,6 +36,20 @@ require("./routes/products")(app);
 require("./routes/pages")(app);
 require("./routes/categories")(app);
 require("./routes/carts")(app);
+require("./routes/profileInfo")(app);
+
+if (process.env.NODE_ENV === "production") {
+  // Express will serve up production assets
+  // if not https redirect to https unless logging in using OAuth
+  app.use(express.static("client/build"));
+
+  const path = require("path");
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  });
+}
+
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
   console.log("The server is listening to the port", port);

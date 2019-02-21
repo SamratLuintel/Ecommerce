@@ -7,6 +7,14 @@
   text-align: center;
   position: relative;
   overflow: hidden;
+
+  @media (max-width: 510px) {
+    width: 370px;
+  }
+
+  @media (max-width: 400px) {
+    width: 100%;
+  }
 }
 
 .LogInModal__cross {

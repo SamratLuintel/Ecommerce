@@ -4,6 +4,7 @@ const Category = mongoose.model("categories");
 const ValidateCategory = require("../../utils/validation/category-validation");
 
 const requireToken = passport.authenticate("jwt", { session: false });
+
 module.exports = app => {
   //Create a new category
   app.post("/api/add-category", requireToken, async (req, res) => {

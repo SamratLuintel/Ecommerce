@@ -7,6 +7,10 @@
   text-align: center;
   position: relative;
   overflow: hidden;
+
+  @media (max-width: 510px) {
+    width: 370px;
+  }
 }
 
 .SignUpModal__cross {

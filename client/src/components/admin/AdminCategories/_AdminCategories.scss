@@ -6,12 +6,15 @@
   min-height: 100vh;
 }
 
-.AdminCategories__main-area {
+.AdminCategories__main-area__content {
+  padding: 2.2rem;
+  background-color: #f4f5fa;
+  margin-top: 50px;
 }
 
 .AdminCategories__table {
   margin: 0 auto;
-  margin-top: 60px;
+  margin-top: 10px;
   box-sizing: border-box;
   width: 90%;
   background-color: #fff;
@@ -34,4 +37,25 @@
     flex-basis: 33.37%;
     text-align: left;
   }
+}
+.AdminCategories__create-btn-wrapper {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.AdminCategories__create-btn {
+  border-color: #168dee !important;
+  background-color: #1e9ff2 !important;
+  color: #ffffff;
+  font-weight: 400;
+  cursor: pointer;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  user-select: none;
+  border: 1px solid transparent;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  line-height: 1.25;
+  border-radius: 0.25rem;
 }

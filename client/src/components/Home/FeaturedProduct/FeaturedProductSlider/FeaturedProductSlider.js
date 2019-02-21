@@ -13,9 +13,10 @@ class FeaturedProductSlider extends Component {
 
     const length = featuredProducts.lists.length;
     const productIndex = Math.floor(Math.random() * length);
-
-    console.log("Product index from featured Product is", productIndex);
-    const imageRawUrl = "https://res.cloudinary.com/samrat/image/upload/";
+    const cloudinaryName = this.props.keys.cloudinary
+      ? this.props.keys.cloudinary.cloudName
+      : "";
+    const imageRawUrl = `https://res.cloudinary.com/${cloudinaryName}/image/upload/`;
     const product = featuredProducts.lists[productIndex];
 
     //We will trust on our backend that the product will have two image
@@ -67,7 +68,8 @@ class FeaturedProductSlider extends Component {
 }
 
 const mapStateToProps = state => ({
-  featuredProducts: state.products.featured
+  featuredProducts: state.products.featured,
+  keys: state.profile.keys
 });
 
 export default connect(mapStateToProps)(FeaturedProductSlider);

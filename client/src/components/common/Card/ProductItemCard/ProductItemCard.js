@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import classnames from "classnames";
 import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
 
 class ProductItemCard extends Component {
   state = {
@@ -21,7 +22,10 @@ class ProductItemCard extends Component {
   };
   render() {
     const { props } = this;
-    const rawImageUrl = "https://res.cloudinary.com/samrat/image/upload/";
+    const cloudinaryName = this.props.keys.cloudinary
+      ? this.props.keys.cloudinary.cloudName
+      : "";
+    const rawImageUrl = `https://res.cloudinary.com/${cloudinaryName}/image/upload/`;
 
     let imageUrl = `${rawImageUrl}${props.images[0]}`;
     if (this.state.hovered) {
@@ -42,7 +46,12 @@ class ProductItemCard extends Component {
             <img src={imageUrl} className="ProductItemCard__image" alt="" />
           </div>
           <div className="ProductItemCard__item-details">
-            <div className="ProductItemCard__title">{props.title}</div>
+            <div
+              onClick={this.redirectToProductPage}
+              className="ProductItemCard__title"
+            >
+              {props.title}
+            </div>
             <div className="ProductItemCard__swap-wrap">
               <div className={swapElmClass}>
                 <div className="ProductItemCard__price">${props.price}</div>
@@ -60,4 +69,8 @@ class ProductItemCard extends Component {
     );
   }
 }
-export default withRouter(ProductItemCard);
+
+const mapStateToProps = state => ({
+  keys: state.profile.keys
+});
+export default withRouter(connect(mapStateToProps)(ProductItemCard));

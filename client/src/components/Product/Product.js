@@ -112,6 +112,7 @@ class Product extends Component {
     const amount = this.state.amount;
     const data = { product, amount };
     await this.props.addProductToCart(data);
+    NotificationManager.info("Item have been added to cart");
     console.log("Add Product to card finished");
     this.props.fetchCart();
   };
@@ -137,8 +138,8 @@ class Product extends Component {
     return (
       <ProductContext.Provider value={contextValue}>
         <div className="Product">
-          <ApplicationHeader />
           <ApplicationSideNav />
+          <ApplicationHeader />
           <div className="container">
             <div className="row">
               <div className="col-md-6 col-sm-12">

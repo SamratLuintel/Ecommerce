@@ -2,6 +2,10 @@ import React, { Component } from "react";
 import CheckoutItem from "./CheckoutItem/CheckoutItem";
 import { connect } from "react-redux";
 import { saveCart } from "../../../store/actions/carts/carts";
+import {
+  NotificationContainer,
+  NotificationManager
+} from "react-notifications";
 
 class CheckoutCart extends Component {
   renderCartItems = () => {
@@ -9,8 +13,11 @@ class CheckoutCart extends Component {
       return <p>There are no items to show</p>;
 
     return this.props.carts.items.map((item, index) => {
-      const imageRawUrl = "https://res.cloudinary.com/samrat/image/upload/";
-      const imageUrl = `${imageRawUrl}${item.product.images[0]}`;
+      const cloudinaryName = this.props.keys.cloudinary
+        ? this.props.keys.cloudinary.cloudName
+        : "";
+      const rawImageUrl = `https://res.cloudinary.com/${cloudinaryName}/image/upload/`;
+      const imageUrl = `${rawImageUrl}${item.product.images[0]}`;
       return (
         <CheckoutItem
           index={index}
@@ -23,10 +30,15 @@ class CheckoutCart extends Component {
     });
   };
 
-  onSaveCart = () => {
+  onSaveCart = async () => {
     const items = this.props.carts.items;
     const cartId = this.props.carts.id;
-    this.props.saveCart(items, cartId);
+    try {
+      await this.props.saveCart(items, cartId);
+      NotificationManager.info("Cart have been updated");
+    } catch (error) {
+      console.log(error);
+    }
   };
   render() {
     return (
@@ -46,13 +58,15 @@ class CheckoutCart extends Component {
         <div onClick={this.onSaveCart} className="CheckoutCart__save-btn">
           SAVE CART
         </div>
+        <NotificationContainer />
       </div>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  carts: state.carts
+  carts: state.carts,
+  keys: state.profile.keys
 });
 export default connect(
   mapStateToProps,

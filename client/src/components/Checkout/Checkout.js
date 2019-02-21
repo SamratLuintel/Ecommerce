@@ -10,11 +10,12 @@ class Checkout extends Component {
   render() {
     return (
       <div className="Checkout">
-        <ApplicationHeader />
         <ApplicationSideNav />
+        <ApplicationHeader />
+
         <div className="container">
           <h1 className="Checkout__heading">Shopping Cart</h1>
-          <div className="row">
+          <div className="row Checkout__row">
             <div className="col-md-8">
               <CheckoutCart />
             </div>

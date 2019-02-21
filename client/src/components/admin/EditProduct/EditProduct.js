@@ -239,7 +239,8 @@ class EditProduct extends Component {
   };
 
   renderServerImages = () => {
-    const rawURL = "https://res.cloudinary.com/samrat/image/upload/";
+    const cloudName = this.props.profile.keys.cloudinary.cloudName;
+    const rawURL = `https://res.cloudinary.com/${cloudName}/image/upload/`;
     return this.state.images.map((image, index) => {
       const imageURL = rawURL + image;
       console.log("From render server images", imageURL);
@@ -428,6 +429,7 @@ class EditProduct extends Component {
 
 const mapStateToProps = state => ({
   profile: state.profile,
+  keys: state.profile.keys,
   categories: state.categories,
   editProduct: state.adminProducts.editProduct
 });

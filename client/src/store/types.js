@@ -36,3 +36,4 @@ export const UPDATE_SEARCHED_PRODUCTS = "update_searched_products";
 export const RESET_SEARCHED_PRODUCTS = "reset_searched_products";
 
 export const RESET_EDIT_PRODUCT = "reset_edit_product";
+export const UPDATE_KEYS = "update_keys";

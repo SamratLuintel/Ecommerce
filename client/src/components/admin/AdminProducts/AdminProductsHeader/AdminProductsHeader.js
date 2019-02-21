@@ -1,12 +1,20 @@
 import React from "react";
+import { withRouter } from "react-router-dom";
 
 const AdminProductsHeader = props => {
+  const redirectToCreateProduct = () => {
+    props.history.push("/admin/add-product");
+  };
+
   return (
     <div className="AdminProductsHeader">
       <div className="AdminProductsHeader__content">
         <h3 className="AdminProductsHeader__content__title">
           Order
-          <span className="AdminProductHeader__content__create-product-btn">
+          <span
+            onClick={redirectToCreateProduct}
+            className="AdminProductHeader__content__create-product-btn"
+          >
             Create Product
           </span>
         </h3>
@@ -18,4 +26,4 @@ const AdminProductsHeader = props => {
   );
 };
 
-export default AdminProductsHeader;
+export default withRouter(AdminProductsHeader);

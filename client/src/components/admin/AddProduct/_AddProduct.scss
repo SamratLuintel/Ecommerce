@@ -118,6 +118,12 @@ $input-label-width: 100px;
   padding-top: 10px;
 }
 
+.AddProduct__create-btn-wrapper {
+  display: flex;
+  margin-top: 50px;
+  align-items: center;
+}
+
 .AddProduct__create-btn {
   background-color: $primary-blue;
   display: inline-block;
@@ -127,11 +133,15 @@ $input-label-width: 100px;
   vertical-align: middle;
   user-select: none;
   border: 1px solid transparent;
-  margin-top: 50px;
+
   padding: 1rem 2rem;
   font-size: 0.875rem;
   color: #fff;
   line-height: 1.25;
   border-radius: 0.25rem;
   cursor: pointer;
+}
+
+.AddProduct__loading {
+  margin-left: 15px;
 }

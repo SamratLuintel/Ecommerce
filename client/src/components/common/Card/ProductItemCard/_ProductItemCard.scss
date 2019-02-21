@@ -45,6 +45,10 @@
   text-align: center;
 }
 
+.ProductItemCard__title {
+  cursor: pointer;
+}
+
 .ProductItemCard__price {
   height: 40px;
   line-height: 40px;

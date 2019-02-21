@@ -21,8 +21,9 @@ class Categories extends Component {
     }
     return (
       <div className="Categories">
-        <ApplicationHeader />
         <ApplicationSideNav />
+        <ApplicationHeader />
+
         <div className="container">
           <div className="Categories__header">{name}</div>
           <InfiniteCategories id={this.props.match.params.id} />

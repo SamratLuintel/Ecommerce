@@ -1,16 +1,23 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Dropzone from "react-dropzone";
-import keys from "../../../config/keys";
 import axios from "axios";
 import AddProductImage from "./AddProductImage/AddProductImage";
-import { addProduct } from "../../../store/actions/products/adminProducts";
+import {
+  addProduct,
+  fetchAdminProducts
+} from "../../../store/actions/products/adminProducts";
 import CKEditor from "react-ckeditor-component";
 import AdminHeader from "../../common/admin/AdminHeader/AdminHeader";
 import AdminSideNav from "../../common/admin/AdminSideNav/AdminSideNav";
 import Select from "react-select";
 import { fetchCategories } from "../../../store/actions/categories/userCategories";
 import classnames from "classnames";
+import {
+  NotificationContainer,
+  NotificationManager
+} from "react-notifications";
+import { ClipLoader } from "react-spinners";
 
 class AddProduct extends Component {
   state = {
@@ -31,6 +38,7 @@ class AddProduct extends Component {
     descError: "",
     imagesError: "",
     detailsError: "",
+    saving: false,
     nav: "add-product"
   };
 
@@ -95,6 +103,7 @@ class AddProduct extends Component {
     this.updateLocalImages(images);
     let imagesFormData = this.state.imagesFormData;
     console.log(imagesFormData);
+    const keys = this.props.profile.keys;
     images.map(image => {
       // our formdata
       const formData = new FormData();
@@ -117,11 +126,18 @@ class AddProduct extends Component {
     const token = axios.defaults.headers.common["authorization"];
     //Deleting authorization header
     delete axios.defaults.headers.common["authorization"];
+    const cloudinaryName = this.props.keys.cloudinary
+      ? this.props.keys.cloudinary.cloudName
+      : "";
     const uploads = formDatas.map(formData => {
       return axios
-        .post("https://api.cloudinary.com/v1_1/samrat/image/upload", formData, {
-          headers: { "X-Requested-With": "XMLHttpRequest" }
-        })
+        .post(
+          `https://api.cloudinary.com/v1_1/${cloudinaryName}/image/upload`,
+          formData,
+          {
+            headers: { "X-Requested-With": "XMLHttpRequest" }
+          }
+        )
         .then(response => imagesId.push(response.data.public_id));
     });
     // We would use axios `.all()` method to perform concurrent image upload to cloudinary.
@@ -167,6 +183,7 @@ class AddProduct extends Component {
 
   onCreateProduct = async () => {
     try {
+      this.setState({ saving: true });
       const images = await this.saveUploadImages();
       const data = {
         title: this.state.title,
@@ -179,11 +196,29 @@ class AddProduct extends Component {
       console.log(data.category);
       await this.props.addProduct(data);
       console.log("Product is successfuly created");
+      this.setState({ saving: false });
+      NotificationManager.info("Product have been successfully created");
+      this.resetProductState();
+      this.props.fetchAdminProducts();
     } catch (error) {
       this.setFormError(error);
     }
   };
 
+  resetProductState = () => {
+    this.setState({
+      title: "",
+      //Short description of the product
+      desc: "",
+      //In depth info of the product
+      details: "",
+      category: "",
+      price: "",
+      //Images which will be live previewed without being saved on any kind of database
+      localImages: [],
+      imagesFormData: []
+    });
+  };
   render() {
     const selectOptions = this.renderCategoriesOptions();
     return (
@@ -312,14 +347,28 @@ class AddProduct extends Component {
                   {this.state.imagesError}
                 </p>
               )}
-              <button
-                className="AddProduct__create-btn"
-                onClick={this.onCreateProduct}
-              >
-                Create a Product
-              </button>
+              <div className="AddProduct__create-btn-wrapper">
+                <button
+                  className="AddProduct__create-btn"
+                  onClick={this.onCreateProduct}
+                >
+                  {" "}
+                  Create a Product{" "}
+                </button>
+                {this.state.saving && (
+                  <div className="AddProduct__loading">
+                    <ClipLoader
+                      sizeUnit={"px"}
+                      size={23}
+                      color={"#00bcd1"}
+                      loading={true}
+                    />
+                  </div>
+                )}
+              </div>
             </div>
           </div>
+          <NotificationContainer />
         </div>
       </div>
     );
@@ -328,10 +377,11 @@ class AddProduct extends Component {
 
 const mapStateToProps = state => ({
   profile: state.profile,
+  keys: state.profile.keys,
   categories: state.categories
 });
 
 export default connect(
   mapStateToProps,
-  { fetchCategories, addProduct }
+  { fetchCategories, addProduct, fetchAdminProducts }
 )(AddProduct);

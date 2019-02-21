@@ -43,7 +43,10 @@ export const getEditCategory = id => async dispatch => {
 //Updates the category
 export const updateCategory = category => async dispatch => {
   try {
-    const res = await axios.post(`/api/category/${category.id}`, category);
+    const res = await axios.post(
+      `/api/admin-category/${category.id}`,
+      category
+    );
     console.log("Update category successfully finished");
     dispatch({
       type: UPDATE_EDIT_CATEGORY,
@@ -59,7 +62,7 @@ export const updateCategory = category => async dispatch => {
 //Deletes the category
 export const deleteCategory = id => async dispatch => {
   try {
-    await axios.delete(`/api/category/${id}`);
+    await axios.delete(`/api/admin-category/${id}`);
     return;
   } catch (error) {
     console.log(error);

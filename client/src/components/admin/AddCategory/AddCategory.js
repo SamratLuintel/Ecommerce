@@ -1,6 +1,12 @@
 import React, { Component } from "react";
-import { addCategory } from "../../../store/actions/categories/adminCategories";
-
+import {
+  addCategory,
+  fetchAdminCategories
+} from "../../../store/actions/categories/adminCategories";
+import {
+  NotificationContainer,
+  NotificationManager
+} from "react-notifications";
 import { connect } from "react-redux";
 import AdminHeader from "../../common/admin/AdminHeader/AdminHeader";
 import AdminSideNav from "../../common/admin/AdminSideNav/AdminSideNav";
@@ -11,20 +17,20 @@ class AddCategory extends Component {
     title: "",
     icon: "fas fa-calendar-alt",
     titleErr: "",
-    nav: "add-category"
+    nav: "add-category",
+    saving: false
   };
 
   onTitleChange = e => this.setState({ title: e.target.value, titleErr: "" });
 
-  onCreateCategory = async () => {
-    const { title } = this.state;
-    try {
-      await this.props.addCategory(title);
-    } catch (err) {
-      this.setFormError(err);
-    }
+  resetCategoryState = () => {
+    this.setState({
+      title: "",
+      icon: "fas fa-calendar-alt",
+      titleErr: "",
+      nav: "add-category"
+    });
   };
-
   setFormError = error => {
     if (error.title) this.setState({ titleError: error.title });
   };
@@ -40,8 +46,13 @@ class AddCategory extends Component {
   onFormSubmit = async () => {
     const title = this.state.title;
     const icon = this.state.icon;
+    this.setState({ saving: true });
     try {
       await this.props.addCategory(title, icon);
+      this.setState({ saving: false });
+      NotificationManager.info("Category have been successfully created");
+      this.resetCategoryState();
+      this.props.fetchAdminCategories();
     } catch (error) {
       console.log("Add Category", error);
       this.setFormError(error);
@@ -117,6 +128,7 @@ class AddCategory extends Component {
               </button>
             </div>
           </div>
+          <NotificationContainer />
         </div>
       </div>
     );
@@ -124,5 +136,5 @@ class AddCategory extends Component {
 }
 export default connect(
   null,
-  { addCategory }
+  { addCategory, fetchAdminCategories }
 )(AddCategory);
