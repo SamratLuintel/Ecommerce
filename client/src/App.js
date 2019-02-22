@@ -63,7 +63,6 @@ class App extends Component {
           />
 
           {/* General User Routes */}
-          <Route exact path="/products" component={Products} />
 
           <Route exact path="/categories/:id" component={Categories} />
           <Route exact path="/product/:id" component={Product} />
