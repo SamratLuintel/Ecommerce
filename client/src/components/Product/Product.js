@@ -30,7 +30,7 @@ class Product extends Component {
     details: "",
     reviews: [],
     //product info
-    amount: 10,
+    amount: 1,
     //Three options
     //details , reviews and add-review
     selectedTab: "details",

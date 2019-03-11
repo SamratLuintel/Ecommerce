@@ -1,7 +1,11 @@
 import React, { Component } from "react";
 import cateBanner from "../../../../assets/images/banner/banner-cate.jpg";
+import { withRouter } from "react-router-dom";
 
 class CatesBanner extends Component {
+  redirectToTV = () => {
+    this.props.history.push("/categories/5c85202e3fc05d0016b4b408");
+  };
   render() {
     return (
       <div className="CatesBanner">
@@ -9,11 +13,11 @@ class CatesBanner extends Component {
           className="CatesBanner__image"
           style={{ backgroundImage: `url(${cateBanner})` }}
         />
-        <p className="CatesBanner__action-btn">
+        <p onClick={this.redirectToTV} className="CatesBanner__action-btn">
           Discover Now <i class="fas fa-angle-right" />
         </p>
       </div>
     );
   }
 }
-export default CatesBanner;
+export default withRouter(CatesBanner);

@@ -25,6 +25,16 @@ class HeaderMiddle extends Component {
   redirectToFindProduct = () => {
     this.props.history.push(`/findproduct/${this.state.searchedText}`);
   };
+
+  totalItem = () => {
+    if (this.props.carts.totalItems === 0) return 0;
+    let total = 0;
+    this.props.carts.items.map(item => {
+      const itemTotalPrice = item.amount * item.product.price;
+      total += itemTotalPrice;
+    });
+    return total;
+  };
   render() {
     return (
       <div className="HeaderMiddle">
@@ -52,7 +62,9 @@ class HeaderMiddle extends Component {
             <HeaderControlBlock />
             <div className="HeaderMiddle__user-cart">
               Your Cart
-              <p className="HeaderMiddle__user-cart__price">$0.00</p>
+              <p className="HeaderMiddle__user-cart__price">
+                ${this.totalItem()}
+              </p>
             </div>
           </div>
         </div>
@@ -60,4 +72,9 @@ class HeaderMiddle extends Component {
     );
   }
 }
-export default withRouter(HeaderMiddle);
+
+const mapStateToProps = state => ({
+  carts: state.carts
+});
+
+export default withRouter(connect(mapStateToProps)(HeaderMiddle));

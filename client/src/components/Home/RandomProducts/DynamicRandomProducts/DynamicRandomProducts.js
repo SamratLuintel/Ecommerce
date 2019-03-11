@@ -16,10 +16,10 @@ class DynamicRandomProducts extends Component {
     //Id of categories is to be checked in the database
     //So this field is more open to manual customization
     displayCategories: [
-      { id: "5c08066ea8e78784243fc938", name: "Computer" },
-      { id: "5c0806b1a8e78784243fc939", name: "Mobile" },
-      { id: "", name: "Audio" },
-      { id: "", name: "TV" }
+      { id: "5c85202e3fc05d0016b4b408", name: "Computer" },
+      { id: "5c8520413fc05d0016b4b409", name: "Mobile" },
+      { id: "5c8520503fc05d0016b4b40a", name: "Audio" },
+      { id: "5c85212c3fc05d0016b4b40b", name: "Watches" }
     ]
   };
   onSelectedCategoryChange = index => {

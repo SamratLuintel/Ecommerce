@@ -83,7 +83,7 @@ module.exports = app => {
     try {
       const products = await Product.find({})
         .sort({ createdOn: -1 })
-        .limit(5);
+        .limit(4);
       res.status(200).send(products);
     } catch (error) {
       console.log(error);

@@ -32,7 +32,6 @@ class Home extends Component {
       this.props.fetchUser(token);
     }
   };
-
   render() {
     return (
       <div>
