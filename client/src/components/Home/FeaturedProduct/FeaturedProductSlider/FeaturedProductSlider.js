@@ -2,8 +2,13 @@ import React, { Component } from "react";
 import { Carousel } from "react-responsive-carousel";
 import { connect } from "react-redux";
 import FadeIn from "react-fade-in";
+import { withRouter } from "react-router-dom";
 
 class FeaturedProductSlider extends Component {
+  redirectToProduct = id => {
+    this.props.history.push(`/product/${id}`);
+  };
+
   renderFeaturedProducts = () => {
     const { featuredProducts } = this.props;
     if (!featuredProducts.fetched || featuredProducts.lists.length === 0)
@@ -45,7 +50,10 @@ class FeaturedProductSlider extends Component {
               </h3>
             </FadeIn>
             <FadeIn>
-              <div className="FeaturedProductSlider__content__button">
+              <div
+                onClick={() => this.redirectToProduct(product._id)}
+                className="FeaturedProductSlider__content__button"
+              >
                 Shop Now
               </div>
             </FadeIn>
@@ -72,4 +80,4 @@ const mapStateToProps = state => ({
   keys: state.profile.keys
 });
 
-export default connect(mapStateToProps)(FeaturedProductSlider);
+export default withRouter(connect(mapStateToProps)(FeaturedProductSlider));
